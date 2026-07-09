@@ -1,0 +1,67 @@
+# Supply Radar — MLOps on GitHub Actions
+#
+#   1. CI        every push to src/**: run the full pipeline as a test gate
+#                (DQ failures or crashes fail the build)
+#   2. Retrain   every Monday 07:00 IST: retrain, tune, gate promotion, and
+#                commit the refreshed registry + gold outputs + brief back
+#   3. Audit     each run's metrics visible in the Actions log and the
+#                committed data/models/registry.jsonl
+#
+# Optional secrets (Settings -> Secrets and variables -> Actions):
+#   LLM_API_KEY   enables the LLM-written brief in scheduled runs
+
+name: mlops
+
+on:
+  schedule:
+    - cron: "30 1 * * 1"          # Mon 01:30 UTC = 07:00 IST
+  push:
+    branches: [main]
+    paths: ["src/**", "requirements.txt", ".github/workflows/mlops.yml"]
+  workflow_dispatch:               # manual "Run workflow" button
+
+permissions:
+  contents: write
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run end-to-end pipeline (retrain + tune + promotion gate)
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+        run: python3 src/pipeline.py data/raw
+
+      - name: Show model registry (audit trail)
+        run: tail -5 data/models/registry.jsonl || true
+
+      - name: Commit refreshed outputs (scheduled/manual runs only)
+        if: github.event_name != 'push'
+        run: |
+          git config user.name  "mlops-bot"
+          git config user.email "mlops-bot@users.noreply.github.com"
+          git add data/models data/gold data/silver data/bronze/weather_*.csv \
+                  docs/weekly_sourcing_brief.md docs/validation_report.md \
+                  dashboard/supply_radar_dashboard.html \
+                  frontend/public/dashboard_data.json frontend/dist/dashboard_data.json \
+                  data/supply_radar.db || true
+          git diff --cached --quiet || git commit -m "mlops: scheduled retrain $(date -u +%F) [skip ci]"
+          git push
+
+      - name: Upload sourcing brief as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-sourcing-brief
+          path: |
+            docs/weekly_sourcing_brief.md
+            docs/validation_report.md
