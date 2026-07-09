@@ -1,109 +1,125 @@
-# Supply Radar — Use Case 6: Supplier & Sourcing Intelligence
+# Supply Radar
 
-End-to-end procurement intelligence pipeline for Vaighai Agro Products.
-Runs **fully locally** (no cloud). Each stage maps one-to-one to an Azure
-service for later migration.
+**Use Case 6 — Supplier & Sourcing Intelligence · Vaighai Agro Products Ltd**
+
+End-to-end procurement intelligence pipeline. Fully local execution; one-to-one Azure migration path.
 
 ```
-EXTRACTION                     TRANSFORMATION       WAREHOUSE           ML              AGENT           REPORTING
-extract_mir_field_data.py  ->  transform_supply_ -> load_warehouse  ->  ml_train_   ->  agent_brief ->  report_dashboard
-extract_erp_purchases.py       panel.py             (SQLite or          score.py        (LLM or         (HTML) or
-extract_weather_api.py         dq_validate.py        Postgres)                          template)       Metabase
-   bronze/                        silver/            tables+views        gold/          docs/brief      dashboard/
+EXTRACT (3 sources) → TRANSFORM → VALIDATE → WAREHOUSE → ML → AGENT → DASHBOARD
+      bronze            silver      DQ gates   SQL         gold   brief    React / Metabase
 ```
 
-## Quick start (zero setup — SQLite)
+---
+
+## Quick start
 
 ```bash
 pip install -r requirements.txt
-python3 src/pipeline.py data/raw          # ~30s end to end
+python3 src/pipeline.py data/raw
 ```
 
-Open `dashboard/supply_radar_dashboard.html`, `docs/weekly_sourcing_brief.md`,
-`docs/validation_report.md`.
+Runtime ≈ 30 s. Outputs:
 
-## React dashboard (modern UI — glassmorphism, animated 3D background, tilt effects)
+| Output | Path |
+| --- | --- |
+| React dashboard | `frontend/dist` (serve) or `cd frontend && npm run dev` |
+| HTML dashboard (fallback) | `dashboard/supply_radar_dashboard.html` |
+| Weekly sourcing brief | `docs/weekly_sourcing_brief.md` |
+| Data-quality report | `docs/validation_report.md` |
+| SQL warehouse | `data/supply_radar.db` |
 
-```bash
-cd frontend
-npm install
-npm run dev            # dev server at http://localhost:5173
-# or serve the committed production build without installing anything:
-python3 -m http.server 8080 --directory frontend/dist   # -> http://localhost:8080
-```
-
-The pipeline writes `dashboard_data.json` into `frontend/public/` and `frontend/dist/`
-on every run, so the React app always shows the latest scored data. The plain-HTML
-dashboard remains as a zero-setup fallback.
-
-## Local production stack (Postgres + Metabase + n8n)
+## Production stack (optional)
 
 ```bash
-docker compose up -d
+docker compose up -d        # PostgreSQL + Metabase + n8n
 export WAREHOUSE_URL=postgresql+psycopg2://radar:radar@localhost:5432/supplyradar
 pip install sqlalchemy psycopg2-binary
 python3 src/pipeline.py data/raw
 ```
 
-- **Metabase** http://localhost:3000 — add the `supplyradar` Postgres database and build
-  dashboards on `vw_critical_watchlist`, `vw_top_opportunities`, `vw_region_summary`.
-- **n8n** http://localhost:5678 — Schedule trigger (Mon 7:00) → Execute Command
-  (`python3 src/pipeline.py data/raw`) → Read File (`docs/weekly_sourcing_brief.md`)
-  → Send Email / Teams / WhatsApp.
+| Service | URL | Purpose |
+| --- | --- | --- |
+| Metabase | `localhost:3000` | BI dashboards on warehouse views |
+| n8n | `localhost:5678` | Scheduling + email/Teams alert delivery |
+| PostgreSQL | `localhost:5432` | Warehouse (`supplyradar`) |
 
-## LLM agent (optional, free tier)
+## Configuration
 
-```bash
-export LLM_API_KEY=<your free Groq key>     # console.groq.com
-python3 src/pipeline.py data/raw
-```
+Set via environment (see `.env.example`):
 
-The agent sends **only aggregated facts** (metrics, flagged suppliers, opportunities)
-to the LLM — never row-level raw data. Without a key it falls back to deterministic
-templates, so the pipeline always completes. Works with any OpenAI-compatible endpoint
-(`LLM_BASE_URL`), including a fully in-house Ollama (`http://localhost:11434/v1`).
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `WAREHOUSE_URL` | empty → SQLite | Postgres connection string |
+| `LLM_API_KEY` | empty → template mode | Enables LLM-written brief (Groq free tier / any OpenAI-compatible endpoint) |
+| `LLM_BASE_URL` | Groq | `http://localhost:11434/v1` for in-house Ollama |
+| `WEATHER_START` | 2020-04-01 | Weather history window for training |
 
-## The three data sources
+## Data sources
 
-1. **MIR field data** — field-staff estimates per mill (produced / dispatched / our offtake)
-2. **ERP purchases** — actual receipts; internal transfers excluded in transformation
-3. **Weather API** — daily rainfall history per coir region (Open-Meteo archive, free,
-   from `WEATHER_START`), rolled up to fiscal-quarter actuals so model **training** joins
-   real monsoon data to every supplier-quarter. Offline climatology fallback included.
+| # | Source | Nature | Handling |
+| --- | --- | --- | --- |
+| 1 | MIR field data | Field-staff market estimates per mill | Future-dated rows dropped; outliers winsorized (p99.5) |
+| 2 | ERP purchases | System receipts | Internal transfers excluded |
+| 3 | Weather API (Open-Meteo) | Daily rainfall actuals + 16-day live forecast | Quarterly aggregation; climatology fallback offline |
 
-## Models (all validated on held-out quarters)
+## Models
 
-- **Decline risk** — logistic model; P(next-quarter dispatch >50% below trailing 4-q avg). AUC ≈ 0.76
-- **Forecast** — champion of {ridge, seasonal-naive, blend} picked by backtest WAPE each run
-- **Opportunity score** — mill size × share headroom × growth; the "call these mills" list
-- **Concentration** — HHI + top-5 supplier share per fiscal year
+Validated on held-out quarters every run; no future data leaks into training.
+
+| Model | Method | Output | Validation |
+| --- | --- | --- | --- |
+| Decline risk | Logistic regression, 19 features (lags, momentum, share, monsoon) | P(next-quarter dispatch >50% below 4-q avg) | AUC ≈ 0.76 |
+| Volume forecast | Champion of ridge / seasonal-naive / blend | Next-quarter MT per supplier | WAPE, champion auto-selected |
+| Opportunity score | Size percentile × share headroom × growth | Ranked sourcing shortlist | — |
+| Concentration | HHI, top-5 share per FY | Dependency trend | — |
+
+Weather feature `rain_next_q`: training rows use rainfall **actuals** of the target
+quarter; scoring rows use elapsed actuals + 16-day live forecast + climatology fill.
 
 ## Architecture
 
-**Local production stack (what this repo runs today — no cloud):**
+**Local production stack (current):**
 
 ![Local stack](docs/uc6_architecture_local_stack.png)
 
-**Azure target architecture (migration path, recommended):**
+**Azure target (recommended migration):**
 
-![Azure without Databricks](docs/uc6_architecture_without_databricks.png)
+![Azure](docs/uc6_architecture_without_databricks.png)
 
-**Azure Databricks variant (only if data volumes grow):**
+**Azure Databricks variant (high-volume scenario):**
 
-![Azure on Databricks](docs/uc6_architecture_on_databricks.png)
+![Azure Databricks](docs/uc6_architecture_on_databricks.png)
 
 ## Azure migration map
 
-| Local (this repo) | Azure |
+| Local | Azure |
 | --- | --- |
-| cron / n8n | Logic Apps |
-| extract_*.py | Data Factory / Logic Apps connectors |
-| transform + dq | Azure Functions (Python) |
-| SQLite / Postgres | Azure SQL Database |
-| ml_train_score.py | Azure ML batch endpoint + registry |
-| agent_brief.py (LLM mode) | Azure AI Foundry agent (in-tenant) |
-| HTML dashboard / Metabase | Power BI |
+| n8n / cron | Logic Apps |
+| `extract_*.py` | Data Factory |
+| `transform_supply_panel.py`, `dq_validate.py` | Azure Functions |
+| SQLite / PostgreSQL | Azure SQL Database |
+| `ml_train_score.py` | Azure ML (batch endpoint + registry) |
+| `agent_brief.py` | Azure AI Foundry (in-tenant) |
+| React / Metabase | Power BI |
 | n8n alerts | Power Automate → Teams |
 
-Docs: `docs/UC6_Supply_Radar_Approach_and_Architecture.docx`, architecture diagrams
-(`docs/uc6_architecture_*.png`), validation report and weekly brief (regenerated each run).
+## Repository layout
+
+```
+src/            pipeline modules (extract → transform → dq → load → ml → agent → report)
+data/raw        input CSVs          data/bronze|silver|gold  pipeline layers
+frontend/       React dashboard (Vite + recharts)
+dashboard/      HTML fallback dashboard
+docs/           architecture diagrams, approach document, generated reports
+```
+
+## Scheduling
+
+```
+cron:  0 7 * * MON  python3 src/pipeline.py data/raw
+n8n:   Schedule trigger → Execute Command → Read File (brief) → Send Email / Teams
+```
+
+---
+
+*Internal — contains supplier-identifying data. Keep repository private.*
