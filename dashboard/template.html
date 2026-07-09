@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supply Radar — Supplier &amp; Sourcing Intelligence (Use Case 6)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{--bg:#f4f6fa;--card:#fff;--ink:#1e293b;--mut:#64748b;--blue:#2563eb;--red:#dc2626;--amber:#d97706;--green:#059669;--line:#e2e8f0;}
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',system-ui,sans-serif;}
+  body{background:var(--bg);color:var(--ink);padding:24px;}
+  h1{font-size:22px;margin-bottom:2px;} .sub{color:var(--mut);font-size:13px;margin-bottom:18px;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:18px;}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;}
+  .kpi .v{font-size:24px;font-weight:700;} .kpi .l{font-size:12px;color:var(--mut);margin-top:2px;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;}
+  .card h2{font-size:14px;margin-bottom:10px;} .card .note{font-size:11px;color:var(--mut);margin-top:6px;}
+  .full{grid-column:1/-1;}
+  table{width:100%;border-collapse:collapse;font-size:12px;}
+  th{text-align:left;color:var(--mut);font-weight:600;padding:6px 8px;border-bottom:2px solid var(--line);cursor:default;}
+  td{padding:6px 8px;border-bottom:1px solid var(--line);}
+  tr:hover td{background:#f8fafc;}
+  .num{text-align:right;font-variant-numeric:tabular-nums;}
+  .pill{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600;}
+  .Critical{background:#fee2e2;color:var(--red);} .Moderate{background:#fef3c7;color:var(--amber);} .Low{background:#d1fae5;color:var(--green);}
+  .bar{height:8px;border-radius:4px;background:#e2e8f0;overflow:hidden;display:inline-block;width:70px;vertical-align:middle;margin-right:6px;}
+  .bar i{display:block;height:100%;background:var(--blue);}
+  .chartbox{position:relative;height:260px;}
+  input[type=search]{padding:6px 10px;border:1px solid var(--line);border-radius:8px;font-size:12px;width:220px;margin-bottom:8px;}
+  @media(max-width:900px){.grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<h1>Supply Radar — Supplier &amp; Sourcing Intelligence</h1>
+<div class="sub" id="sub"></div>
+<div class="kpis" id="kpis"></div>
+<div class="grid">
+  <div class="card full">
+    <h2>Market vs Vaighai — quarterly volumes (MT)</h2>
+    <div class="chartbox"><canvas id="trend"></canvas></div>
+    <div class="note">Mill dispatch = whole market (MIR field estimate). Offtake = our estimated take. Purchased = actual system receipts (external only).</div>
+  </div>
+  <div class="card full">
+    <h2 id="watchTitle">Supplier decline-risk watchlist (predicted for next quarter)</h2>
+    <input type="search" id="q" placeholder="Filter supplier / region…">
+    <div style="max-height:420px;overflow:auto"><table id="watch"></table></div>
+    <div class="note" id="watchNote"></div>
+  </div>
+  <div class="card full">
+    <h2 id="oppTitle">Sourcing opportunities — big mills where our share is low</h2>
+    <div style="max-height:420px;overflow:auto"><table id="opps"></table></div>
+    <div class="note">Score = mill size percentile × share headroom × growth factor. Untapped = dispatch we did not take.</div>
+  </div>
+  <div class="card">
+    <h2 id="mixTitle">Region mix — market vs our offtake</h2>
+    <div class="chartbox"><canvas id="mix"></canvas></div>
+  </div>
+  <div class="card">
+    <h2>Supply-base concentration</h2>
+    <div class="chartbox"><canvas id="conc"></canvas></div>
+    <div class="note">Top-5 supplier share of external purchases. Higher = more dependency risk.</div>
+  </div>
+</div>
+<script>
+const DATA = /*__DATA__*/;
+const m = DATA.meta;
+document.getElementById('sub').textContent =
+  `Latest scored quarter: ${m.latest_quarter} · predictions are for ${m.next_quarter} · opportunity view: FY${m.latest_complete_fy} (latest complete year)`;
+const kpis = [
+  [m.n_suppliers_scored, 'active suppliers scored'],
+  [m.n_critical, 'critical decline risk', 'var(--red)'],
+  [m.n_moderate, 'moderate decline risk', 'var(--amber)'],
+  [m.decline_auc, 'risk model AUC (holdout)'],
+  [m.forecast_wape_pct + '%', `forecast WAPE (baseline ${m.baseline_wape_pct}%)`],
+];
+document.getElementById('kpis').innerHTML = kpis.map(k =>
+  `<div class="kpi"><div class="v" style="color:${k[2]||'var(--ink)'}">${k[0]}</div><div class="l">${k[1]}</div></div>`).join('');
+
+const fmt = n => n === '' || n == null ? '–' : Number(n).toLocaleString('en-IN');
+
+// trend chart
+new Chart(document.getElementById('trend'), {type:'line', data:{
+  labels: DATA.trend.map(r=>r.label),
+  datasets:[
+    {label:'Mill dispatch (market)', data:DATA.trend.map(r=>r.dispatched_MT), borderColor:'#2563eb', backgroundColor:'#2563eb22', fill:true, tension:.3},
+    {label:'Our offtake (est.)', data:DATA.trend.map(r=>r.offtake_MT), borderColor:'#059669', tension:.3},
+    {label:'Purchased (actual)', data:DATA.trend.map(r=>r.purchased_MT), borderColor:'#d97706', borderDash:[5,4], tension:.3},
+  ]}, options:{maintainAspectRatio:false, plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}}, scales:{x:{ticks:{font:{size:10},maxRotation:60}}, y:{ticks:{font:{size:10}}}}}});
+
+// watchlist table
+document.getElementById('watchTitle').textContent = `Supplier decline-risk watchlist — predicted for ${m.next_quarter}`;
+document.getElementById('watchNote').textContent =
+  `Risk = probability next-quarter dispatch falls >50% below the supplier's trailing 4-quarter average. Model AUC ${m.decline_auc} on held-out quarters (base rate ${m.decline_base_rate_pct}%).`;
+function renderWatch(filter){
+  const rows = DATA.watchlist.filter(r => !filter || (r.supplier+r.region).toLowerCase().includes(filter));
+  document.getElementById('watch').innerHTML =
+    `<tr><th>Supplier</th><th>Region</th><th class="num">Latest Q (MT)</th><th class="num">4-Q avg (MT)</th><th class="num">Our share %</th><th class="num">Forecast next Q (MT)</th><th>Risk</th><th>Band</th></tr>` +
+    rows.map(r=>`<tr><td>${r.supplier}</td><td>${r.region}</td><td class="num">${fmt(r.latest_q_dispatch_MT)}</td><td class="num">${fmt(r.trailing_4q_avg_MT)}</td><td class="num">${r.our_share_pct===''?'–':Number(r.our_share_pct).toFixed(0)}</td><td class="num">${fmt(r.forecast_next_q_MT)}</td>
+      <td><span class="bar"><i style="width:${(r.decline_risk*100).toFixed(0)}%;background:${r.decline_risk>0.7?'var(--red)':r.decline_risk>0.4?'var(--amber)':'var(--green)'}"></i></span>${(r.decline_risk*100).toFixed(0)}%</td>
+      <td><span class="pill ${r.risk_band}">${r.risk_band}</span></td></tr>`).join('');
+}
+renderWatch('');
+document.getElementById('q').addEventListener('input', e=>renderWatch(e.target.value.toLowerCase()));
+
+// opportunities
+document.getElementById('oppTitle').textContent = `Sourcing opportunities FY${m.latest_complete_fy} — big mills where our share is low`;
+document.getElementById('opps').innerHTML =
+  `<tr><th>#</th><th>Supplier</th><th>Region</th><th class="num">Dispatch (MT)</th><th class="num">Our share %</th><th class="num">YoY growth %</th><th class="num">Untapped (MT)</th><th class="num">Score</th></tr>` +
+  DATA.opportunities.map((r,i)=>`<tr><td>${i+1}</td><td>${r.supplier}</td><td>${r.region}</td><td class="num">${fmt(r.dispatched_MT)}</td><td class="num">${Number(r.share_pct).toFixed(1)}</td><td class="num">${r.growth_pct===''?'new':Number(r.growth_pct).toFixed(0)}</td><td class="num">${fmt(r.untapped_MT)}</td><td class="num"><b>${r.opportunity_score}</b></td></tr>`).join('');
+
+// region mix
+document.getElementById('mixTitle').textContent = `Region mix FY${m.latest_complete_fy} — market vs our offtake`;
+new Chart(document.getElementById('mix'), {type:'bar', data:{
+  labels: DATA.region_mix.map(r=>r.region),
+  datasets:[
+    {label:'Mill dispatch (MT)', data:DATA.region_mix.map(r=>r.dispatched_MT), backgroundColor:'#2563eb'},
+    {label:'Our offtake (MT)', data:DATA.region_mix.map(r=>r.offtake_MT), backgroundColor:'#059669'},
+  ]}, options:{maintainAspectRatio:false, plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}}, scales:{x:{ticks:{font:{size:10}}}, y:{ticks:{font:{size:10}}}}}});
+
+// concentration
+new Chart(document.getElementById('conc'), {type:'line', data:{
+  labels: DATA.concentration.map(r=>'FY'+r.fiscal_year),
+  datasets:[
+    {label:'Top-5 supplier share %', data:DATA.concentration.map(r=>r.top5_share_pct), borderColor:'#dc2626', yAxisID:'y', tension:.3},
+    {label:'Active suppliers', data:DATA.concentration.map(r=>r.active_suppliers), borderColor:'#2563eb', yAxisID:'y1', tension:.3},
+  ]}, options:{maintainAspectRatio:false, plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}},
+  scales:{y:{position:'left',title:{display:true,text:'%',font:{size:10}},ticks:{font:{size:10}}}, y1:{position:'right',grid:{drawOnChartArea:false},ticks:{font:{size:10}}}, x:{ticks:{font:{size:10}}}}}});
+</script>
+</body>
+</html>
