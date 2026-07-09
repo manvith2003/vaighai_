@@ -64,6 +64,20 @@ templates, so the pipeline always completes. Works with any OpenAI-compatible en
 - **Opportunity score** — mill size × share headroom × growth; the "call these mills" list
 - **Concentration** — HHI + top-5 supplier share per fiscal year
 
+## Architecture
+
+**Local production stack (what this repo runs today — no cloud):**
+
+![Local stack](docs/uc6_architecture_local_stack.png)
+
+**Azure target architecture (migration path, recommended):**
+
+![Azure without Databricks](docs/uc6_architecture_without_databricks.png)
+
+**Azure Databricks variant (only if data volumes grow):**
+
+![Azure on Databricks](docs/uc6_architecture_on_databricks.png)
+
 ## Azure migration map
 
 | Local (this repo) | Azure |
