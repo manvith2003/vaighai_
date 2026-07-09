@@ -39,18 +39,32 @@ def run():
                 offtake_MT=("vaighai_offtake_est_MT", "sum")))
     mix = mix[mix["dispatched_MT"] > 0].sort_values("dispatched_MT", ascending=False)
 
+    from agent_brief import monsoon_outlook
     data = {"meta": m,
             "watchlist": watch.head(40).fillna("").to_dict(orient="records"),
             "opportunities": opp.head(25).round(1).fillna("").to_dict(orient="records"),
             "trend": trend.round(0).to_dict(orient="records"),
             "region_mix": mix.round(0).to_dict(orient="records"),
-            "concentration": conc.to_dict(orient="records")}
+            "concentration": conc.to_dict(orient="records"),
+            "monsoon_outlook": monsoon_outlook()}
+    payload = json.dumps(data, default=str)
 
+    # 1. React frontend data feed (frontend/public + built frontend/dist)
+    root = os.path.dirname(DASH)
+    for sub in ("frontend/public", "frontend/dist"):
+        d = os.path.join(root, sub)
+        if os.path.isdir(os.path.dirname(d)) :
+            os.makedirs(d, exist_ok=True)
+            with open(os.path.join(d, "dashboard_data.json"), "w") as f:
+                f.write(payload)
+    print("  -> frontend/public/dashboard_data.json (React app feed)")
+
+    # 2. zero-setup HTML fallback
     tpl = open(os.path.join(DASH, "template.html")).read()
     with open(os.path.join(DASH, "supply_radar_dashboard.html"), "w") as f:
-        f.write(tpl.replace("/*__DATA__*/", json.dumps(data, default=str)))
-    print("  -> dashboard/supply_radar_dashboard.html (open in any browser)")
-    print("  -> or run Metabase on the Postgres warehouse: docker compose up -d")
+        f.write(tpl.replace("/*__DATA__*/", payload))
+    print("  -> dashboard/supply_radar_dashboard.html (fallback, no build needed)")
+    print("  React UI:  cd frontend && npm install && npm run dev   (or serve frontend/dist)")
 
 
 if __name__ == "__main__":

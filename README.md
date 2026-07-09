@@ -22,6 +22,20 @@ python3 src/pipeline.py data/raw          # ~30s end to end
 Open `dashboard/supply_radar_dashboard.html`, `docs/weekly_sourcing_brief.md`,
 `docs/validation_report.md`.
 
+## React dashboard (modern UI — glassmorphism, animated 3D background, tilt effects)
+
+```bash
+cd frontend
+npm install
+npm run dev            # dev server at http://localhost:5173
+# or serve the committed production build without installing anything:
+python3 -m http.server 8080 --directory frontend/dist   # -> http://localhost:8080
+```
+
+The pipeline writes `dashboard_data.json` into `frontend/public/` and `frontend/dist/`
+on every run, so the React app always shows the latest scored data. The plain-HTML
+dashboard remains as a zero-setup fallback.
+
 ## Local production stack (Postgres + Metabase + n8n)
 
 ```bash
