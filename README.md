@@ -92,6 +92,18 @@ Every pipeline run executes the full loop (`src/model_registry.py`):
 Azure mapping: registry → Azure ML model registry; tuning → Azure ML sweep jobs;
 `ml_runs` monitoring → Azure ML job metrics.
 
+### CI/CD (GitHub Actions — `.github/workflows/mlops.yml`)
+
+| Trigger | Behaviour |
+| --- | --- |
+| Push to `src/**` | Full pipeline runs as a test gate; DQ or pipeline failure fails the build |
+| Mon 07:00 IST (cron) | Scheduled retrain: tune → gate promotion → commit refreshed registry, gold outputs, brief and dashboard data |
+| Manual dispatch | Same as scheduled; brief uploaded as a build artifact |
+
+Note: scheduled runs execute on GitHub-hosted runners — keep the repository
+**private**; for strict in-house processing use n8n/cron instead and keep
+Actions for CI only.
+
 ## Architecture
 
 **Local production stack (current):**
