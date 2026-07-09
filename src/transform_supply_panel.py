@@ -68,6 +68,42 @@ def run():
     wq.to_csv(os.path.join(SILVER, "weather_quarterly.csv"), index=False)
     print(f"  silver.weather_quarterly: {len(wq):,} region-quarters of rainfall actuals")
 
+    # TARGET-quarter rainfall estimate (the quarter the models predict):
+    # completed months -> archive actuals; next 16 days -> LIVE forecast;
+    # remaining days -> climatology. Used as the scoring-time value of the
+    # rain_next_q feature (training uses actuals of t+1).
+    from extract_weather_api import CLIMATOLOGY_MM
+    fc = pd.read_csv(os.path.join(BRONZE, "weather_forecast.csv"), parse_dates=["date"])
+    tq = cutoff_q + 1
+    t_fy, t_qn = (tq - 1) // 4, tq - ((tq - 1) // 4) * 4
+    months = {1: [4, 5, 6], 2: [7, 8, 9], 3: [10, 11, 12], 4: [1, 2, 3]}[t_qn]
+    today = pd.Timestamp.today().normalize()
+    rows = []
+    for region in CLIMATOLOGY_MM:
+        est = 0.0
+        for m in months:
+            yr = t_fy if m <= 3 else t_fy - 1
+            mstart = pd.Timestamp(yr, m, 1)
+            mend = mstart + pd.offsets.MonthEnd(0)
+            ndays = mend.day
+            clim_daily = CLIMATOLOGY_MM[region][m - 1] / ndays
+            if mend < today:  # month fully elapsed -> archive actual
+                est += float(wx[(wx["region"] == region) & (wx["year"] == yr)
+                                & (wx["month"] == m)]["rain_mm"].sum())
+            else:
+                f = fc[(fc["region"] == region) & (fc["date"] >= max(mstart, today))
+                       & (fc["date"] <= mend)]
+                est += float(f["rain_mm"].sum())
+                past_days = max((min(today, mend) - mstart).days, 0)
+                rem_days = max(ndays - past_days - len(f), 0)
+                est += clim_daily * (past_days + rem_days)
+        rows.append({"region": region, "fiscal_year": t_fy, "fiscal_quarter": f"FQ{t_qn}",
+                     "rain_mm_est": round(est, 1)})
+    wnq = pd.DataFrame(rows)
+    wnq.to_csv(os.path.join(SILVER, "weather_next_quarter.csv"), index=False)
+    print(f"  silver.weather_next_quarter: FY{t_fy} FQ{t_qn} rainfall estimate per region "
+          f"(actuals + live 16-day forecast + climatology fill)")
+
 
 if __name__ == "__main__":
     run()

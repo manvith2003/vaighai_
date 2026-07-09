@@ -43,6 +43,25 @@ def action_for(r):
     return "Contact the mill; negotiate offtake before a competitor locks the capacity."
 
 
+def monsoon_outlook():
+    """16-day LIVE forecast total per region vs climatological norm for the window."""
+    from extract_weather_api import CLIMATOLOGY_MM
+    from utils import ROOT as _ROOT
+    fc_path = os.path.join(_ROOT, "data", "bronze", "weather_forecast.csv")
+    if not os.path.exists(fc_path):
+        return []
+    fc = pd.read_csv(fc_path, parse_dates=["date"])
+    out = []
+    for region, g in fc.groupby("region"):
+        total = float(g["rain_mm"].sum())
+        norm = float(sum(CLIMATOLOGY_MM[region][d.month - 1] / 30 for d in g["date"]))
+        ratio = total / norm if norm > 0 else 1.0
+        out.append({"region": region, "forecast_16d_mm": round(total, 1),
+                    "normal_mm": round(norm, 1), "vs_normal_x": round(ratio, 2),
+                    "source": g["source"].iloc[0]})
+    return sorted(out, key=lambda r: -r["vs_normal_x"])
+
+
 def gather_facts():
     con, backend = wh_connect()
     watch = pd.read_sql("SELECT * FROM watchlist_decline_risk ORDER BY decline_risk DESC", con)
@@ -52,10 +71,10 @@ def gather_facts():
         con.close()
     m = json.load(open(os.path.join(GOLD, "model_metrics.json")))
     crit = watch[watch["risk_band"] == "Critical"].head(10)
-    return m, crit, opps, conc
+    return m, crit, opps, conc, monsoon_outlook()
 
 
-def template_brief(m, crit, opps, conc):
+def template_brief(m, crit, opps, conc, outlook):
     lines = [
         "# Supply Radar — Weekly Sourcing Brief",
         f"*Scored quarter: {m['latest_quarter']} · predictions for {m['next_quarter']} · "
@@ -80,14 +99,23 @@ def template_brief(m, crit, opps, conc):
         lines.append(f"{i}. **{r['supplier']}** ({r['region']}): {r['dispatched_MT']:,.0f} MT "
                      f"dispatched{growth}, our share {r['our_share_pct']}% — "
                      f"{r['untapped_MT']:,.0f} MT untapped.")
+    if outlook:
+        lines += ["", "## Monsoon outlook — next 16 days (live forecast)", ""]
+        for o in outlook:
+            tone = ("heavy rain — expect wet-coir and drying delays" if o["vs_normal_x"] > 1.3
+                    else "dry spell — production should run freely" if o["vs_normal_x"] < 0.7
+                    else "near normal")
+            lines.append(f"- **{o['region']}**: {o['forecast_16d_mm']} mm forecast "
+                         f"(normal {o['normal_mm']} mm, {o['vs_normal_x']}×) — {tone}.")
     lines += ["", "---", f"*Every flagged item needs an owner, root cause and resolution date. "
               f"Forecast model: {m['forecast_champion']} (WAPE {m['forecast_wape_pct']}%).*"]
     return "\n".join(lines)
 
 
-def llm_brief(m, crit, opps, conc):
+def llm_brief(m, crit, opps, conc, outlook):
     facts = {
         "metrics": m,
+        "monsoon_outlook_next_16_days": outlook,
         "critical_suppliers": [
             {"supplier": r["supplier"], "region": r["region"],
              "risk_pct": round(r["decline_risk"] * 100),
@@ -103,7 +131,9 @@ def llm_brief(m, crit, opps, conc):
         "markdown for purchase managers. Use ONLY the facts given — do not invent numbers. "
         "Structure: title, one-paragraph headline, 'Act this week' section with each critical "
         "supplier (why flagged, expected volume, one concrete action), 'Grow here' section with "
-        "the opportunities, closing line on ownership of flagged items. Be direct and brief.\n\n"
+        "the opportunities, 'Monsoon outlook' section using the 16-day forecast (heavy rain = "
+        "wet coir and drying delays), closing line on ownership of flagged items. "
+        "Be direct and brief.\n\n"
         f"FACTS:\n{json.dumps(facts, default=str)}"
     )
     req = urllib.request.Request(
@@ -120,17 +150,17 @@ def llm_brief(m, crit, opps, conc):
 
 def run():
     banner("AGENT", "Composing the weekly sourcing brief")
-    m, crit, opps, conc = gather_facts()
+    m, crit, opps, conc, outlook = gather_facts()
     mode = "llm" if config.LLM_API_KEY else "template"
     if mode == "llm":
         try:
-            text = llm_brief(m, crit, opps, conc)
+            text = llm_brief(m, crit, opps, conc, outlook)
             print(f"  written by LLM ({config.LLM_MODEL} via {config.LLM_BASE_URL})")
         except Exception as e:
             print(f"  LLM call failed ({type(e).__name__}) — falling back to templates")
-            text, mode = template_brief(m, crit, opps, conc), "template"
+            text, mode = template_brief(m, crit, opps, conc, outlook), "template"
     else:
-        text = template_brief(m, crit, opps, conc)
+        text = template_brief(m, crit, opps, conc, outlook)
     if mode == "template":
         print("  written by deterministic templates (set LLM_API_KEY for LLM mode)")
     out = os.path.join(ROOT, "docs", "weekly_sourcing_brief.md")

@@ -35,6 +35,8 @@ CLIMATOLOGY_MM = {
 }
 API = ("https://archive-api.open-meteo.com/v1/archive?latitude={lat}&longitude={lon}"
        "&start_date={start}&end_date={end}&daily=precipitation_sum&timezone=Asia%2FKolkata")
+FORECAST_API = ("https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}"
+                "&daily=precipitation_sum&forecast_days=16&timezone=Asia%2FKolkata")
 
 
 def _from_api():
@@ -67,15 +69,45 @@ def _from_climatology():
     return df
 
 
+def _forecast():
+    """LIVE 16-day daily rainfall forecast per region (real-time endpoint)."""
+    rows = []
+    for region, (lat, lon) in REGION_COORDS.items():
+        url = FORECAST_API.format(lat=lat, lon=lon)
+        with urllib.request.urlopen(url, timeout=20) as r:
+            d = json.load(r)
+        for day, mm in zip(d["daily"]["time"], d["daily"]["precipitation_sum"]):
+            rows.append({"region": region, "date": day,
+                         "rain_mm": round(float(mm or 0), 1),
+                         "source": "open-meteo live forecast"})
+    return pd.DataFrame(rows)
+
+
+def _forecast_from_climatology():
+    days = pd.date_range(dt.date.today(), periods=16, freq="D")
+    rows = [{"region": r, "date": d.date().isoformat(),
+             "rain_mm": round(CLIMATOLOGY_MM[r][d.month - 1] / 30, 1),
+             "source": "climatology fallback"}
+            for r in CLIMATOLOGY_MM for d in days]
+    return pd.DataFrame(rows)
+
+
 def run():
-    banner("EXTRACT 3/3", f"Weather history ({config.WEATHER_START} -> today) -> bronze")
+    banner("EXTRACT 3/3", f"Weather: history ({config.WEATHER_START} ->) + 16-day live forecast")
     try:
         wx = _from_api()
     except Exception as e:
-        print(f"  API unreachable ({type(e).__name__}) — using bundled climatology fallback")
+        print(f"  archive API unreachable ({type(e).__name__}) — climatology fallback")
         wx = _from_climatology()
     wx.to_csv(os.path.join(BRONZE, FILENAME), index=False)
     print(f"  {FILENAME}: {len(wx):,} region-months landed ({wx['source'].iloc[0]})")
+    try:
+        fc = _forecast()
+    except Exception as e:
+        print(f"  forecast API unreachable ({type(e).__name__}) — climatology fallback")
+        fc = _forecast_from_climatology()
+    fc.to_csv(os.path.join(BRONZE, "weather_forecast.csv"), index=False)
+    print(f"  weather_forecast.csv: {len(fc):,} region-days ({fc['source'].iloc[0]})")
     return len(wx)
 
 

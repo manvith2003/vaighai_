@@ -1,18 +1,16 @@
-"""WAREHOUSE LOAD — Silver/Gold tables + reporting views.
+"""STAGE 4 & 6 — SQL WAREHOUSE. Azure equivalent: Azure SQL Database.
 
-Backend chosen by WAREHOUSE_URL env var:
-  unset -> SQLite  (zero-setup local default; snapshot committed to data/)
-  postgresql+psycopg2://radar:radar@localhost:5432/supplyradar -> Postgres
-    (start it with: docker compose up -d postgres)
-
-Same tables, same views, same SQL either way — this is the Azure SQL stand-in.
+SQLite plays the role of Azure SQL locally — same tables, same views, same SQL.
+Called twice by the orchestrator: after CLEAN (silver tables) and after MODELS
+(gold tables + reporting views).
 """
 import os
 import shutil
+import sqlite3
 
 import pandas as pd
 
-from utils import GOLD, SILVER, SQLITE_PATH, SQLITE_SNAPSHOT, banner, wh_connect, wh_execute
+from common import DB_PATH, DB_SNAPSHOT, GOLD, SILVER, banner
 
 VIEWS = {
     "vw_critical_watchlist": """
@@ -32,34 +30,35 @@ VIEWS = {
 
 
 def load_silver():
-    con, backend = wh_connect()
-    banner("WAREHOUSE", f"Loading Silver tables ({backend})")
-    for name in ("supply_panel", "weather_quarterly", "weather_next_quarter"):
+    banner("SQL", f"Loading Silver tables into warehouse ({os.path.basename(DB_PATH)})")
+    con = sqlite3.connect(DB_PATH)
+    for name in ("supply_panel", "weather_quarterly"):
         df = pd.read_csv(os.path.join(SILVER, f"{name}.csv"))
         df.to_sql(name, con, if_exists="replace", index=False)
         print(f"  table {name}: {len(df):,} rows")
-    if backend == "sqlite":
-        con.close()
+    con.close()
 
 
 def load_gold():
-    con, backend = wh_connect()
-    banner("WAREHOUSE", f"Loading Gold tables + views ({backend})")
+    banner("SQL", "Loading Gold tables + reporting views")
+    con = sqlite3.connect(DB_PATH)
     for name in ("watchlist_decline_risk", "sourcing_opportunities", "concentration_risk"):
         df = pd.read_csv(os.path.join(GOLD, f"{name}.csv"))
         df.to_sql(name, con, if_exists="replace", index=False)
         print(f"  table {name}: {len(df):,} rows")
+    cur = con.cursor()
     for name, sql in VIEWS.items():
-        wh_execute(con, backend, f"DROP VIEW IF EXISTS {name}")
-        wh_execute(con, backend, f"CREATE VIEW {name} AS {sql}")
-        print(f"  view  {name} created")
-    if backend == "sqlite":
-        con.close()
-        try:
-            shutil.copy(SQLITE_PATH, SQLITE_SNAPSHOT)
-            print(f"  warehouse snapshot -> data/{os.path.basename(SQLITE_SNAPSHOT)}")
-        except OSError as e:
-            print(f"  (snapshot skipped: {e})")
+        cur.execute(f"DROP VIEW IF EXISTS {name}")
+        cur.execute(f"CREATE VIEW {name} AS {sql}")
+        n = cur.execute(f"SELECT COUNT(*) FROM {name}").fetchone()[0]
+        print(f"  view  {name}: {n} rows")
+    con.commit()
+    con.close()
+    try:  # snapshot the warehouse into the repo for inspection / git
+        shutil.copy(DB_PATH, DB_SNAPSHOT)
+        print(f"  warehouse snapshot -> data/{os.path.basename(DB_SNAPSHOT)}")
+    except OSError as e:
+        print(f"  (snapshot skipped: {e})")
 
 
 if __name__ == "__main__":
