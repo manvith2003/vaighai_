@@ -1,1 +1,1 @@
-{"latest_quarter":"FY2027 FQ1","next_quarter":"FY2027 FQ2","latest_complete_fy":2026,"n_suppliers_scored":510,"n_critical":68,"n_moderate":190,"decline_auc":0.76,"decline_base_rate_pct":47.6,"forecast_champion":"seasonal_naive","forecast_wape_pct":50.1,"baseline_wape_pct":50.1}
+{"latest_quarter": "FY2027 FQ1", "next_quarter": "FY2027 FQ2", "latest_complete_fy": 2026, "n_suppliers_scored": 510, "n_critical": 40, "n_moderate": 153, "decline_auc": 0.761, "decline_base_rate_pct": 47.6, "forecast_champion": "seasonal_naive", "forecast_wape_pct": 50.1, "baseline_wape_pct": 50.1}

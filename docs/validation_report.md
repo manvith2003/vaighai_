@@ -1,6 +1,6 @@
 # Data Validation Report
 
-Generated: 2026-07-09 21:37
+Generated: 2026-07-09 22:24
 
 ## Hard gates
 
@@ -12,9 +12,10 @@ Generated: 2026-07-09 21:37
 - ✅ vaighai_offtake_est_MT: no negative quantities
 - ✅ vaighai_purchased_MT: no negative quantities
 - ✅ fiscal_quarter values all valid
+- ✅ weather actuals present, non-negative
 
 ## Warnings / observations
 
 - ✅ UNKNOWN-region rows: 96 (0.5%)
 - ✅ share>100% rows after capping: 0
-- ✅ MIR-only supplier-quarters (est vs actual gap to reconcile): 16,771
+- ✅ MIR-only supplier-quarters (estimate vs actual gap): 16,771

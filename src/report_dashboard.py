@@ -1,26 +1,28 @@
-"""STAGE 8 — DASHBOARD. Azure equivalent: Power BI on Azure SQL.
+"""REPORTING — build the HTML dashboard from the warehouse.
 
-Builds the interactive HTML dashboard from the SQL warehouse: injects the data
-as JSON into dashboard/template.html -> dashboard/supply_radar_dashboard.html.
+The repo ships two reporting options:
+  1. This HTML dashboard (zero-setup, single file, works anywhere)
+  2. Metabase on the Postgres warehouse (docker compose up -d) — point it at
+     the same tables/views (vw_critical_watchlist, vw_top_opportunities, ...)
 """
 import json
 import os
-import sqlite3
 
 import pandas as pd
 
-from common import DASH, DB_PATH, GOLD, Q_NUM, banner
+from utils import DASH, GOLD, Q_NUM, banner, wh_connect
 
 
 def run():
-    banner("DASHBOARD", "Building supply_radar_dashboard.html from the warehouse")
-    con = sqlite3.connect(DB_PATH)
+    banner("REPORT", "Building dashboard/supply_radar_dashboard.html")
+    con, backend = wh_connect()
     panel = pd.read_sql("SELECT * FROM supply_panel", con)
     watch = pd.read_sql("SELECT * FROM watchlist_decline_risk ORDER BY decline_risk DESC", con)
     opp = pd.read_sql("SELECT * FROM sourcing_opportunities ORDER BY opportunity_score DESC", con)
     conc = pd.read_sql("SELECT * FROM concentration_risk ORDER BY fiscal_year", con)
-    con.close()
-    m = json.loads(open(os.path.join(GOLD, "model_metrics.json")).read())
+    if backend == "sqlite":
+        con.close()
+    m = json.load(open(os.path.join(GOLD, "model_metrics.json")))
 
     panel["qidx"] = panel["fiscal_year"] * 4 + panel["fiscal_quarter"].map(Q_NUM)
     mir_era = panel[panel["fiscal_year"] >= 2021]
@@ -45,11 +47,10 @@ def run():
             "concentration": conc.to_dict(orient="records")}
 
     tpl = open(os.path.join(DASH, "template.html")).read()
-    out = os.path.join(DASH, "supply_radar_dashboard.html")
-    with open(out, "w") as f:
+    with open(os.path.join(DASH, "supply_radar_dashboard.html"), "w") as f:
         f.write(tpl.replace("/*__DATA__*/", json.dumps(data, default=str)))
-    print(f"  -> dashboard/supply_radar_dashboard.html (open in any browser)")
-    return out
+    print("  -> dashboard/supply_radar_dashboard.html (open in any browser)")
+    print("  -> or run Metabase on the Postgres warehouse: docker compose up -d")
 
 
 if __name__ == "__main__":

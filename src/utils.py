@@ -1,34 +1,59 @@
-"""Shared constants, paths and the tiny numpy-only ML models."""
+"""Shared paths, constants, warehouse connection and numpy-only ML models."""
 import os
+import tempfile
 
 import numpy as np
 import pandas as pd
 
-import tempfile
+import config
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BRONZE = os.path.join(ROOT, "data", "bronze")
 SILVER = os.path.join(ROOT, "data", "silver")
 GOLD = os.path.join(ROOT, "data", "gold")
-# SQLite needs a lock-friendly filesystem; work in temp, snapshot into the repo.
-DB_PATH = os.path.join(tempfile.gettempdir(), "supply_radar.db")
-DB_SNAPSHOT = os.path.join(ROOT, "data", "supply_radar.db")
 DOCS = os.path.join(ROOT, "docs")
 DASH = os.path.join(ROOT, "dashboard")
+# SQLite fallback warehouse: work in temp (lock-friendly), snapshot into repo
+SQLITE_PATH = os.path.join(tempfile.gettempdir(), "supply_radar.db")
+SQLITE_SNAPSHOT = os.path.join(ROOT, "data", "supply_radar.db")
 
 Q_NUM = {"FQ1": 1, "FQ2": 2, "FQ3": 3, "FQ4": 4}
+MONTH_TO_FQ = {4: "FQ1", 5: "FQ1", 6: "FQ1", 7: "FQ2", 8: "FQ2", 9: "FQ2",
+               10: "FQ3", 11: "FQ3", 12: "FQ3", 1: "FQ4", 2: "FQ4", 3: "FQ4"}
 QTY_COLS = ["mill_produced_MT", "mill_dispatched_MT", "vaighai_offtake_est_MT", "vaighai_purchased_MT"]
 
-for d in (BRONZE, SILVER, GOLD, DASH):
+for d in (BRONZE, SILVER, GOLD, DASH, DOCS):
     os.makedirs(d, exist_ok=True)
 
 
+def wh_connect():
+    """Warehouse connection: Postgres if WAREHOUSE_URL set, else SQLite."""
+    if config.WAREHOUSE_URL:
+        from sqlalchemy import create_engine
+        return create_engine(config.WAREHOUSE_URL), "postgres"
+    import sqlite3
+    return sqlite3.connect(SQLITE_PATH), "sqlite"
+
+
+def wh_execute(con, backend, sql):
+    if backend == "postgres":
+        from sqlalchemy import text
+        with con.begin() as c:
+            c.execute(text(sql))
+    else:
+        con.execute(sql)
+        con.commit()
+
+
+def fiscal_of(ts):
+    fy = ts.year + 1 if ts.month >= 4 else ts.year
+    return fy, MONTH_TO_FQ[ts.month]
+
+
 def current_complete_quarter():
-    """Latest COMPLETE fiscal quarter index (fiscal year Apr-Mar, ending-year label)."""
     today = pd.Timestamp.today()
-    fy = today.year + 1 if today.month >= 4 else today.year
-    qn = {4: 1, 5: 1, 6: 1, 7: 2, 8: 2, 9: 2, 10: 3, 11: 3, 12: 3, 1: 4, 2: 4, 3: 4}[today.month]
-    return fy * 4 + qn - 1
+    fy, fq = fiscal_of(today)
+    return fy * 4 + Q_NUM[fq] - 1
 
 
 def _standardize(X, mu=None, sd=None):
@@ -39,7 +64,7 @@ def _standardize(X, mu=None, sd=None):
 
 
 class LogisticModel:
-    """L2-regularised logistic regression (numpy only) — production swap: Azure ML."""
+    """L2-regularised logistic regression (numpy only)."""
 
     def fit(self, X, y, lr=0.3, iters=600, l2=1e-3):
         X = np.nan_to_num(np.asarray(X, dtype=float))

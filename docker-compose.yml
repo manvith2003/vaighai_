@@ -1,0 +1,45 @@
+# Supply Radar — local production stack (no cloud)
+#   docker compose up -d            -> Postgres + Metabase + n8n
+#   export WAREHOUSE_URL=postgresql+psycopg2://radar:radar@localhost:5432/supplyradar
+#   python3 src/pipeline.py data/raw
+#
+#   Metabase (dashboards): http://localhost:3000  -> connect to postgres:5432 / supplyradar
+#   n8n (scheduling):      http://localhost:5678  -> Schedule trigger -> Execute Command
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: radar
+      POSTGRES_PASSWORD: radar
+      POSTGRES_DB: supplyradar
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  metabase:
+    image: metabase/metabase:latest
+    ports:
+      - "3000:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: supplyradar
+      MB_DB_PORT: 5432
+      MB_DB_USER: radar
+      MB_DB_PASS: radar
+      MB_DB_HOST: postgres
+    depends_on:
+      - postgres
+
+  n8n:
+    image: n8nio/n8n:latest
+    ports:
+      - "5678:5678"
+    environment:
+      GENERIC_TIMEZONE: Asia/Kolkata
+    volumes:
+      - n8ndata:/home/node/.n8n
+
+volumes:
+  pgdata:
+  n8ndata:

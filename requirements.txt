@@ -1,2 +1,5 @@
 pandas>=2.0
 numpy>=1.24
+# optional, only for the Postgres warehouse backend:
+# sqlalchemy>=2.0
+# psycopg2-binary>=2.9
