@@ -49,6 +49,12 @@ def load_gold():
         df = pd.read_csv(os.path.join(GOLD, f"{name}.csv"))
         df.to_sql(name, con, if_exists="replace", index=False)
         print(f"  table {name}: {len(df):,} rows")
+    # MLOps audit trail: model runs history for Metabase / monitoring
+    import model_registry
+    runs = model_registry.runs_table()
+    if len(runs):
+        runs.to_sql("ml_runs", con, if_exists="replace", index=False)
+        print(f"  table ml_runs: {len(runs):,} model runs tracked")
     for name, sql in VIEWS.items():
         wh_execute(con, backend, f"DROP VIEW IF EXISTS {name}")
         wh_execute(con, backend, f"CREATE VIEW {name} AS {sql}")

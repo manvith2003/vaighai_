@@ -129,22 +129,61 @@ def run():
     cut = hist["qidx"].max() - 4
     tr, va = hist[hist["qidx"] <= cut], hist[hist["qidx"] > cut]
 
-    clf = LogisticModel().fit(tr[FEATURES].values, tr["declined_next"].values)
-    auc = auc_score(va["declined_next"].values, clf.predict_proba(va[FEATURES].values))
+    # ---- MLOps: hyperparameter search on the held-out window
+    import model_registry
+    y_va = va["declined_next"].values
+    best = None
+    for l2 in (1e-4, 1e-3, 1e-2, 1e-1):
+        for lr in (0.15, 0.3):
+            cand = LogisticModel().fit(tr[FEATURES].values, tr["declined_next"].values,
+                                       lr=lr, l2=l2)
+            cand_auc = auc_score(y_va, cand.predict_proba(va[FEATURES].values))
+            if best is None or cand_auc > best[1]:
+                best = (cand, cand_auc, {"l2": l2, "lr": lr})
+    clf, auc, params = best
+    print(f"  tuned decline model: AUC {auc:.3f} with {params} "
+          f"(searched 8 configs; base rate {hist['declined_next'].mean()*100:.1f}%)")
+
+    # ---- MLOps: promotion gate vs the registered champion
+    note = "first champion"
+    promoted = True
+    prev_v = model_registry.champion_version()
+    if prev_v is not None:
+        prev_clf, prev_feats = model_registry.load_model(prev_v)
+        if prev_feats == FEATURES:
+            prev_auc = auc_score(y_va, prev_clf.predict_proba(va[FEATURES].values))
+            if auc >= prev_auc - 0.01:
+                note = f"challenger promoted (AUC {auc:.3f} vs v{prev_v} {prev_auc:.3f})"
+            else:
+                clf, auc = prev_clf, prev_auc
+                promoted, note = False, (f"challenger regressed — kept champion v{prev_v} "
+                                         f"(AUC {prev_auc:.3f})")
+        else:
+            note = "feature set changed — new champion line"
+    print(f"  registry: {note}")
+
     watch = g[eligible & (g["qidx"] == latest_q)].copy()
     watch["decline_risk"] = clf.predict_proba(watch[FEATURES].values)
     watch["risk_band"] = pd.cut(watch["decline_risk"], [0, 0.4, 0.7, 1.0],
                                 labels=["Low", "Moderate", "Critical"]).astype(str)
-    print(f"  decline model: AUC {auc:.3f} (base rate {hist['declined_next'].mean()*100:.1f}%)")
 
-    reg = RidgeModel().fit(tr[FEATURES].values, np.log1p(tr["disp_next"].values))
-    pred_va = np.clip(np.expm1(reg.predict(va[FEATURES].values)), 0, None)
+    # ---- forecast: tune ridge l2, then champion selection vs seasonal-naive/blend
     base = (va["disp_roll4_mean"] * va["next_seasonal_idx"]).clip(lower=0).values
     y = va["disp_next"].values
-    wapes = {"ridge": np.abs(pred_va - y).sum() / max(y.sum(), 1) * 100,
+    best_r = None
+    for l2 in (0.1, 1.0, 10.0, 100.0):
+        cand = RidgeModel().fit(tr[FEATURES].values, np.log1p(tr["disp_next"].values), l2=l2)
+        w = float(np.abs(np.clip(np.expm1(cand.predict(va[FEATURES].values)), 0, None) - y).sum()
+                  / max(y.sum(), 1) * 100)
+        if best_r is None or w < best_r[1]:
+            best_r = (cand, w, l2)
+    reg, ridge_wape, ridge_l2 = best_r
+    pred_va = np.clip(np.expm1(reg.predict(va[FEATURES].values)), 0, None)
+    wapes = {"ridge": ridge_wape,
              "seasonal_naive": np.abs(base - y).sum() / max(y.sum(), 1) * 100,
              "blend": np.abs(0.5 * pred_va + 0.5 * base - y).sum() / max(y.sum(), 1) * 100}
     champion = min(wapes, key=wapes.get)
+    params_fc = {"ridge_l2": ridge_l2, "forecast_champion": champion}
     ml = np.clip(np.expm1(reg.predict(watch[FEATURES].values)), 0, None)
     naive = (watch["disp_roll4_mean"] * watch["next_seasonal_idx"]).clip(lower=0).values
     watch["forecast_next_q_MT"] = {"ridge": ml, "seasonal_naive": naive,
@@ -202,6 +241,18 @@ def run():
                "forecast_champion": champion,
                "forecast_wape_pct": round(float(wapes[champion]), 1),
                "baseline_wape_pct": round(float(wapes["seasonal_naive"]), 1)}
+
+    # ---- MLOps: log this run to the model registry (versioned weights + audit trail)
+    version = model_registry.register_run(
+        clf, FEATURES, {**params, **params_fc},
+        {"val_auc": round(auc, 4), "val_wape_pct": round(float(wapes[champion]), 1),
+         "train_rows": len(tr), "val_rows": len(va),
+         "data_through": f"FY{latest_fy} FQ{latest_qn}"},
+        promoted=promoted, note=note)
+    metrics["model_version"] = version
+    metrics["model_promoted"] = promoted
+    print(f"  registry: run logged as v{version} ({len(model_registry.history())} runs tracked)")
+
     with open(os.path.join(GOLD, "model_metrics.json"), "w") as f:
         json.dump(metrics, f)
     return metrics

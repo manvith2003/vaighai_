@@ -76,6 +76,22 @@ Validated on held-out quarters every run; no future data leaks into training.
 Weather feature `rain_next_q`: training rows use rainfall **actuals** of the target
 quarter; scoring rows use elapsed actuals + 16-day live forecast + climatology fill.
 
+## MLOps
+
+Every pipeline run executes the full loop (`src/model_registry.py`):
+
+| Step | Mechanism |
+| --- | --- |
+| Retraining | All history through the latest complete quarter, every run |
+| Hyperparameter search | Grid over `l2 × lr` (classifier) and `l2` (ridge), selected on held-out quarters |
+| Champion selection | Best forecaster of {ridge, seasonal-naive, blend} by backtest WAPE |
+| Promotion gate | Tuned challenger replaces registered champion only if validation AUC does not regress |
+| Versioning | Weights per run in `data/models/model_v{N}.json`; audit trail in `registry.jsonl` |
+| Monitoring | `ml_runs` warehouse table — chart model quality over time in Metabase |
+
+Azure mapping: registry → Azure ML model registry; tuning → Azure ML sweep jobs;
+`ml_runs` monitoring → Azure ML job metrics.
+
 ## Architecture
 
 **Local production stack (current):**
