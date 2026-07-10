@@ -14,19 +14,21 @@ import pandas as pd
 
 from utils import GOLD, SILVER, SQLITE_PATH, SQLITE_SNAPSHOT, banner, wh_connect, wh_execute
 
+# NOTE: mixed-case column names must be double-quoted — Postgres folds unquoted
+# identifiers to lowercase (SQLite is case-insensitive, so it never complained).
 VIEWS = {
     "vw_critical_watchlist": """
-        SELECT supplier, region, latest_q_dispatch_MT, trailing_4q_avg_MT,
-               ROUND(decline_risk*100) AS risk_pct, forecast_next_q_MT, expected_next_q_MT
+        SELECT supplier, region, "latest_q_dispatch_MT", "trailing_4q_avg_MT",
+               ROUND(decline_risk*100) AS risk_pct, "forecast_next_q_MT", "expected_next_q_MT"
         FROM watchlist_decline_risk WHERE risk_band='Critical'
         ORDER BY decline_risk DESC""",
     "vw_top_opportunities": """
-        SELECT supplier, region, dispatched_MT, ROUND(share_pct,1) AS our_share_pct,
-               ROUND(growth_pct) AS yoy_growth_pct, untapped_MT, opportunity_score
+        SELECT supplier, region, "dispatched_MT", ROUND(CAST(share_pct AS numeric),1) AS our_share_pct,
+               ROUND(CAST(growth_pct AS numeric)) AS yoy_growth_pct, "untapped_MT", opportunity_score
         FROM sourcing_opportunities ORDER BY opportunity_score DESC LIMIT 25""",
     "vw_region_summary": """
-        SELECT region, fiscal_year, SUM(mill_dispatched_MT) AS market_MT,
-               SUM(vaighai_offtake_est_MT) AS offtake_MT, SUM(vaighai_purchased_MT) AS purchased_MT
+        SELECT region, fiscal_year, SUM("mill_dispatched_MT") AS market_MT,
+               SUM("vaighai_offtake_est_MT") AS offtake_MT, SUM("vaighai_purchased_MT") AS purchased_MT
         FROM supply_panel GROUP BY region, fiscal_year""",
 }
 
