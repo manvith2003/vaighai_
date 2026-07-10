@@ -157,7 +157,13 @@ def run():
             text = llm_brief(m, crit, opps, conc, outlook)
             print(f"  written by LLM ({config.LLM_MODEL} via {config.LLM_BASE_URL})")
         except Exception as e:
-            print(f"  LLM call failed ({type(e).__name__}) — falling back to templates")
+            detail = str(getattr(e, "code", "") or "")
+            if hasattr(e, "read"):
+                try:
+                    detail += " " + e.read(300).decode(errors="ignore")
+                except Exception:
+                    pass
+            print(f"  LLM call failed ({type(e).__name__} {detail.strip()}) — falling back to templates")
             text, mode = template_brief(m, crit, opps, conc, outlook), "template"
     else:
         text = template_brief(m, crit, opps, conc, outlook)
