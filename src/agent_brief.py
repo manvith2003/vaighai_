@@ -142,7 +142,10 @@ def llm_brief(m, crit, opps, conc, outlook):
                          "messages": [{"role": "user", "content": prompt}],
                          "temperature": 0.3}).encode(),
         headers={"Authorization": f"Bearer {config.LLM_API_KEY}",
-                 "Content-Type": "application/json"})
+                 "Content-Type": "application/json",
+                 "Accept": "application/json",
+                 # Cloudflare blocks the default python-urllib signature (error 1010)
+                 "User-Agent": "Mozilla/5.0 (compatible; SupplyRadar/1.0)"})
     with urllib.request.urlopen(req, timeout=60) as r:
         out = json.load(r)
     return out["choices"][0]["message"]["content"]
