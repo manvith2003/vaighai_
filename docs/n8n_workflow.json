@@ -1,0 +1,58 @@
+{
+  "name": "Supply Radar — weekly retrain & brief",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            { "field": "weeks", "triggerAtDay": [1], "triggerAtHour": 7, "triggerAtMinute": 0 }
+          ]
+        }
+      },
+      "name": "Every Monday 07:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "command": "cd /data/vaighai_ && .venv/bin/python src/pipeline.py data/raw"
+      },
+      "name": "Run pipeline (retrain + score)",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [240, 0],
+      "notesInFlow": true,
+      "notes": "In production, n8n runs on the same server as the repo. Adjust the path to where the repo lives."
+    },
+    {
+      "parameters": {
+        "filePath": "/data/vaighai_/docs/weekly_sourcing_brief.md"
+      },
+      "name": "Read sourcing brief",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [480, 0]
+    },
+    {
+      "parameters": {
+        "toEmail": "purchase.managers@vaighai.com",
+        "subject": "Supply Radar — weekly sourcing brief",
+        "text": "This week's supplier decline risks, sourcing opportunities and monsoon outlook are attached.",
+        "attachments": "data"
+      },
+      "name": "Email purchase managers",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [720, 0],
+      "notesInFlow": true,
+      "notes": "Configure SMTP credentials (company mail server) before activating."
+    }
+  ],
+  "connections": {
+    "Every Monday 07:00": { "main": [[{ "node": "Run pipeline (retrain + score)", "type": "main", "index": 0 }]] },
+    "Run pipeline (retrain + score)": { "main": [[{ "node": "Read sourcing brief", "type": "main", "index": 0 }]] },
+    "Read sourcing brief": { "main": [[{ "node": "Email purchase managers", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "timezone": "Asia/Kolkata" }
+}
