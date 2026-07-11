@@ -64,10 +64,52 @@ const tipStyle = {
   borderRadius: 12, fontSize: 12.5, color: "#eef2ff",
 };
 
+/* live agent proxy (keeps the LLM key server-side) — run: python3 src/agent_server.py */
+const AGENT_URL = "http://localhost:8000/api/explain";
+
 /* ---------- app ---------- */
 export default function App() {
   const [data, setData] = useState(null);
   const [q, setQ] = useState("");
+
+  /* ---- live agent-on-hover state ---- */
+  const [ai, setAi] = useState({ open: false, supplier: "", band: "", text: "", loading: false, facts: null });
+  const aiCache = useRef({});
+  const hoverT = useRef(null);
+
+  function hoverRow(r) {
+    clearTimeout(hoverT.current);
+    hoverT.current = setTimeout(() => askAgent(r), 320); // debounce so we don't spam the LLM
+  }
+  function leaveRow() { clearTimeout(hoverT.current); }
+
+  async function askAgent(r) {
+    const key = r.supplier;
+    const cached = aiCache.current[key];
+    setAi({ open: true, supplier: r.supplier, band: r.risk_band, facts: r,
+            text: cached || "", loading: !cached });
+    if (cached) return;
+    try {
+      const res = await fetch(AGENT_URL, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          supplier: r.supplier, region: r.region,
+          latest_q_dispatch_MT: r.latest_q_dispatch_MT, trailing_4q_avg_MT: r.trailing_4q_avg_MT,
+          our_share_pct: r.our_share_pct, decline_risk: r.decline_risk, risk_band: r.risk_band,
+          expected_next_q_MT: r.expected_next_q_MT, forecast_next_q_MT: r.forecast_next_q_MT,
+          forecast_p10_MT: r.forecast_p10_MT, forecast_p90_MT: r.forecast_p90_MT,
+          next_quarter: data?.meta?.next_quarter,
+        }),
+      });
+      const j = await res.json();
+      aiCache.current[key] = j.text;
+      setAi((a) => (a.supplier === key ? { ...a, text: j.text, loading: false } : a));
+    } catch (e) {
+      setAi((a) => (a.supplier === key
+        ? { ...a, loading: false, text: "Agent offline — start it with:  python3 src/agent_server.py" }
+        : a));
+    }
+  }
 
   useEffect(() => {
     fetch("./dashboard_data.json").then((r) => r.json()).then(setData)
@@ -147,7 +189,8 @@ export default function App() {
           <Tilt className="full">
             <h2>Decline-risk watchlist — predicted for {m.next_quarter}</h2>
             <div className="sub">
-              Risk = probability next-quarter dispatch falls &gt;50% below the supplier's trailing 4-quarter average
+              Risk = probability next-quarter dispatch falls &gt;50% below the supplier's trailing 4-quarter average ·
+              <b style={{ color: "#a5c4ff" }}> hover a row for a live AI explanation</b>
             </div>
             <input className="search" placeholder="Filter supplier / region…"
                    value={q} onChange={(e) => setQ(e.target.value)} />
@@ -163,7 +206,9 @@ export default function App() {
                 </thead>
                 <tbody>
                   {watch.map((r) => (
-                    <tr key={r.supplier}>
+                    <tr key={r.supplier}
+                        className={ai.open && ai.supplier === r.supplier ? "airow" : ""}
+                        onMouseEnter={() => hoverRow(r)} onMouseLeave={leaveRow}>
                       <td>{r.supplier}</td>
                       <td style={{ color: "#94a3b8" }}>{r.region}</td>
                       <td className="num">{fmt(r.latest_q_dispatch_MT)}</td>
@@ -255,6 +300,26 @@ export default function App() {
           Azure-ready — <b>generated {new Date().toLocaleDateString("en-IN")}</b>
         </div>
       </div>
+
+      {ai.open && (
+        <div className="aipanel">
+          <button className="aiclose" onClick={() => setAi((a) => ({ ...a, open: false }))}>×</button>
+          <div className="aihead"><span className="aidot" /> AI risk insight</div>
+          <div className="ainame">
+            {ai.supplier} {ai.band && <span className={`pill ${ai.band}`}>{ai.band}</span>}
+          </div>
+          {ai.loading
+            ? <div className="aiload">Asking the agent…</div>
+            : <p className="aitext">{ai.text}</p>}
+          {ai.facts && (
+            <div className="airange">
+              Forecast next Q: <b>{fmt(ai.facts.forecast_next_q_MT)} MT</b>
+              {ai.facts.forecast_p10_MT !== "" && ai.facts.forecast_p10_MT != null &&
+                ` · P10–P90 ${fmt(ai.facts.forecast_p10_MT)}–${fmt(ai.facts.forecast_p90_MT)} MT`}
+            </div>
+          )}
+        </div>
+      )}
     </>
   );
 }

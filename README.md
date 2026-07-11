@@ -37,6 +37,23 @@ pip install pytest
 pytest -q        # helper unit tests + transform integration + import smoke test
 ```
 
+### Live dashboard with AI-on-hover
+
+The React app auto-loads `dashboard_data.json` (rewritten every pipeline run — no manual
+upload). Hovering a supplier in the decline-risk table asks the **agent** to explain, in
+plain English, why it's at risk and the expected volume (with the P10–P90 range).
+
+```bash
+# 1) generate data
+python3 src/pipeline.py data/raw
+# 2) start the agent proxy (keeps the LLM key server-side; Groq if LLM_API_KEY is set,
+#    otherwise a deterministic template so hover still works offline)
+export LLM_API_KEY=...            # optional
+python3 src/agent_server.py       # -> http://localhost:8000
+# 3) run the UI
+cd frontend && npm install && npm run dev
+```
+
 ## Production stack (optional)
 
 ```bash
