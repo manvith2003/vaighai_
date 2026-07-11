@@ -10,7 +10,7 @@ import os
 
 import pandas as pd
 
-from utils import DASH, GOLD, Q_NUM, banner, wh_connect
+from utils import DASH, GOLD, ROOT, Q_NUM, banner, wh_connect
 
 
 def run():
@@ -40,13 +40,16 @@ def run():
     mix = mix[mix["dispatched_MT"] > 0].sort_values("dispatched_MT", ascending=False)
 
     from agent_brief import monsoon_outlook
+    brief_path = os.path.join(ROOT, "docs", "weekly_sourcing_brief.md")
+    brief_md = open(brief_path).read() if os.path.exists(brief_path) else ""
     data = {"meta": m,
             "watchlist": watch.head(40).fillna("").to_dict(orient="records"),
             "opportunities": opp.head(25).round(1).fillna("").to_dict(orient="records"),
             "trend": trend.round(0).to_dict(orient="records"),
             "region_mix": mix.round(0).to_dict(orient="records"),
             "concentration": conc.to_dict(orient="records"),
-            "monsoon_outlook": monsoon_outlook()}
+            "monsoon_outlook": monsoon_outlook(),
+            "brief_md": brief_md}
     payload = json.dumps(data, default=str)
 
     # 1. React frontend data feed (frontend/public + built frontend/dist)

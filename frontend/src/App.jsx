@@ -27,8 +27,8 @@ function useCountUp(target, ms = 1200) {
   return v;
 }
 
-/* 3D tilt-on-hover card */
-function Tilt({ children, className = "", style }) {
+/* 3D tilt-on-hover card (optionally fires onEnter for a plain-English AI insight) */
+function Tilt({ children, className = "", style, onEnter }) {
   const ref = useRef(null);
   const onMove = (e) => {
     const el = ref.current;
@@ -41,8 +41,29 @@ function Tilt({ children, className = "", style }) {
   const onLeave = () => { ref.current.style.transform = ""; };
   return (
     <div ref={ref} className={`card tilt ${className}`} style={style}
-         onMouseMove={onMove} onMouseLeave={onLeave}>
+         onMouseMove={onMove} onMouseLeave={onLeave} onMouseEnter={onEnter}>
       {children}
+    </div>
+  );
+}
+
+/* tiny markdown renderer for the agent's brief (headings, bullets, **bold**) */
+function MarkdownLite({ text }) {
+  if (!text) return null;
+  const bold = (s) =>
+    s.split(/(\*\*[^*]+\*\*)/g).map((p, i) =>
+      p.startsWith("**") && p.endsWith("**") ? <b key={i}>{p.slice(2, -2)}</b> : p);
+  return (
+    <div className="md">
+      {text.split("\n").map((ln, i) => {
+        const t = ln.trim();
+        if (!t) return null;
+        if (t.startsWith("## ")) return <h4 key={i}>{bold(t.slice(3))}</h4>;
+        if (t.startsWith("# ")) return <h3 key={i}>{bold(t.slice(2))}</h3>;
+        if (t.startsWith("* ") || t.startsWith("- "))
+          return <div key={i} className="mdli">• {bold(t.slice(2))}</div>;
+        return <p key={i}>{bold(t)}</p>;
+      })}
     </div>
   );
 }
@@ -66,27 +87,25 @@ const tipStyle = {
 
 /* live agent proxy (keeps the LLM key server-side) — run: python3 src/agent_server.py */
 const AGENT_URL = "http://localhost:8000/api/explain";
+const INSIGHT_URL = "http://localhost:8000/api/insight";
 
 /* ---------- app ---------- */
 export default function App() {
   const [data, setData] = useState(null);
   const [q, setQ] = useState("");
 
-  /* ---- live agent-on-hover state ---- */
-  const [ai, setAi] = useState({ open: false, supplier: "", band: "", text: "", loading: false, facts: null });
+  /* ---- live agent-on-hover state (supplier rows AND charts) ---- */
+  const [ai, setAi] = useState({ open: false, kind: "", title: "", band: "", text: "", loading: false, facts: null });
+  const [notifOpen, setNotifOpen] = useState(true);
   const aiCache = useRef({});
   const hoverT = useRef(null);
-
-  function hoverRow(r) {
-    clearTimeout(hoverT.current);
-    hoverT.current = setTimeout(() => askAgent(r), 320); // debounce so we don't spam the LLM
-  }
-  function leaveRow() { clearTimeout(hoverT.current); }
+  const hover = (fn) => { clearTimeout(hoverT.current); hoverT.current = setTimeout(fn, 320); };
+  const leave = () => clearTimeout(hoverT.current);
 
   async function askAgent(r) {
-    const key = r.supplier;
+    const key = "sup:" + r.supplier;
     const cached = aiCache.current[key];
-    setAi({ open: true, supplier: r.supplier, band: r.risk_band, facts: r,
+    setAi({ open: true, kind: "supplier", title: r.supplier, band: r.risk_band, facts: r,
             text: cached || "", loading: !cached });
     if (cached) return;
     try {
@@ -103,9 +122,30 @@ export default function App() {
       });
       const j = await res.json();
       aiCache.current[key] = j.text;
-      setAi((a) => (a.supplier === key ? { ...a, text: j.text, loading: false } : a));
+      setAi((a) => (a.title === r.supplier ? { ...a, text: j.text, loading: false } : a));
     } catch (e) {
-      setAi((a) => (a.supplier === key
+      setAi((a) => (a.title === r.supplier
+        ? { ...a, loading: false, text: "Agent offline — start it with:  python3 src/agent_server.py" }
+        : a));
+    }
+  }
+
+  async function askInsight(title, summary) {
+    const key = "ins:" + title;
+    const cached = aiCache.current[key];
+    setAi({ open: true, kind: "insight", title, band: "", facts: null,
+            text: cached || "", loading: !cached });
+    if (cached) return;
+    try {
+      const res = await fetch(INSIGHT_URL, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, summary }),
+      });
+      const j = await res.json();
+      aiCache.current[key] = j.text;
+      setAi((a) => (a.title === title ? { ...a, text: j.text, loading: false } : a));
+    } catch (e) {
+      setAi((a) => (a.title === title
         ? { ...a, loading: false, text: "Agent offline — start it with:  python3 src/agent_server.py" }
         : a));
     }
@@ -135,6 +175,29 @@ export default function App() {
 
   const m = data.meta;
 
+  /* short factual summaries the agent turns into plain English on chart hover */
+  const sums = {
+    trend: (() => {
+      const t = data.trend || []; const last = t[t.length - 1] || {};
+      return `Whole-market dispatch vs our offtake vs actual purchases over time. Latest quarter ${last.label}: market ${fmt(last.dispatched_MT)} MT, our offtake ${fmt(last.offtake_MT)} MT, purchased ${fmt(last.purchased_MT)} MT.`;
+    })(),
+    region: `Dispatch by region (MT): ` +
+      [...(data.region_mix || [])].sort((a, b) => b.dispatched_MT - a.dispatched_MT)
+        .slice(0, 4).map((x) => `${x.region} ${fmt(x.dispatched_MT)}`).join(", ") + ".",
+    conc: (() => {
+      const c = data.concentration || []; const a = c[0] || {}, z = c[c.length - 1] || {};
+      return `Top-5 supplier share of our purchases went from ${a.top5_share_pct}% (FY${a.fiscal_year}) to ${z.top5_share_pct}% (FY${z.fiscal_year}); HHI ${a.hhi} to ${z.hhi}.`;
+    })(),
+    opps: `Biggest mills where our share is low: ` +
+      (data.opportunities || []).slice(0, 4).map((o) => `${o.supplier} ${fmt(o.dispatched_MT)} MT at ${Number(o.share_pct).toFixed(0)}% share`).join(", ") + ".",
+    monsoon: `Next-16-day rainfall vs normal: ` +
+      (data.monsoon_outlook || []).map((o) => `${o.region} ${o.vs_normal_x}x`).join(", ") + ".",
+  };
+
+  const critical = (data.watchlist || [])
+    .filter((r) => r.risk_band === "Critical")
+    .sort((a, b) => b.decline_risk - a.decline_risk);
+
   return (
     <>
       <div className="bg" />
@@ -160,7 +223,15 @@ export default function App() {
         </section>
 
         <div className="grid">
-          <Tilt className="full">
+          {data.brief_md && (
+            <Tilt className="full brief">
+              <h2>🧠 This week's sourcing brief <span className="byai">written by the AI agent</span></h2>
+              <div className="sub">Plain-English summary the agent generated from the numbers below.</div>
+              <MarkdownLite text={data.brief_md} />
+            </Tilt>
+          )}
+
+          <Tilt className="full" onEnter={() => hover(() => askInsight("Market vs Vaighai", sums.trend))}>
             <h2>Market vs Vaighai — quarterly volumes (MT)</h2>
             <div className="sub">Mill dispatch = whole market (MIR estimates) · offtake = our estimated take · purchased = actual receipts</div>
             <ResponsiveContainer width="100%" height={280}>
@@ -207,8 +278,8 @@ export default function App() {
                 <tbody>
                   {watch.map((r) => (
                     <tr key={r.supplier}
-                        className={ai.open && ai.supplier === r.supplier ? "airow" : ""}
-                        onMouseEnter={() => hoverRow(r)} onMouseLeave={leaveRow}>
+                        className={ai.kind === "supplier" && ai.title === r.supplier ? "airow" : ""}
+                        onMouseEnter={() => hover(() => askAgent(r))} onMouseLeave={leave}>
                       <td>{r.supplier}</td>
                       <td style={{ color: "#94a3b8" }}>{r.region}</td>
                       <td className="num">{fmt(r.latest_q_dispatch_MT)}</td>
@@ -227,7 +298,7 @@ export default function App() {
             </div>
           </Tilt>
 
-          <Tilt className="full">
+          <Tilt className="full" onEnter={() => hover(() => askInsight("Sourcing opportunities", sums.opps))}>
             <h2>Sourcing opportunities — FY{m.latest_complete_fy}</h2>
             <div className="sub">Big, growing mills where our share is low · score = size × headroom × growth</div>
             <div className="opps">
@@ -245,7 +316,7 @@ export default function App() {
             </div>
           </Tilt>
 
-          <Tilt>
+          <Tilt onEnter={() => hover(() => askInsight("Region mix", sums.region))}>
             <h2>Region mix — FY{m.latest_complete_fy}</h2>
             <div className="sub">Market dispatch vs our offtake by region (MT)</div>
             <ResponsiveContainer width="100%" height={250}>
@@ -261,7 +332,7 @@ export default function App() {
             </ResponsiveContainer>
           </Tilt>
 
-          <Tilt>
+          <Tilt onEnter={() => hover(() => askInsight("Supply-base concentration", sums.conc))}>
             <h2>Supply-base concentration</h2>
             <div className="sub">Top-5 supplier share of purchases — dependency risk trend</div>
             <ResponsiveContainer width="100%" height={250}>
@@ -279,7 +350,7 @@ export default function App() {
           </Tilt>
 
           {data.monsoon_outlook?.length > 0 && (
-            <Tilt className="full">
+            <Tilt className="full" onEnter={() => hover(() => askInsight("Monsoon outlook", sums.monsoon))}>
               <h2>Monsoon outlook — next 16 days (live forecast)</h2>
               <div className="sub">Heavy rain = wet coir &amp; drying delays · dry = production runs freely</div>
               <div className="chips">
@@ -301,17 +372,35 @@ export default function App() {
         </div>
       </div>
 
+      {notifOpen && critical.length > 0 && (
+        <div className="notif">
+          <button className="aiclose" onClick={() => setNotifOpen(false)}>×</button>
+          <div className="notifhead"><span className="bell">🔔</span> {critical.length} mills at critical decline risk</div>
+          <ul className="notiflist">
+            {critical.slice(0, 5).map((r) => (
+              <li key={r.supplier}>
+                <b>{r.supplier}</b> <span className="nreg">{r.region}</span>
+                <span className="nrk">{(r.decline_risk * 100).toFixed(0)}%</span>
+              </li>
+            ))}
+          </ul>
+          <div className="notiffoot">Hover a table row or any chart for the agent's plain-English reason.</div>
+        </div>
+      )}
+
       {ai.open && (
         <div className="aipanel">
           <button className="aiclose" onClick={() => setAi((a) => ({ ...a, open: false }))}>×</button>
-          <div className="aihead"><span className="aidot" /> AI risk insight</div>
+          <div className="aihead">
+            <span className="aidot" /> {ai.kind === "supplier" ? "AI risk insight" : "AI chart insight"}
+          </div>
           <div className="ainame">
-            {ai.supplier} {ai.band && <span className={`pill ${ai.band}`}>{ai.band}</span>}
+            {ai.title} {ai.band && <span className={`pill ${ai.band}`}>{ai.band}</span>}
           </div>
           {ai.loading
             ? <div className="aiload">Asking the agent…</div>
             : <p className="aitext">{ai.text}</p>}
-          {ai.facts && (
+          {ai.kind === "supplier" && ai.facts && (
             <div className="airange">
               Forecast next Q: <b>{fmt(ai.facts.forecast_next_q_MT)} MT</b>
               {ai.facts.forecast_p10_MT !== "" && ai.facts.forecast_p10_MT != null &&
