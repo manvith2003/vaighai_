@@ -1,5 +1,9 @@
 pandas>=2.0
 numpy>=1.24
+# tests
+pytest>=7.0
+# optional challenger model (pipeline runs fine without it):
+# lightgbm>=4.0
 # optional, only for the Postgres warehouse backend:
 # sqlalchemy>=2.0
 # psycopg2-binary>=2.9

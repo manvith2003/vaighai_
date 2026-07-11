@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supply Radar — Data Analysis (Use Case 6)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --green:#1b7a4b; --green-d:#0f5233; --amber:#e0a100; --red:#c0392b;
+    --ink:#1f2a24; --muted:#6b7a72; --line:#e3e9e5; --bg:#f5f7f5; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+       background:var(--bg);color:var(--ink);line-height:1.45}
+  header{background:linear-gradient(135deg,var(--green-d),var(--green));color:#fff;
+         padding:22px 28px}
+  header h1{margin:0;font-size:20px;letter-spacing:.2px}
+  header p{margin:4px 0 0;opacity:.85;font-size:13px}
+  .wrap{max-width:1180px;margin:0 auto;padding:20px 24px 60px}
+  .bar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;background:var(--card);
+       border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:18px 0}
+  .bar label{font-size:13px;color:var(--muted)}
+  select,input[type=file]{font:inherit;padding:7px 10px;border:1px solid var(--line);
+       border-radius:8px;background:#fff}
+  .btn{background:var(--green);color:#fff;border:none;padding:9px 14px;border-radius:8px;
+       cursor:pointer;font-size:13px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .kpi .n{font-size:24px;font-weight:700;color:var(--green-d)}
+  .kpi .l{font-size:12px;color:var(--muted);margin-top:2px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .card.full{grid-column:1/-1}
+  .card h3{margin:0 0 2px;font-size:15px}
+  .card .sub{margin:0 0 12px;font-size:12px;color:var(--muted)}
+  .chartbox{position:relative;height:300px}
+  .chartbox.tall{height:360px}
+  .empty{padding:60px 20px;text-align:center;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+  .pill.hi{background:#fdecea;color:var(--red)} .pill.mid{background:#fdf3d6;color:#8a6d00}
+  .pill.lo{background:#e6f4ec;color:var(--green-d)}
+  .note{font-size:12px;color:var(--muted);margin-top:6px}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Supply Radar — Supplier &amp; Sourcing Intelligence</h1>
+  <p>Use Case 6 · Vaighai Agro Products · interactive analysis of the joined supply panel</p>
+</header>
+
+<div class="wrap">
+  <div class="bar">
+    <label><b>1.</b> Load data:</label>
+    <input type="file" id="file" accept=".csv">
+    <span style="color:var(--muted);font-size:12px">pick <code>supply_radar_joined.csv</code></span>
+    <span style="flex:1"></span>
+    <label>Focus fiscal year:</label>
+    <select id="fySel" disabled></select>
+  </div>
+
+  <div id="app">
+    <div class="empty" id="empty">
+      <h3 style="color:var(--ink)">No data loaded yet</h3>
+      <p>Click <b>Load data</b> above and choose your <code>supply_radar_joined.csv</code>.<br>
+      Everything below is computed in your browser — nothing is uploaded anywhere.</p>
+    </div>
+
+    <div id="dash" style="display:none">
+      <div class="kpis" id="kpis"></div>
+
+      <div class="grid">
+        <div class="card full">
+          <h3>Market vs. our buying, by fiscal year</h3>
+          <p class="sub">Mill dispatch (whole market, field estimate) vs. what Vaighai actually purchased (MT). The gap = room to grow.</p>
+          <div class="chartbox tall"><canvas id="cFY"></canvas></div>
+          <p class="note">MIR field data (dispatch/produced) begins ~FY2021; earlier years show purchases only.</p>
+        </div>
+
+        <div class="card">
+          <h3>Sourcing opportunity map <span id="fyA" class="pill lo"></span></h3>
+          <p class="sub">Each bubble = a mill. Right = big dispatcher; low = we take little. Bottom-right = best opportunities.</p>
+          <div class="chartbox"><canvas id="cOpp"></canvas></div>
+        </div>
+
+        <div class="card">
+          <h3>Top suppliers by dispatch <span id="fyB" class="pill lo"></span></h3>
+          <p class="sub">Largest mills in the market that year (MT dispatched), coloured by our share.</p>
+          <div class="chartbox"><canvas id="cTop"></canvas></div>
+        </div>
+
+        <div class="card">
+          <h3>Supplier concentration risk</h3>
+          <p class="sub">Share of our total purchases taken by our top-5 suppliers, per fiscal year. Higher = more dependent.</p>
+          <div class="chartbox"><canvas id="cConc"></canvas></div>
+        </div>
+
+        <div class="card">
+          <h3>Our share of the mills we buy from <span id="fyC" class="pill lo"></span></h3>
+          <p class="sub">How much of each active mill's dispatch we capture. Many low bars = lots of headroom.</p>
+          <div class="chartbox"><canvas id="cShare"></canvas></div>
+        </div>
+
+        <div class="card full">
+          <h3>Estimate vs. actual — reconciliation, by fiscal year</h3>
+          <p class="sub">Field-staff offtake estimate (MIR) vs. system-recorded purchases. Close bars = trustworthy field reporting.</p>
+          <div class="chartbox"><canvas id="cRec"></canvas></div>
+        </div>
+
+        <div class="card full">
+          <h3>Weather impact — rainfall vs. mill dispatch</h3>
+          <p class="sub">Coir drying depends on rain, so monsoon quarters often coincide with dispatch dips. This overlays live quarterly rainfall (Open-Meteo archive) on dispatch for a region.</p>
+          <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
+            <button class="btn" id="wxBtn">Load rainfall overlay</button>
+            <label>Region:</label>
+            <select id="wxRegion" disabled></select>
+            <span id="wxStatus" class="note"></span>
+          </div>
+          <div class="chartbox tall"><canvas id="cWx"></canvas></div>
+          <p class="note" id="wxCorr"></p>
+        </div>
+
+        <div class="card full">
+          <h3>Top 10 sourcing opportunities <span id="fyD" class="pill lo"></span></h3>
+          <p class="sub">Big, active mills where our share is low — ranked by untapped volume (dispatch we don't yet capture).</p>
+          <table id="oppTbl"><thead><tr>
+            <th>#</th><th>Supplier</th><th>Region</th>
+            <th class="num">Dispatched MT</th><th class="num">Our offtake MT</th>
+            <th class="num">Our share</th><th class="num">Untapped MT</th>
+          </tr></thead><tbody></tbody></table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const G="#1b7a4b", GD="#0f5233", AM="#e0a100", RD="#c0392b", GR="#9db3a7";
+let ROWS=[], CH={};
+const fmt=n=>Math.round(n).toLocaleString();
+const truthy=v=> v===true||v==="True"||v==="true"||v===1;
+
+document.getElementById('file').addEventListener('change',e=>{
+  const f=e.target.files[0]; if(!f) return;
+  Papa.parse(f,{header:true,dynamicTyping:false,skipEmptyLines:true,
+    complete:res=>{ ROWS=clean(res.data); boot(); }});
+});
+
+function clean(data){
+  return data.filter(r=>r.supplier).map(r=>({
+    supplier:(r.supplier||"").trim(),
+    region:(r.region||"UNKNOWN").trim(),
+    fy: Math.round(parseFloat(r.fiscal_year))||null,
+    fq: r.fiscal_quarter,
+    produced:+r.mill_produced_MT||0,
+    dispatched:+r.mill_dispatched_MT||0,
+    offtake:+r.vaighai_offtake_est_MT||0,
+    purchased:+r.vaighai_purchased_MT||0,
+    share: r.our_share_of_dispatch_pct===""||r.our_share_of_dispatch_pct==null?null:+r.our_share_of_dispatch_pct,
+    in_mir:truthy(r.in_mir), in_pur:truthy(r.in_purchase)
+  })).filter(r=>r.fy);
+}
+
+function boot(){
+  document.getElementById('empty').style.display='none';
+  document.getElementById('dash').style.display='block';
+  // fiscal years present
+  const fys=[...new Set(ROWS.map(r=>r.fy))].sort((a,b)=>a-b);
+  const mirMax=Math.max(...ROWS.filter(r=>r.in_mir).map(r=>r.fy));
+  const latestComplete = isFinite(mirMax)? mirMax-1 : fys[fys.length-1];
+  const sel=document.getElementById('fySel');
+  sel.innerHTML=fys.map(y=>`<option value="${y}" ${y===latestComplete?'selected':''}>FY${y}</option>`).join('');
+  sel.disabled=false; sel.onchange=()=>renderFY(+sel.value);
+  kpis(latestComplete);
+  chartFY(fys);
+  chartConc(fys);
+  chartRec(fys);
+  renderFY(latestComplete);
+}
+
+function kpis(fy){
+  const sup=new Set(ROWS.map(r=>r.supplier)).size;
+  const reg=new Set(ROWS.map(r=>r.region)).size;
+  const pur=ROWS.reduce((s,r)=>s+r.purchased,0);
+  const disp=ROWS.reduce((s,r)=>s+r.dispatched,0);
+  const activeFY=new Set(ROWS.filter(r=>r.fy===fy&&r.dispatched>0).map(r=>r.supplier)).size;
+  const el=document.getElementById('kpis');
+  el.innerHTML=[
+    [sup,'suppliers tracked'],
+    [reg,'regions'],
+    [fmt(pur)+' MT','purchased (all years)'],
+    [fmt(disp)+' MT','market dispatch observed'],
+    [activeFY,'active mills FY'+fy],
+  ].map(k=>`<div class="kpi"><div class="n">${k[0]}</div><div class="l">${k[1]}</div></div>`).join('');
+}
+
+function chartFY(fys){
+  const by=fys.map(y=>{const rs=ROWS.filter(r=>r.fy===y);
+    return {y, disp:rs.reduce((s,r)=>s+r.dispatched,0), pur:rs.reduce((s,r)=>s+r.purchased,0)};});
+  CH.fy&&CH.fy.destroy();
+  CH.fy=new Chart(document.getElementById('cFY'),{data:{labels:by.map(d=>'FY'+d.y),
+    datasets:[
+     {type:'bar',label:'Market dispatch (MT, est.)',data:by.map(d=>d.disp),backgroundColor:GR},
+     {type:'bar',label:'Vaighai purchased (MT, actual)',data:by.map(d=>d.pur),backgroundColor:G}
+    ]},
+    options:baseOpts('MT')});
+}
+
+function chartConc(fys){
+  const rows=fys.map(y=>{
+    const m={}; ROWS.filter(r=>r.fy===y&&r.purchased>0).forEach(r=>m[r.supplier]=(m[r.supplier]||0)+r.purchased);
+    const vals=Object.values(m); const tot=vals.reduce((a,b)=>a+b,0);
+    if(!tot) return {y,top5:null,hhi:null};
+    const sorted=vals.sort((a,b)=>b-a);
+    const top5=sorted.slice(0,5).reduce((a,b)=>a+b,0)/tot*100;
+    const hhi=vals.reduce((a,b)=>a+(b/tot)**2,0);
+    return {y,top5,hhi};
+  }).filter(d=>d.top5!=null);
+  CH.conc&&CH.conc.destroy();
+  CH.conc=new Chart(document.getElementById('cConc'),{data:{labels:rows.map(d=>'FY'+d.y),
+    datasets:[
+      {type:'line',label:'Top-5 supplier share %',data:rows.map(d=>d.top5.toFixed(1)),
+       borderColor:RD,backgroundColor:RD,tension:.25,yAxisID:'y'},
+      {type:'line',label:'HHI (0–1)',data:rows.map(d=>d.hhi.toFixed(3)),
+       borderColor:AM,backgroundColor:AM,tension:.25,yAxisID:'y1'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      scales:{y:{position:'left',title:{display:true,text:'Top-5 share %'},max:100},
+              y1:{position:'right',title:{display:true,text:'HHI'},grid:{drawOnChartArea:false},min:0}}}});
+}
+
+function chartRec(fys){
+  const by=fys.filter(y=>ROWS.some(r=>r.fy===y&&r.in_mir)).map(y=>{const rs=ROWS.filter(r=>r.fy===y);
+    return {y, off:rs.reduce((s,r)=>s+r.offtake,0), pur:rs.reduce((s,r)=>s+r.purchased,0)};});
+  CH.rec&&CH.rec.destroy();
+  CH.rec=new Chart(document.getElementById('cRec'),{type:'bar',data:{labels:by.map(d=>'FY'+d.y),
+    datasets:[
+     {label:'Field offtake estimate (MIR)',data:by.map(d=>d.off),backgroundColor:AM},
+     {label:'Actual purchased (system)',data:by.map(d=>d.pur),backgroundColor:GD}
+    ]},options:baseOpts('MT')});
+}
+
+function renderFY(fy){
+  ['fyA','fyB','fyC','fyD'].forEach(id=>document.getElementById(id).textContent='FY'+fy);
+  // per-supplier aggregate for the year
+  const m={};
+  ROWS.filter(r=>r.fy===fy).forEach(r=>{
+    const k=r.supplier; m[k]=m[k]||{supplier:r.supplier,region:r.region,disp:0,off:0,pur:0};
+    m[k].disp+=r.dispatched; m[k].off+=r.offtake; m[k].pur+=r.purchased;
+  });
+  let arr=Object.values(m).map(d=>({...d,
+    share: d.disp>0? Math.min(100,d.off/d.disp*100):null,
+    untapped: Math.max(0,d.disp-d.off)}));
+  const active=arr.filter(d=>d.disp>0);
+
+  // opportunity scatter
+  CH.opp&&CH.opp.destroy();
+  CH.opp=new Chart(document.getElementById('cOpp'),{type:'bubble',data:{datasets:[{
+    label:'mills',data:active.map(d=>({x:d.disp,y:d.share||0,r:Math.max(4,Math.sqrt(d.untapped)/2),sup:d.supplier})),
+    backgroundColor:active.map(d=>(d.share||0)<15?'rgba(192,57,43,.6)':(d.share||0)<40?'rgba(224,161,0,.6)':'rgba(27,122,75,.55)')}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const d=c.raw;
+        return `${d.sup}: ${fmt(d.x)} MT dispatched, ${d.y.toFixed(0)}% ours`;}}}},
+      scales:{x:{title:{display:true,text:'Mill dispatch (MT)'}},
+              y:{title:{display:true,text:'Our share %'},min:0,max:100}}}});
+
+  // top suppliers by dispatch
+  const top=active.slice().sort((a,b)=>b.disp-a.disp).slice(0,12);
+  CH.top&&CH.top.destroy();
+  CH.top=new Chart(document.getElementById('cTop'),{type:'bar',data:{labels:top.map(d=>d.supplier),
+    datasets:[{label:'Dispatch MT',data:top.map(d=>d.disp),
+      backgroundColor:top.map(d=>(d.share||0)<15?RD:(d.share||0)<40?AM:G)}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{afterLabel:c=>{const d=top[c.dataIndex];
+        return `our share ${(d.share||0).toFixed(0)}%`;}}}},scales:{x:{title:{display:true,text:'MT'}}}}});
+
+  // share distribution
+  const bins=[0,10,20,30,40,50,60,70,80,90,100], counts=Array(bins.length-1).fill(0);
+  active.filter(d=>d.share!=null).forEach(d=>{let i=Math.min(bins.length-2,Math.floor(d.share/10));counts[i]++;});
+  CH.share&&CH.share.destroy();
+  CH.share=new Chart(document.getElementById('cShare'),{type:'bar',
+    data:{labels:bins.slice(0,-1).map((b,i)=>`${b}–${bins[i+1]}%`),
+      datasets:[{label:'# mills',data:counts,backgroundColor:G}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{y:{title:{display:true,text:'# active mills'}}}}});
+
+  // opportunities table
+  const opps=active.filter(d=>d.share!=null).sort((a,b)=>b.untapped-a.untapped).slice(0,10);
+  const tb=document.querySelector('#oppTbl tbody');
+  tb.innerHTML=opps.map((d,i)=>{const cls=d.share<15?'hi':d.share<40?'mid':'lo';
+    return `<tr><td>${i+1}</td><td>${d.supplier}</td><td>${d.region}</td>
+      <td class="num">${fmt(d.disp)}</td><td class="num">${fmt(d.off)}</td>
+      <td class="num"><span class="pill ${cls}">${d.share.toFixed(0)}%</span></td>
+      <td class="num"><b>${fmt(d.untapped)}</b></td></tr>`;}).join('');
+}
+
+function baseOpts(yl){return {responsive:true,maintainAspectRatio:false,
+  interaction:{mode:'index',intersect:false},
+  scales:{y:{title:{display:true,text:yl},beginAtZero:true}}};}
+
+// ---------- Weather overlay (Open-Meteo archive, no API key, CORS-enabled) ----------
+const REGION_COORDS={ // Tamil Nadu coir hubs
+  Pollachi:[10.66,77.01], Kangeyam:[11.00,77.56], Salem:[11.66,78.16],
+  Madurai:[9.93,78.12], Peravurani:[10.29,79.19]};
+const M2FQ={4:'FQ1',5:'FQ1',6:'FQ1',7:'FQ2',8:'FQ2',9:'FQ2',10:'FQ3',11:'FQ3',12:'FQ3',1:'FQ4',2:'FQ4',3:'FQ4'};
+const QN={FQ1:1,FQ2:2,FQ3:3,FQ4:4};
+let WX={};
+
+document.getElementById('wxBtn').addEventListener('click',loadWeather);
+document.getElementById('wxRegion').addEventListener('change',e=>renderWx(e.target.value));
+
+async function loadWeather(){
+  if(!ROWS.length){setWx('Load the CSV first.');return;}
+  const regions=[...new Set(ROWS.map(r=>r.region))].filter(r=>REGION_COORDS[r]);
+  if(!regions.length){setWx('No mapped regions in this data.');return;}
+  setWx('Fetching rainfall from Open-Meteo…');
+  const end=new Date(Date.now()-7*864e5).toISOString().slice(0,10); // archive lags ~5d
+  try{
+    await Promise.all(regions.map(async reg=>{
+      const [la,lo]=REGION_COORDS[reg];
+      const url=`https://archive-api.open-meteo.com/v1/archive?latitude=${la}&longitude=${lo}`+
+                `&start_date=2020-04-01&end_date=${end}&daily=precipitation_sum&timezone=Asia%2FKolkata`;
+      const j=await (await fetch(url)).json();
+      const t=j.daily.time, p=j.daily.precipitation_sum, agg={};
+      for(let i=0;i<t.length;i++){
+        const d=new Date(t[i]), m=d.getMonth()+1, y=d.getFullYear();
+        const fy=m>=4?y+1:y, key=fy+'-'+M2FQ[m];
+        agg[key]=(agg[key]||0)+(p[i]||0);
+      }
+      WX[reg]=agg;
+    }));
+    const sel=document.getElementById('wxRegion');
+    sel.innerHTML=regions.map(r=>`<option>${r}</option>`).join('');
+    sel.disabled=false; setWx('Loaded. Pick a region.');
+    renderWx(regions[0]);
+  }catch(err){ setWx('Could not fetch rainfall (offline or API blocked): '+err.message); }
+}
+
+function renderWx(region){
+  const agg=WX[region]||{};
+  // fiscal quarters present in dispatch for this region
+  const dm={};
+  ROWS.filter(r=>r.region===region).forEach(r=>{
+    const k=r.fy+'-'+r.fq; dm[k]=(dm[k]||0)+r.dispatched;});
+  const keys=[...new Set([...Object.keys(dm),...Object.keys(agg)])]
+    .filter(k=>+k.split('-')[0]>=2021)
+    .sort((a,b)=>{const[ya,qa]=a.split('-'),[yb,qb]=b.split('-');
+      return (+ya*4+QN[qa])-(+yb*4+QN[qb]);});
+  const rain=keys.map(k=>agg[k]!=null?Math.round(agg[k]):null);
+  const disp=keys.map(k=>dm[k]!=null?Math.round(dm[k]):null);
+  CH.wx&&CH.wx.destroy();
+  CH.wx=new Chart(document.getElementById('cWx'),{data:{labels:keys,
+    datasets:[
+      {type:'bar',label:'Rainfall (mm)',data:rain,backgroundColor:'rgba(52,152,219,.45)',yAxisID:'y1'},
+      {type:'line',label:'Mill dispatch (MT)',data:disp,borderColor:G,backgroundColor:G,tension:.25,yAxisID:'y'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      scales:{y:{position:'left',title:{display:true,text:'Dispatch MT'},beginAtZero:true},
+              y1:{position:'right',title:{display:true,text:'Rainfall mm'},grid:{drawOnChartArea:false},beginAtZero:true}}}});
+  // correlation over quarters where both exist
+  const pairs=keys.map((k,i)=>[rain[i],disp[i]]).filter(p=>p[0]!=null&&p[1]!=null);
+  const el=document.getElementById('wxCorr');
+  if(pairs.length>=4){
+    const r=pearson(pairs.map(p=>p[0]),pairs.map(p=>p[1]));
+    const dir=r<-0.1?'more rain → lower dispatch (monsoon drag)':r>0.1?'more rain → higher dispatch':'little linear relationship';
+    el.textContent=`Rainfall–dispatch correlation in ${region}: r = ${r.toFixed(2)} (${dir}). Based on ${pairs.length} quarters.`;
+  }else{el.textContent='Not enough overlapping quarters for a correlation.';}
+}
+
+function pearson(a,b){const n=a.length,ma=a.reduce((x,y)=>x+y,0)/n,mb=b.reduce((x,y)=>x+y,0)/n;
+  let num=0,da=0,db=0; for(let i=0;i<n;i++){const x=a[i]-ma,y=b[i]-mb;num+=x*y;da+=x*x;db+=y*y;}
+  return da&&db?num/Math.sqrt(da*db):0;}
+function setWx(m){document.getElementById('wxStatus').textContent=m;}
+</script>
+</body>
+</html>

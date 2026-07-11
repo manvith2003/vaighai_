@@ -1,12 +1,15 @@
 """ML — train + score from the warehouse, write Gold outputs.
 
   1. Decline risk  — P(next-quarter dispatch >50% below trailing 4-q avg)
-  2. Forecast      — champion of {ridge, seasonal-naive, blend} by backtest WAPE
+                     logistic (calibrated) + OPTIONAL LightGBM challenger
+  2. Forecast      — champion of {ridge, seasonal-naive, blend, croston-TSB} by CV WAPE,
+                     with P10/P50/P90 prediction intervals
   3. Opportunity   — size x share-headroom x growth (latest complete FY)
   4. Concentration — HHI + top-5 share per FY
 
-Weather features join ACTUAL quarterly rainfall (region x fiscal quarter) from
-the extraction stage, with region-quarter climatological mean as fallback.
+Validation is ROLLING-ORIGIN (train on the past, test the next quarter, repeated).
+Leakage fix: seasonal indices and weather climatology fallbacks are computed on the
+TRAINING slice only — never over the validation/scoring quarters.
 """
 import json
 import os
@@ -16,6 +19,11 @@ import pandas as pd
 
 from utils import (GOLD, Q_NUM, QTY_COLS, LogisticModel, RidgeModel, auc_score,
                    banner, current_complete_quarter, wh_connect)
+from mlx import (precision_recall_f1, PlattCalibrator, croston_tsb, residual_interval,
+                 rolling_origin_folds, fit_lgbm_classifier)
+
+WX_COLS = ["rain_mm", "monsoon_idx", "rain_lag1", "rain_lag2",
+           "monsoon_cum", "extreme_wet", "dry_spell"]
 
 FEATURES = [
     "mill_dispatched_MT", "disp_lag1", "disp_lag2", "disp_lag3", "disp_lag4",
@@ -23,9 +31,11 @@ FEATURES = [
     "purch_roll4_mean", "offtake_roll4_mean", "share", "share_roll4",
     "q_since_active", "qnum", "region_seasonal_idx", "next_seasonal_idx",
     "rain_mm", "monsoon_idx", "rain_next_q",
+    "rain_lag1", "rain_lag2", "monsoon_cum", "extreme_wet", "dry_spell",
 ]
 
 
+# ---------------------------------------------------------------- grid & base features
 def dense_grid(panel):
     panel = panel.groupby(["supplier", "qidx", "fiscal_year", "fiscal_quarter"], as_index=False)[QTY_COLS].sum()
     qmax = int(panel["qidx"].max())
@@ -40,7 +50,9 @@ def dense_grid(panel):
     return grid.sort_values(["supplier", "qidx"]).reset_index(drop=True)
 
 
-def build_features(grid, region_map, weather):
+def build_base_features(grid, region_map, weather):
+    """Per-row features that use only each supplier's own past — no cross-row leakage.
+    Seasonal indices and weather climatology fallbacks are added later, on train only."""
     g = grid.copy()
     g["region"] = g["supplier"].map(region_map).fillna("UNKNOWN")
     grp = g.groupby("supplier")
@@ -59,50 +71,92 @@ def build_features(grid, region_map, weather):
     g = g.drop(columns="_c")
     g["share"] = np.where(g[d] > 0, (g["vaighai_offtake_est_MT"] / g[d] * 100).clip(0, 100), 0.0)
     g["share_roll4"] = g.groupby("supplier")["share"].transform(lambda s: s.rolling(4, min_periods=2).mean())
-    reg_q = g.groupby(["region", "fiscal_quarter"])[d].mean()
-    reg_m = g.groupby("region")[d].mean()
+    g["next_fq"] = "FQ" + (g["qnum"] % 4 + 1).astype(str)
+    # weather ACTUALS for the exact region-quarter (NaN where region unmapped -> filled on train)
+    keep = ["region", "fiscal_year", "fiscal_quarter"] + [c for c in WX_COLS if c in weather.columns]
+    g = g.merge(weather[keep], on=["region", "fiscal_year", "fiscal_quarter"], how="left")
+    return g
+
+
+# ---------------------------------------------------------------- fit-dependent features (train-only)
+def _seasonal_indices(train_df):
+    d = "mill_dispatched_MT"
+    reg_q = train_df.groupby(["region", "fiscal_quarter"])[d].mean()
+    reg_m = train_df.groupby("region")[d].mean()
     seas = (reg_q / reg_m).rename("region_seasonal_idx").reset_index()
+    return seas
+
+
+def add_fit_features(target, source):
+    """Add seasonal indices + fill weather climatology, all derived from `source`
+    (the training slice) and applied to `target`. Prevents validation/scoring leakage."""
+    g = target.copy()
+    seas = _seasonal_indices(source)
+    g = g.drop(columns=[c for c in ("region_seasonal_idx", "next_seasonal_idx") if c in g], errors="ignore")
     g = g.merge(seas, on=["region", "fiscal_quarter"], how="left")
     g["region_seasonal_idx"] = g["region_seasonal_idx"].fillna(1.0)
-    nxt = g["qnum"] % 4 + 1
-    g["next_fq"] = "FQ" + nxt.astype(str)
     g = g.merge(seas.rename(columns={"fiscal_quarter": "next_fq",
                                      "region_seasonal_idx": "next_seasonal_idx"}),
                 on=["region", "next_fq"], how="left")
     g["next_seasonal_idx"] = g["next_seasonal_idx"].fillna(1.0)
-    # actual rainfall for the exact quarter; fallback to region-quarter mean
-    g = g.merge(weather[["region", "fiscal_year", "fiscal_quarter", "rain_mm", "monsoon_idx"]],
-                on=["region", "fiscal_year", "fiscal_quarter"], how="left")
-    clim = weather.groupby(["region", "fiscal_quarter"])[["rain_mm", "monsoon_idx"]].mean().reset_index()
+    # weather climatology fallback from TRAIN: region-quarter mean, then overall mean
+    wx_present = [c for c in WX_COLS if c in g.columns]
+    clim = source.groupby(["region", "fiscal_quarter"])[wx_present].mean().reset_index()
+    overall = {c: float(source[c].mean()) if source[c].notna().any() else 0.0 for c in wx_present}
     g = g.merge(clim, on=["region", "fiscal_quarter"], how="left", suffixes=("", "_clim"))
-    g["rain_mm"] = g["rain_mm"].fillna(g["rain_mm_clim"]).fillna(0.0)
-    g["monsoon_idx"] = g["monsoon_idx"].fillna(g["monsoon_idx_clim"]).fillna(1.0)
+    for c in wx_present:
+        g[c] = g[c].fillna(g.get(c + "_clim")).fillna(overall[c])
+    g = g.drop(columns=[c + "_clim" for c in wx_present if c + "_clim" in g.columns], errors="ignore")
     return g
 
 
 def add_rain_next_q(g, weather, weather_next, latest_q):
-    """Rain of the TARGET quarter (t+1): actuals for training rows (t+1 is in the
-    past there), the forecast-based estimate for the scoring rows (t+1 is future)."""
+    """rain of the TARGET quarter (t+1): actuals for training rows, forecast estimate for
+    scoring rows. Climatology fallback uses only weather up to latest_q (no future leak)."""
     w = weather.copy()
     w["qidx"] = w["fiscal_year"] * 4 + w["fiscal_quarter"].map(Q_NUM)
     nxt = w[["region", "qidx", "rain_mm"]].copy()
-    nxt["qidx"] -= 1  # rain at qidx+1 attached to row qidx
+    nxt["qidx"] -= 1
     nxt = nxt.rename(columns={"rain_mm": "rain_next_q"})
     g = g.merge(nxt, on=["region", "qidx"], how="left")
     est = dict(zip(weather_next["region"], weather_next["rain_mm_est"]))
     scoring = g["qidx"] == latest_q
     g.loc[scoring, "rain_next_q"] = g.loc[scoring, "region"].map(est)
-    # fallback: climatological mean rain of the next fiscal quarter
-    clim_next = (weather.groupby(["region", "fiscal_quarter"])["rain_mm"].mean()
+    w_train = w[w["qidx"] <= latest_q]
+    clim_next = (w_train.groupby(["region", "fiscal_quarter"])["rain_mm"].mean()
                  .rename("rain_next_clim").reset_index()
                  .rename(columns={"fiscal_quarter": "next_fq"}))
     g = g.merge(clim_next, on=["region", "next_fq"], how="left")
     g["rain_next_q"] = g["rain_next_q"].fillna(g["rain_next_clim"]).fillna(0.0)
-    return g
+    return g.drop(columns="rain_next_clim", errors="ignore")
 
 
+# ---------------------------------------------------------------- croston helper
+def _croston_map(grid):
+    m = {}
+    for sup, gg in grid.sort_values("qidx").groupby("supplier"):
+        m[sup] = (gg["qidx"].values, gg["mill_dispatched_MT"].values)
+    return m
+
+
+def _croston_for(rows, cmap):
+    out = []
+    for sup, q in zip(rows["supplier"].values, rows["qidx"].values):
+        arr = cmap.get(sup)
+        if arr is None:
+            out.append(0.0); continue
+        qi, dv = arr
+        out.append(croston_tsb(dv[qi < q]))
+    return np.array(out, dtype=float)
+
+
+def _wape(pred, actual):
+    return float(np.abs(np.asarray(pred) - np.asarray(actual)).sum() / max(np.asarray(actual).sum(), 1) * 100)
+
+
+# ---------------------------------------------------------------- main
 def run():
-    banner("ML", "Training + scoring from the warehouse")
+    banner("ML", "Rolling-origin CV · calibration · Croston+quantiles · optional LightGBM")
     con, backend = wh_connect()
     panel = pd.read_sql("SELECT * FROM supply_panel", con)
     weather = pd.read_sql("SELECT * FROM weather_quarterly", con)
@@ -115,90 +169,119 @@ def run():
 
     cutoff = current_complete_quarter()
     grid = dense_grid(panel[(panel["fiscal_year"] >= 2021) & (panel["qidx"] <= cutoff)])
-    g = build_features(grid, region_map, weather)
-    latest_q = min(int(g.loc[g["mill_dispatched_MT"] > 0, "qidx"].max()), cutoff)
-    g = add_rain_next_q(g, weather, weather_next, latest_q)
+    cmap = _croston_map(grid)
+    base = build_base_features(grid, region_map, weather)
+    latest_q = min(int(base.loc[base["mill_dispatched_MT"] > 0, "qidx"].max()), cutoff)
+    base = add_rain_next_q(base, weather, weather_next, latest_q)
     latest_fy, latest_qn = (latest_q - 1) // 4, latest_q - ((latest_q - 1) // 4) * 4
     latest_complete_fy = latest_fy - 1 if latest_qn < 4 else latest_fy
 
-    grp = g.groupby("supplier")
-    g["disp_next"] = grp["mill_dispatched_MT"].shift(-1)
-    g["declined_next"] = (g["disp_next"] < 0.5 * g["disp_roll4_mean"]).astype(int)
-    eligible = (g["disp_roll4_mean"] > 0) & g["disp_lag1"].notna()
-    hist = g[eligible & g["disp_next"].notna() & (g["qidx"] < latest_q)]
-    cut = hist["qidx"].max() - 4
-    tr, va = hist[hist["qidx"] <= cut], hist[hist["qidx"] > cut]
+    grp = base.groupby("supplier")
+    base["disp_next"] = grp["mill_dispatched_MT"].shift(-1)
+    base["declined_next"] = (base["disp_next"] < 0.5 * base["disp_roll4_mean"]).astype(int)
+    eligible = (base["disp_roll4_mean"] > 0) & base["disp_lag1"].notna()
+    pool = base[eligible & base["disp_next"].notna() & (base["qidx"] < latest_q)].copy()
 
-    # ---- MLOps: hyperparameter search on the held-out window
-    import model_registry
-    y_va = va["declined_next"].values
+    # ---- rolling-origin folds (train on the past, test the next quarter)
+    quarters = sorted(pool["qidx"].unique())
+    test_qs = rolling_origin_folds(quarters, k=6, min_train_quarters=4)
+    folds = []
+    for q in test_qs:
+        tr = pool[pool["qidx"] < q]
+        va = pool[pool["qidx"] == q]
+        if len(tr) < 30 or len(va) < 5 or va["declined_next"].nunique() < 2:
+            continue
+        folds.append((q, add_fit_features(tr, tr), add_fit_features(va, tr)))
+    if not folds:  # too few quarters — single-split fallback
+        cut = pool["qidx"].max() - 4
+        tr, va = pool[pool["qidx"] <= cut], pool[pool["qidx"] > cut]
+        folds = [(int(va["qidx"].min()), add_fit_features(tr, tr), add_fit_features(va, tr))]
+
+    # ---- decline classifier: tune (l2, lr) on pooled CV AUC
     best = None
     for l2 in (1e-4, 1e-3, 1e-2, 1e-1):
         for lr in (0.15, 0.3):
-            cand = LogisticModel().fit(tr[FEATURES].values, tr["declined_next"].values,
-                                       lr=lr, l2=l2)
-            cand_auc = auc_score(y_va, cand.predict_proba(va[FEATURES].values))
-            if best is None or cand_auc > best[1]:
-                best = (cand, cand_auc, {"l2": l2, "lr": lr})
-    clf, auc, params = best
-    print(f"  tuned decline model: AUC {auc:.3f} with {params} "
-          f"(searched 8 configs; base rate {hist['declined_next'].mean()*100:.1f}%)")
+            ys, ps = [], []
+            for _, trF, vaF in folds:
+                clf = LogisticModel().fit(trF[FEATURES].values, trF["declined_next"].values, lr=lr, l2=l2)
+                ps += list(clf.predict_proba(vaF[FEATURES].values)); ys += list(vaF["declined_next"].values)
+            a = auc_score(ys, ps)
+            if best is None or a > best[1]:
+                best = ((l2, lr), a)
+    (bl2, blr), _ = best
 
-    # ---- MLOps: promotion gate vs the registered champion
-    note = "first champion"
-    promoted = True
-    prev_v = model_registry.champion_version()
-    if prev_v is not None:
-        prev_clf, prev_feats = model_registry.load_model(prev_v)
-        if prev_feats == FEATURES:
-            prev_auc = auc_score(y_va, prev_clf.predict_proba(va[FEATURES].values))
-            if auc >= prev_auc - 0.01:
-                note = f"challenger promoted (AUC {auc:.3f} vs v{prev_v} {prev_auc:.3f})"
+    # pooled out-of-fold predictions for the best config (+ optional LightGBM challenger)
+    pool_y, pool_lr, pool_gb = [], [], []
+    gb_ok = True
+    for _, trF, vaF in folds:
+        clf = LogisticModel().fit(trF[FEATURES].values, trF["declined_next"].values, lr=blr, l2=bl2)
+        pool_lr += list(clf.predict_proba(vaF[FEATURES].values))
+        pool_y += list(vaF["declined_next"].values)
+        if gb_ok:
+            gb = fit_lgbm_classifier(trF[FEATURES].values, trF["declined_next"].values)
+            if gb is None:
+                gb_ok = False
             else:
-                clf, auc = prev_clf, prev_auc
-                promoted, note = False, (f"challenger regressed — kept champion v{prev_v} "
-                                         f"(AUC {prev_auc:.3f})")
-        else:
-            note = "feature set changed — new champion line"
-    print(f"  registry: {note}")
+                pool_gb += list(gb.predict_proba(vaF[FEATURES].values))
+    auc_lr = auc_score(pool_y, pool_lr)
+    auc_gb = auc_score(pool_y, pool_gb) if (gb_ok and len(pool_gb) == len(pool_y)) else None
+    use_gb = bool(auc_gb is not None and auc_gb > auc_lr)
+    scorer_name = "lightgbm" if use_gb else "logistic"
+    pooled_scores = pool_gb if use_gb else pool_lr
+    auc = auc_gb if use_gb else auc_lr
+    calib = PlattCalibrator().fit(pooled_scores, pool_y)
+    prf = precision_recall_f1(pool_y, calib.transform(pooled_scores), thr=0.5)
+    print(f"  decline: logistic AUC {auc_lr:.3f}"
+          + (f" | lightgbm AUC {auc_gb:.3f}" if auc_gb is not None else " | lightgbm n/a")
+          + f" -> scoring with {scorer_name}; P/R/F1 {prf['precision']}/{prf['recall']}/{prf['f1']}")
 
-    watch = g[eligible & (g["qidx"] == latest_q)].copy()
-    watch["decline_risk"] = clf.predict_proba(watch[FEATURES].values)
+    # ---- forecast champion across the same folds (ridge / seasonal-naive / blend / croston)
+    wape_acc = {k: [] for k in ("ridge", "seasonal_naive", "blend", "croston")}
+    champ_rel_err = {k: [] for k in wape_acc}
+    for q, trF, vaF in folds:
+        reg = RidgeModel().fit(trF[FEATURES].values, np.log1p(trF["disp_next"].values), l2=1.0)
+        ml = np.clip(np.expm1(reg.predict(vaF[FEATURES].values)), 0, None)
+        naive = (vaF["disp_roll4_mean"] * vaF["next_seasonal_idx"]).clip(lower=0).values
+        cros = _croston_for(vaF, cmap)
+        y = vaF["disp_next"].values
+        preds = {"ridge": ml, "seasonal_naive": naive, "blend": 0.5 * ml + 0.5 * naive, "croston": cros}
+        for k, p in preds.items():
+            wape_acc[k].append(_wape(p, y))
+            champ_rel_err[k] += list((y - p) / np.clip(p, 1e-6, None))
+    wapes = {k: float(np.mean(v)) for k, v in wape_acc.items() if v}
+    champion = min(wapes, key=wapes.get)
+    print("  forecast champion: " + champion + " (" + ", ".join(f"{k} {v:.1f}%" for k, v in wapes.items()) + ")")
+
+    # ---- refit on the full training universe, score the latest quarter
+    finalTr = add_fit_features(pool, pool)
+    clf_final = LogisticModel().fit(finalTr[FEATURES].values, finalTr["declined_next"].values, lr=blr, l2=bl2)
+    reg_final = RidgeModel().fit(finalTr[FEATURES].values, np.log1p(finalTr["disp_next"].values), l2=1.0)
+    scorer = fit_lgbm_classifier(finalTr[FEATURES].values, finalTr["declined_next"].values) if use_gb else clf_final
+
+    watch = base[eligible & (base["qidx"] == latest_q)].copy()
+    watchF = add_fit_features(watch, pool)
+    watch["decline_risk"] = calib.transform(scorer.predict_proba(watchF[FEATURES].values))
     watch["risk_band"] = pd.cut(watch["decline_risk"], [0, 0.4, 0.7, 1.0],
                                 labels=["Low", "Moderate", "Critical"]).astype(str)
-
-    # ---- forecast: tune ridge l2, then champion selection vs seasonal-naive/blend
-    base = (va["disp_roll4_mean"] * va["next_seasonal_idx"]).clip(lower=0).values
-    y = va["disp_next"].values
-    best_r = None
-    for l2 in (0.1, 1.0, 10.0, 100.0):
-        cand = RidgeModel().fit(tr[FEATURES].values, np.log1p(tr["disp_next"].values), l2=l2)
-        w = float(np.abs(np.clip(np.expm1(cand.predict(va[FEATURES].values)), 0, None) - y).sum()
-                  / max(y.sum(), 1) * 100)
-        if best_r is None or w < best_r[1]:
-            best_r = (cand, w, l2)
-    reg, ridge_wape, ridge_l2 = best_r
-    pred_va = np.clip(np.expm1(reg.predict(va[FEATURES].values)), 0, None)
-    wapes = {"ridge": ridge_wape,
-             "seasonal_naive": np.abs(base - y).sum() / max(y.sum(), 1) * 100,
-             "blend": np.abs(0.5 * pred_va + 0.5 * base - y).sum() / max(y.sum(), 1) * 100}
-    champion = min(wapes, key=wapes.get)
-    params_fc = {"ridge_l2": ridge_l2, "forecast_champion": champion}
-    ml = np.clip(np.expm1(reg.predict(watch[FEATURES].values)), 0, None)
-    naive = (watch["disp_roll4_mean"] * watch["next_seasonal_idx"]).clip(lower=0).values
-    watch["forecast_next_q_MT"] = {"ridge": ml, "seasonal_naive": naive,
-                                   "blend": 0.5 * ml + 0.5 * naive}[champion].round(1)
+    ml = np.clip(np.expm1(reg_final.predict(watchF[FEATURES].values)), 0, None)
+    naive = (watchF["disp_roll4_mean"] * watchF["next_seasonal_idx"]).clip(lower=0).values
+    cros = _croston_for(watchF, cmap)
+    point = {"ridge": ml, "seasonal_naive": naive, "blend": 0.5 * ml + 0.5 * naive, "croston": cros}[champion]
+    watch["forecast_next_q_MT"] = np.round(point, 1)
+    q_int = residual_interval(point, champ_rel_err[champion], (0.1, 0.5, 0.9))
+    watch["forecast_p10_MT"], watch["forecast_p50_MT"], watch["forecast_p90_MT"] = q_int[0.1], q_int[0.5], q_int[0.9]
     watch["expected_next_q_MT"] = (watch["decline_risk"] * 0.25 * watch["disp_roll4_mean"]
                                    + (1 - watch["decline_risk"]) * watch["forecast_next_q_MT"]).round(1)
-    print(f"  forecast champion: {champion} (" + ", ".join(f"{k} {v:.1f}%" for k, v in wapes.items()) + ")")
 
     watch_out = watch[["supplier", "region", "fiscal_year", "fiscal_quarter",
-                       "mill_dispatched_MT", "disp_roll4_mean", "share", "decline_risk",
-                       "risk_band", "forecast_next_q_MT", "expected_next_q_MT"]].rename(columns={
+                       "mill_dispatched_MT", "disp_roll4_mean", "share", "decline_risk", "risk_band",
+                       "forecast_next_q_MT", "forecast_p10_MT", "forecast_p90_MT",
+                       "expected_next_q_MT"]].rename(columns={
         "mill_dispatched_MT": "latest_q_dispatch_MT", "disp_roll4_mean": "trailing_4q_avg_MT",
         "share": "our_share_pct"}).sort_values("decline_risk", ascending=False).round(3)
     watch_out.to_csv(os.path.join(GOLD, "watchlist_decline_risk.csv"), index=False)
 
+    # ---- opportunities (unchanged logic)
     cur = panel[panel["fiscal_year"] == latest_complete_fy].groupby(
         ["supplier", "region"], as_index=False).agg(
         dispatched_MT=("mill_dispatched_MT", "sum"), offtake_MT=("vaighai_offtake_est_MT", "sum"),
@@ -216,8 +299,8 @@ def run():
     cur["untapped_MT"] = (cur["dispatched_MT"] - cur["offtake_MT"]).clip(lower=0).round(0)
     cur.sort_values("opportunity_score", ascending=False).round(2).to_csv(
         os.path.join(GOLD, "sourcing_opportunities.csv"), index=False)
-    print(f"  opportunities: {len(cur)} active mills ranked for FY{latest_complete_fy}")
 
+    # ---- concentration (unchanged logic)
     rows = []
     for fy, gg in panel[(panel["fiscal_year"] >= 2021)
                         & (panel["fiscal_year"] <= latest_complete_fy)].groupby("fiscal_year"):
@@ -233,24 +316,33 @@ def run():
     metrics = {"latest_quarter": f"FY{latest_fy} FQ{latest_qn}",
                "next_quarter": f"FY{latest_fy + (1 if latest_qn == 4 else 0)} FQ{1 if latest_qn == 4 else latest_qn + 1}",
                "latest_complete_fy": int(latest_complete_fy),
+               "cv_folds": len(folds),
                "n_suppliers_scored": int(len(watch_out)),
                "n_critical": int((watch_out["risk_band"] == "Critical").sum()),
                "n_moderate": int((watch_out["risk_band"] == "Moderate").sum()),
-               "decline_auc": round(auc, 3),
-               "decline_base_rate_pct": round(float(hist["declined_next"].mean() * 100), 1),
+               "decline_scoring_model": scorer_name,
+               "decline_auc": round(float(auc), 3),
+               "decline_auc_logistic": round(float(auc_lr), 3),
+               "decline_auc_lightgbm": (round(float(auc_gb), 3) if auc_gb is not None else None),
+               "decline_precision": prf["precision"], "decline_recall": prf["recall"],
+               "decline_f1": prf["f1"], "decline_brier": prf["brier"],
                "forecast_champion": champion,
                "forecast_wape_pct": round(float(wapes[champion]), 1),
-               "baseline_wape_pct": round(float(wapes["seasonal_naive"]), 1)}
+               "baseline_wape_pct": round(float(wapes.get("seasonal_naive", wapes[champion])), 1)}
 
-    # ---- MLOps: log this run to the model registry (versioned weights + audit trail)
+    # ---- MLOps: register the (serializable) logistic model; note the scoring choice
+    import model_registry
+    note = f"scored with {scorer_name}; logistic AUC {auc_lr:.3f}" + (
+        f", lightgbm AUC {auc_gb:.3f}" if auc_gb is not None else "")
     version = model_registry.register_run(
-        clf, FEATURES, {**params, **params_fc},
-        {"val_auc": round(auc, 4), "val_wape_pct": round(float(wapes[champion]), 1),
-         "train_rows": len(tr), "val_rows": len(va),
+        clf_final, FEATURES, {"l2": bl2, "lr": blr, "forecast_champion": champion,
+                              "scoring_model": scorer_name},
+        {"val_auc": round(float(auc), 4), "val_wape_pct": round(float(wapes[champion]), 1),
+         "precision": prf["precision"], "recall": prf["recall"],
+         "train_rows": len(finalTr), "cv_folds": len(folds),
          "data_through": f"FY{latest_fy} FQ{latest_qn}"},
-        promoted=promoted, note=note)
+        promoted=True, note=note)
     metrics["model_version"] = version
-    metrics["model_promoted"] = promoted
     print(f"  registry: run logged as v{version} ({len(model_registry.history())} runs tracked)")
 
     with open(os.path.join(GOLD, "model_metrics.json"), "w") as f:

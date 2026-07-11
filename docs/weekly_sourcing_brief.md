@@ -1,76 +1,22 @@
-# Supply Radar — Weekly Sourcing Brief
-*Scored quarter: FY2027 FQ1 · predictions for FY2027 FQ2 · generated 09 Jul 2026*
+# Sourcing Brief for Vaighai Coco-Coir Manufacturer
+We are entering a critical period for coir sourcing, with 11 critical suppliers flagged for high risk and expected volumes for the next quarter. The monsoon outlook for the next 16 days indicates below-normal rainfall in key regions, which may impact coir quality and drying times.
 
-## Headline
-Of 510 active suppliers, **11 are at critical risk** of a sharp supply drop next quarter and 243 at moderate risk (model AUC 0.769). Top-5 supplier dependency is 51.4% (was 88.5% in FY2021).
+## Act this week
+* **Krishna Coir**: Flagged for 78% risk, expected volume 3.8 MT. Action: Establish communication to confirm expected supply.
+* **Sivasakthi Fibre Products Export**: Flagged for 75% risk, expected volume 14.4 MT. Action: Negotiate supply terms to secure expected volume.
+* **J&D Pith Blocks**: Flagged for 75% risk, expected volume 2.0 MT. Action: Explore alternative suppliers in the same region.
+* **Vasantha Fibers**: Flagged for 75% risk, expected volume 2.0 MT. Action: Verify production capacity to meet expected demand.
+* **Kannamal Fibre**: Flagged for 75% risk, expected volume 2.0 MT. Action: Discuss risk mitigation strategies with the supplier.
+* **Siva Fiber Products**: Flagged for 75% risk, expected volume 2.0 MT. Action: Assess supplier's ability to meet quality standards.
+* **PKS Coir**: Flagged for 75% risk, expected volume 1.6 MT. Action: Evaluate supplier's reliability and potential for long-term partnership.
+* **AKS Coirs (Vivek)**: Flagged for 73% risk, expected volume 2.7 MT. Action: Develop a contingency plan for potential supply disruptions.
+* **Vishvajith Fiber**: Flagged for 72% risk, expected volume 79.5 MT. Action: Prioritize this supplier for regular supply chain monitoring.
+* **Pranesh Coir**: Flagged for 70% risk, expected volume 10.4 MT. Action: Collaborate with the supplier to improve their risk profile.
 
-## Act this week — critical decline risks
+## Grow here
+Opportunities for growth exist with suppliers such as **Balu Coir**, **Vetrivel Pith Block**, **Palanimurugan Coir**, **Sughavesh Natural Fiber (HEC)**, and **Arul Hi-Tech Coir**, who have shown significant year-over-year growth and untapped potential.
 
-**1. Krishna Coir** (Pollachi) — risk 78%
-   - Why: supplied nothing last quarter after averaging 12 MT/quarter; we take none of its output — possible competitor capture or pause.
-   - Expected next quarter: 4 MT (vs 12 MT normal).
-   - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
+## Monsoon outlook
+The 16-day forecast indicates below-normal rainfall in key regions: **Pollachi** (6.0 mm, 0.19x normal), **Madurai** (13.0 mm, 0.54x normal), **Kangeyam** (11.9 mm, 0.45x normal), **Salem** (17.7 mm, 0.44x normal), and **Peravurani** (13.3 mm, 0.62x normal). This may lead to wet coir and drying delays.
 
-**2. Sivasakthi Fibre Products Export** (Pollachi) — risk 75%
-   - Why: supplied nothing last quarter after averaging 45 MT/quarter; we take none of its output — possible competitor capture or pause.
-   - Expected next quarter: 14 MT (vs 45 MT normal).
-   - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
-
-**3. J&D Pith Blocks** (Pollachi) — risk 75%
-   - Why: supplied nothing last quarter after averaging 6 MT/quarter; we take none of its output — possible competitor capture or pause.
-   - Expected next quarter: 2 MT (vs 6 MT normal).
-   - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
-
-**4. Siva Fiber Products** (Pollachi) — risk 75%
-   - Why: supplied nothing last quarter after averaging 6 MT/quarter; we take none of its output — possible competitor capture or pause.
-   - Expected next quarter: 2 MT (vs 6 MT normal).
-   - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
-
-**5. Vasantha Fibers** (Pollachi) — risk 75%
-   - Why: supplied nothing last quarter after averaging 6 MT/quarter; we take none of its output — possible competitor capture or pause.
-   - Expected next quarter: 2 MT (vs 6 MT normal).
-   - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
-
-**6. Kannamal Fibre** (Pollachi) — risk 75%
-   - Why: supplied nothing last quarter after averaging 6 MT/quarter; we take none of its output — possible competitor capture or pause.
-   - Expected next quarter: 2 MT (vs 6 MT normal).
-   - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
-
-**7. PKS Coir** (Pollachi) — risk 75%
-   - Why: supplied nothing last quarter after averaging 5 MT/quarter; we take none of its output — possible competitor capture or pause.
-   - Expected next quarter: 2 MT (vs 5 MT normal).
-   - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
-
-**8. AKS Coirs (Vivek)** (Salem) — risk 73%
-   - Why: supplied nothing last quarter after averaging 6 MT/quarter; we take none of its output — possible competitor capture or pause.
-   - Expected next quarter: 3 MT (vs 6 MT normal).
-   - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
-
-**9. Vishvajith Fiber** (Pollachi) — risk 73%
-   - Why: supplied nothing last quarter after averaging 242 MT/quarter; we take none of its output — possible competitor capture or pause.
-   - Expected next quarter: 79 MT (vs 242 MT normal).
-   - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
-
-**10. Pranesh Coir** (Pollachi) — risk 70%
-   - Why: supplied nothing last quarter after averaging 31 MT/quarter; we take none of its output — possible competitor capture or pause.
-   - Expected next quarter: 10 MT (vs 31 MT normal).
-   - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
-
-## Grow here — top sourcing opportunities
-
-1. **Balu Coir** (Pollachi): 2,501 MT dispatched, growing 142% YoY, our share 2.0% — 2,451 MT untapped.
-2. **Vetrivel Pith Block** (Kangeyam): 2,819 MT dispatched, growing 246% YoY, our share 2.7% — 2,744 MT untapped.
-3. **Palanimurugan Coir** (Kangeyam): 1,720 MT dispatched, growing 183% YoY, our share 0.0% — 1,720 MT untapped.
-4. **Sughavesh Natural Fiber (HEC)** (Salem): 2,128 MT dispatched, growing 98% YoY, our share 3.5% — 2,053 MT untapped.
-5. **Arul Hi-Tech Coir** (Kangeyam): 1,429 MT dispatched, growing 128% YoY, our share 3.4% — 1,381 MT untapped.
-
-## Monsoon outlook — next 16 days (live forecast)
-
-- **Peravurani**: 21.1 mm forecast (normal 21.3 mm, 0.99×) — near normal.
-- **Salem**: 32.5 mm forecast (normal 40.0 mm, 0.81×) — near normal.
-- **Madurai**: 15.2 mm forecast (normal 24.0 mm, 0.63×) — dry spell — production should run freely.
-- **Kangeyam**: 13.5 mm forecast (normal 26.7 mm, 0.51×) — dry spell — production should run freely.
-- **Pollachi**: 13.7 mm forecast (normal 32.0 mm, 0.43×) — dry spell — production should run freely.
-
----
-*Every flagged item needs an owner, root cause and resolution date. Forecast model: seasonal_naive (WAPE 50.1%).*
+Purchase managers are responsible for owning and addressing the flagged items this week.
