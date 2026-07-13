@@ -1,511 +1,511 @@
-supplier,region,fiscal_year,fiscal_quarter,latest_q_dispatch_MT,trailing_4q_avg_MT,our_share_pct,decline_risk,risk_band,forecast_next_q_MT,expected_next_q_MT
-Krishna Coir,Pollachi,2027,FQ1,0.0,12.25,0.0,0.776,Critical,6.5,3.8
-Sivasakthi Fibre Products Export,Pollachi,2027,FQ1,0.0,45.0,0.0,0.751,Critical,24.0,14.4
-J&D Pith Blocks,Pollachi,2027,FQ1,0.0,6.25,0.0,0.749,Critical,3.3,2.0
-Vasantha Fibers,Pollachi,2027,FQ1,0.0,6.25,0.0,0.748,Critical,3.3,2.0
-Kannamal Fibre,Pollachi,2027,FQ1,0.0,6.25,0.0,0.748,Critical,3.3,2.0
-Siva Fiber Products,Pollachi,2027,FQ1,0.0,6.25,0.0,0.748,Critical,3.3,2.0
-PKS Coir,Pollachi,2027,FQ1,0.0,5.0,0.0,0.747,Critical,2.7,1.6
-AKS Coirs (Vivek),Salem,2027,FQ1,0.0,6.25,0.0,0.726,Critical,5.6,2.7
-Vishvajith Fiber,Pollachi,2027,FQ1,0.0,242.25,0.0,0.725,Critical,129.2,79.5
-Pranesh Coir,Pollachi,2027,FQ1,0.0,31.25,0.0,0.704,Critical,16.7,10.4
-Sri Krishna Coir Impexs,Pollachi,2027,FQ1,0.0,180.0,0.0,0.703,Critical,96.0,60.2
-Sujaatha Exim,Madurai,2027,FQ1,0.0,7.75,0.0,0.697,Moderate,8.4,3.9
-Sun Fiber,Madurai,2027,FQ1,0.0,4.0,0.0,0.694,Moderate,4.3,2.0
-Sai Marketing,Madurai,2027,FQ1,0.0,5.25,0.0,0.694,Moderate,5.7,2.7
-Niveepree Coir,Kangeyam,2027,FQ1,0.0,6.25,0.0,0.694,Moderate,6.2,3.0
-N K S Fibers,Madurai,2027,FQ1,0.0,3.75,0.0,0.694,Moderate,4.1,1.9
-Karuppusamy Coir Industries,Madurai,2027,FQ1,0.0,5.0,0.0,0.692,Moderate,5.4,2.5
-MMS Coir,Madurai,2027,FQ1,0.0,5.0,0.0,0.692,Moderate,5.4,2.5
-Karuppusamy Coir,Madurai,2027,FQ1,0.0,4.0,0.0,0.692,Moderate,4.3,2.0
-TGS Coir,Madurai,2027,FQ1,0.0,4.0,0.0,0.692,Moderate,4.3,2.0
-Jesus Coir Agro,Madurai,2027,FQ1,0.0,4.0,0.0,0.692,Moderate,4.3,2.0
-Nivetha Coir Products,Madurai,2027,FQ1,0.0,3.0,0.0,0.692,Moderate,3.3,1.5
-Sri Ayyanar Coco Pith Products,Madurai,2027,FQ1,0.0,2.0,0.0,0.691,Moderate,2.2,1.0
-Jaya Coco Pith,Madurai,2027,FQ1,0.0,1.75,0.0,0.691,Moderate,1.9,0.9
-Venkateshwara Fibers,Pollachi,2027,FQ1,75.0,327.0,0.0,0.69,Moderate,174.4,110.4
-Corootz,Pollachi,2027,FQ1,0.0,18.5,0.0,0.684,Moderate,9.9,6.3
-Ever Shine Pith Bricks,Pollachi,2027,FQ1,0.0,6.0,0.0,0.672,Moderate,3.2,2.1
-KG Coir Products,Pollachi,2027,FQ1,0.0,5.5,0.0,0.671,Moderate,2.9,1.9
-Sri Hydroponic,Pollachi,2027,FQ1,0.0,6.25,0.0,0.666,Moderate,3.3,2.1
-Standard Agro Tech,Pollachi,2027,FQ1,0.0,5.0,0.0,0.665,Moderate,2.7,1.7
-Sabarigiri Fibres,Kangeyam,2027,FQ1,0.0,190.0,0.0,0.662,Moderate,188.0,95.0
-Kadeswaran Pith Block,Kangeyam,2027,FQ1,50.0,423.75,0.0,0.661,Moderate,419.2,212.0
-Vengadeswara Coir,Pollachi,2027,FQ1,0.0,5.75,0.0,0.66,Moderate,3.1,2.0
-Sri Hariharasudhan Coirs,Pollachi,2027,FQ1,0.0,224.25,0.0,0.65,Moderate,119.6,78.3
-Velaven Coir,Madurai,2027,FQ1,0.0,59.0,0.0,0.646,Moderate,64.0,32.2
-Sri Kamalan Co Coir Industry,Salem,2027,FQ1,0.0,11.0,0.0,0.643,Moderate,9.9,5.3
-PRS Coco Pith,Salem,2027,FQ1,0.0,6.25,0.0,0.641,Moderate,5.6,3.0
-Unique Coirs - Prabu Coir,Salem,2027,FQ1,0.0,6.25,0.0,0.638,Moderate,5.6,3.0
-Guna Coir,Salem,2027,FQ1,0.0,6.25,0.0,0.634,Moderate,5.6,3.0
-SUGHAVESH NATURAL FIBRE,Salem,2027,FQ1,0.0,5.5,0.0,0.633,Moderate,5.0,2.7
-Pachiyammal Coco product,Salem,2027,FQ1,0.0,6.25,0.0,0.628,Moderate,5.6,3.1
-Palaniyandavar Coirs,Kangeyam,2027,FQ1,0.0,27.25,0.0,0.619,Moderate,27.0,14.5
-Vortex Bio Fuel -Selliyamman Coconut Product,Kangeyam,2027,FQ1,0.0,17.25,0.0,0.618,Moderate,17.1,9.2
-Sri Palaniandavar Coir,Pollachi,2027,FQ1,0.0,31.0,0.0,0.617,Moderate,16.5,11.1
-Sri Lakshmi Coirs,Pollachi,2027,FQ1,0.0,73.75,0.0,0.617,Moderate,39.3,26.4
-Kyro Coirs,Pollachi,2027,FQ1,0.0,78.0,0.0,0.617,Moderate,41.6,28.0
-Suriya Coir Products,Pollachi,2027,FQ1,49.0,149.5,0.0,0.614,Moderate,79.7,53.7
-Sri Lakshmi Coirs - Negamam,Pollachi,2027,FQ1,75.0,206.25,0.0,0.612,Moderate,110.0,74.2
-V Star Coirs,Madurai,2027,FQ1,0.0,11.25,0.0,0.608,Moderate,12.2,6.5
-Selvanayagiamman Fibers,Kangeyam,2027,FQ1,154.0,494.0,0.0,0.606,Moderate,488.7,267.4
-Natural Fiber,Kangeyam,2027,FQ1,0.0,6.0,0.0,0.604,Moderate,5.9,3.2
-Natural Coco,Kangeyam,2027,FQ1,0.0,178.5,0.0,0.602,Moderate,176.6,97.2
-Shine Coir,Madurai,2027,FQ1,0.0,6.5,0.0,0.601,Moderate,7.1,3.8
-Balu Coir,Pollachi,2027,FQ1,315.0,507.25,0.0,0.596,Moderate,270.5,184.8
-Sri Sri Fibre,Pollachi,2027,FQ1,0.0,35.75,0.0,0.592,Moderate,19.1,13.1
-Sri Raghavendra Fibre,Pollachi,2027,FQ1,0.0,24.0,0.0,0.589,Moderate,12.8,8.8
-Aiswarya Coir,Pollachi,2027,FQ1,0.0,6.0,0.0,0.582,Moderate,3.2,2.2
-SKS Coir,Pollachi,2027,FQ1,0.0,37.5,0.0,0.579,Moderate,20.0,13.8
-Jothi Fibre,Pollachi,2027,FQ1,0.0,18.75,0.0,0.579,Moderate,10.0,6.9
-Velavan Coir,Pollachi,2027,FQ1,0.0,42.5,0.0,0.577,Moderate,22.7,15.7
-Rajathi Coir,Pollachi,2027,FQ1,0.0,12.5,0.0,0.576,Moderate,6.7,4.6
-Sai Coco (Ten Star Leesed),Pollachi,2027,FQ1,0.0,35.5,0.0,0.576,Moderate,18.9,13.1
-Sri Murugan Fibre,Pollachi,2027,FQ1,0.0,25.0,0.0,0.576,Moderate,13.3,9.2
-Dhamas Coir,Pollachi,2027,FQ1,0.0,25.0,0.0,0.576,Moderate,13.3,9.2
-Venkatajalapathi Fibers,Pollachi,2027,FQ1,0.0,18.75,0.0,0.574,Moderate,10.0,7.0
-Sri Amman coir Product,Pollachi,2027,FQ1,0.0,18.75,0.0,0.574,Moderate,10.0,7.0
-AYYANAR COIR PRODUCT,Pollachi,2027,FQ1,0.0,12.5,0.0,0.574,Moderate,6.7,4.6
-Green Coco Galuxy,Pollachi,2027,FQ1,0.0,12.5,0.0,0.572,Moderate,6.7,4.7
-Sri Fibers,Pollachi,2027,FQ1,24.0,229.0,0.0,0.572,Moderate,122.1,85.0
-Parven Coirs,Pollachi,2027,FQ1,0.0,10.0,0.0,0.571,Moderate,5.3,3.7
-Vivo AG Tech Products,Pollachi,2027,FQ1,0.0,6.25,0.0,0.57,Moderate,3.3,2.3
-Kaveri Fibres,Pollachi,2027,FQ1,0.0,6.25,0.0,0.57,Moderate,3.3,2.3
-SST Coir,Pollachi,2027,FQ1,0.0,6.25,0.0,0.57,Moderate,3.3,2.3
-Nagajothi Fibres,Pollachi,2027,FQ1,0.0,6.25,0.0,0.57,Moderate,3.3,2.3
-A J Coir,Pollachi,2027,FQ1,0.0,6.25,0.0,0.57,Moderate,3.3,2.3
-Visnu Fibers,Pollachi,2027,FQ1,0.0,4.5,0.0,0.57,Moderate,2.4,1.7
-Rathana Coirs,Salem,2027,FQ1,0.0,31.0,0.0,0.568,Moderate,27.9,16.5
-Sri Devi Coir,Pollachi,2027,FQ1,0.0,26.5,0.0,0.566,Moderate,14.1,9.9
-VV Coir,Pollachi,2027,FQ1,0.0,5.5,0.0,0.564,Moderate,2.9,2.0
-VSK coir Product,Pollachi,2027,FQ1,0.0,5.0,0.0,0.564,Moderate,2.7,1.9
-Jaihind Coir,Salem,2027,FQ1,0.0,78.25,0.0,0.564,Moderate,70.5,41.8
-Krishi Horti Pro,Pollachi,2027,FQ1,0.0,4.25,0.0,0.564,Moderate,2.3,1.6
-Sri Murugan Fiber Mills,Salem,2027,FQ1,0.0,17.75,0.0,0.564,Moderate,16.0,9.5
-Vijayabalan Coir,Salem,2027,FQ1,0.0,24.75,0.0,0.559,Moderate,22.3,13.3
-Green Universe,Kangeyam,2027,FQ1,0.0,98.0,0.0,0.558,Moderate,97.0,56.5
-Sri Siva Selvi Coirs,Salem,2027,FQ1,0.0,36.75,0.0,0.554,Moderate,33.1,19.9
-RNK Fibers,Salem,2027,FQ1,0.0,12.5,0.0,0.553,Moderate,11.3,6.8
-Mahalakshmi Coir Industry,Salem,2027,FQ1,0.0,36.0,0.0,0.549,Moderate,32.4,19.6
-Imperial Coir,Salem,2027,FQ1,0.0,6.25,0.0,0.546,Moderate,5.6,3.4
-Mariya Coir Products,Salem,2027,FQ1,0.0,12.0,0.0,0.543,Moderate,10.8,6.6
-Jai Nandhini Coirs,Salem,2027,FQ1,0.0,12.5,0.0,0.541,Moderate,11.3,6.9
-Sivasakthi Coirs,Salem,2027,FQ1,25.0,179.0,0.0,0.537,Moderate,161.3,98.7
-Sangamam Coirs,Salem,2027,FQ1,0.0,12.5,0.0,0.537,Moderate,11.3,6.9
-Krishna Fiber,Salem,2027,FQ1,0.0,12.5,0.0,0.537,Moderate,11.3,6.9
-CS Coir Industries,Salem,2027,FQ1,0.0,12.25,0.0,0.537,Moderate,11.0,6.7
-Sri Kumaran Coir Industry,Salem,2027,FQ1,0.0,6.25,0.0,0.535,Moderate,5.6,3.4
-Naveen Coir,Kangeyam,2027,FQ1,0.0,46.25,0.0,0.535,Moderate,45.8,27.5
-Ozone Internationals,Madurai,2027,FQ1,0.0,48.5,0.0,0.533,Moderate,52.6,31.0
-TSM Nature Grow,Salem,2027,FQ1,0.0,12.25,0.0,0.531,Moderate,11.0,6.8
-Arun Coir,Pollachi,2027,FQ1,25.0,118.0,0.0,0.53,Moderate,62.9,45.2
-RMSR Coir,Madurai,2027,FQ1,0.0,18.0,0.0,0.526,Moderate,19.5,11.6
-Aruna Coir,Kangeyam,2027,FQ1,0.0,37.5,0.0,0.526,Moderate,37.1,22.5
-Sri Sivam Fibers,Pollachi,2027,FQ1,25.0,158.75,0.0,0.525,Moderate,84.7,61.1
-Jacope,Pollachi,2027,FQ1,75.0,205.0,0.0,0.524,Moderate,109.3,78.9
-Sri Vinayaka Fibres,Madurai,2027,FQ1,0.0,22.75,0.0,0.522,Moderate,24.7,14.8
-Sobiya coir,Pollachi,2027,FQ1,50.0,133.25,0.0,0.521,Moderate,71.1,51.4
-Global Pith Block,Kangeyam,2027,FQ1,68.0,360.25,63.235,0.519,Moderate,356.4,218.2
-Om Valaven Coir,Pollachi,2027,FQ1,73.0,72.75,32.877,0.518,Moderate,38.8,28.1
-SRM Pith Block,Kangeyam,2027,FQ1,0.0,20.25,0.0,0.514,Moderate,20.0,12.3
-Shasti Coir,Madurai,2027,FQ1,0.0,23.25,0.0,0.513,Moderate,25.2,15.3
-AAA Coir,Peravurani,2027,FQ1,0.0,6.0,0.0,0.511,Moderate,7.0,4.2
-Selvam Fibers,Kangeyam,2027,FQ1,0.0,17.5,0.0,0.511,Moderate,17.3,10.7
-VGV Traders,Madurai,2027,FQ1,0.0,10.25,0.0,0.51,Moderate,11.1,6.7
-RMA Raja Coconut Pith Products,Madurai,2027,FQ1,0.0,21.75,0.0,0.508,Moderate,23.6,14.4
-Krishtha Fibres,Kangeyam,2027,FQ1,0.0,6.25,0.0,0.508,Moderate,6.2,3.8
-Vedaa Coir,Pollachi,2027,FQ1,25.0,93.75,0.0,0.507,Moderate,50.0,36.5
-Ganapathy Coco Pith,Kangeyam,2027,FQ1,0.0,12.5,0.0,0.506,Moderate,12.4,7.7
-Adithya Coco Products,Pollachi,2027,FQ1,22.0,103.75,0.0,0.506,Moderate,55.3,40.4
-Sri Jayam Fibre Products,Pollachi,2027,FQ1,50.0,155.75,0.0,0.506,Moderate,83.1,60.8
-A P Fibers,Madurai,2027,FQ1,0.0,10.5,0.0,0.505,Moderate,11.4,7.0
-Thirumalai Fibers,Peravurani,2027,FQ1,0.0,5.0,0.0,0.505,Moderate,5.8,3.5
-Arulperumjothi Coir,Madurai,2027,FQ1,0.0,4.0,0.0,0.504,Moderate,4.3,2.6
-Smartsports Coir,Kangeyam,2027,FQ1,0.0,6.25,0.0,0.504,Moderate,6.2,3.9
-Harshitha Coir,Kangeyam,2027,FQ1,0.0,6.25,0.0,0.504,Moderate,6.2,3.9
-VSM Coir,Kangeyam,2027,FQ1,0.0,6.0,0.0,0.504,Moderate,5.9,3.7
-Bhama Coir,Madurai,2027,FQ1,0.0,13.0,0.0,0.504,Moderate,14.1,8.6
-Sri Sivam Coco,Kangeyam,2027,FQ1,0.0,28.75,0.0,0.504,Moderate,28.4,17.7
-Thirupathi Coir,Peravurani,2027,FQ1,0.0,8.75,0.0,0.504,Moderate,10.2,6.2
-Prabu Coir,Madurai,2027,FQ1,0.0,6.25,0.0,0.503,Moderate,6.8,4.2
-SP Exports (Sammy Coir),Kangeyam,2027,FQ1,272.0,562.0,17.279,0.503,Moderate,556.0,347.0
-Everest Fiber,Peravurani,2027,FQ1,0.0,5.0,0.0,0.503,Moderate,5.8,3.5
-RM Lakshmi Coir,Peravurani,2027,FQ1,0.0,5.0,0.0,0.503,Moderate,5.8,3.5
-M I Coirs,Madurai,2027,FQ1,0.0,11.25,0.0,0.501,Moderate,12.2,7.5
-MAHA SHANKAR FIBERS,Madurai,2027,FQ1,0.0,27.75,0.0,0.5,Moderate,30.1,18.5
-Bannariyamman Fibres,Kangeyam,2027,FQ1,0.0,6.25,0.0,0.498,Moderate,6.2,3.9
-Jayam Fibre,Kangeyam,2027,FQ1,0.0,47.5,0.0,0.498,Moderate,47.0,29.5
-Rathinam Fibres,Kangeyam,2027,FQ1,22.0,190.25,0.0,0.493,Moderate,188.2,118.8
-Iswarya Coir,Pollachi,2027,FQ1,75.0,109.25,0.0,0.491,Moderate,58.3,43.1
-Kali Fiber Unit,Salem,2027,FQ1,225.0,320.25,0.0,0.49,Moderate,288.7,186.5
-Sri Selvakumaran Coir Bricks,Pollachi,2027,FQ1,25.0,71.25,0.0,0.489,Moderate,38.0,28.1
-MRK Fibres,Pollachi,2027,FQ1,272.0,329.75,26.838,0.485,Moderate,175.9,130.6
-Dtree Coco Peat,Pollachi,2027,FQ1,70.0,151.0,0.0,0.484,Moderate,80.5,59.8
-Senthur Fibers,Pollachi,2027,FQ1,125.0,226.25,0.0,0.484,Moderate,120.7,89.7
-Aathil Coir Factory,Kangeyam,2027,FQ1,70.0,168.5,0.0,0.481,Moderate,166.7,106.8
-Vel Coir,Pollachi,2027,FQ1,70.0,96.25,0.0,0.479,Moderate,51.3,38.3
-Mangayar Selvi Coir,Pollachi,2027,FQ1,124.0,235.0,0.0,0.478,Moderate,125.3,93.5
-Bharani Fibers,Pollachi,2027,FQ1,25.0,42.75,0.0,0.477,Moderate,22.8,17.0
-Greater Green Coir,Kangeyam,2027,FQ1,48.0,164.75,0.0,0.476,Moderate,163.0,105.0
-K P N Coir Industries,Pollachi,2027,FQ1,25.0,62.5,0.0,0.473,Moderate,33.3,24.9
-Sri Kumaran Fibres,Pollachi,2027,FQ1,25.0,60.25,0.0,0.472,Moderate,32.1,24.1
-Senthurvelavan Fibers,Pollachi,2027,FQ1,123.0,166.5,0.0,0.47,Moderate,88.8,66.6
-PMR Agro Green Fibers,Pollachi,2027,FQ1,101.0,137.75,0.0,0.469,Moderate,73.5,55.2
-SRM Coco Coirs,Pollachi,2027,FQ1,50.0,118.75,0.0,0.469,Moderate,63.3,47.5
-Skantha Fibres,Pollachi,2027,FQ1,75.0,134.25,0.0,0.468,Moderate,71.6,53.8
-RSV Coir Industry,Salem,2027,FQ1,125.0,229.0,0.0,0.468,Moderate,206.4,136.6
-Om Velavan Traders,Pollachi,2027,FQ1,25.0,59.25,0.0,0.468,Moderate,31.6,23.7
-SJ BioRoots Coir Products,Salem,2027,FQ1,25.0,105.75,0.0,0.468,Moderate,95.3,63.1
-Parasakthi Cocotex,Pollachi,2027,FQ1,190.0,263.25,0.0,0.467,Moderate,140.4,105.6
-Sakthi Trade,Pollachi,2027,FQ1,24.0,52.25,0.0,0.466,Moderate,27.9,21.0
-Ever Green Coir,Pollachi,2027,FQ1,50.0,80.5,0.0,0.466,Moderate,42.9,32.3
-Sun Coir,Kangeyam,2027,FQ1,100.0,297.25,0.0,0.465,Moderate,294.1,191.9
-Vetrivel Coir,Pollachi,2027,FQ1,25.0,37.0,0.0,0.463,Moderate,19.7,14.9
-Sri Ragam Fiber,Pollachi,2027,FQ1,13.0,29.5,0.0,0.459,Moderate,15.7,11.9
-Jaisakthi Fibers,Pollachi,2027,FQ1,90.0,129.75,0.0,0.457,Moderate,69.2,52.4
-Kuppanasamy Coir,Kangeyam,2027,FQ1,324.0,539.25,8.025,0.454,Moderate,533.5,352.5
-SETHU COCOS,Pollachi,2027,FQ1,225.0,337.75,0.0,0.453,Moderate,180.1,136.8
-Malayandisami Fibres,Pollachi,2027,FQ1,51.0,67.5,0.0,0.453,Moderate,36.0,27.3
-Dharsani Bio Fuels,Kangeyam,2027,FQ1,25.0,129.5,0.0,0.452,Moderate,128.1,84.9
-K.C.A COIR INDUSTRY,Salem,2027,FQ1,25.0,56.25,0.0,0.451,Moderate,50.7,34.2
-Ganapthy Coir,Pollachi,2027,FQ1,25.0,31.25,0.0,0.451,Moderate,16.7,12.7
-Sri Murugan Thunai Fibres,Pollachi,2027,FQ1,20.0,23.5,0.0,0.45,Moderate,12.5,9.5
-Swami Coirs,Pollachi,2027,FQ1,15.0,3.75,0.0,0.45,Moderate,2.0,1.5
-Amazon Agro Products,Madurai,2027,FQ1,45.0,123.25,0.0,0.448,Moderate,133.8,87.7
-Kadiyamman Fibres,Pollachi,2027,FQ1,25.0,18.75,0.0,0.446,Moderate,10.0,7.6
-Janani Coir,Pollachi,2027,FQ1,25.0,12.5,0.0,0.445,Moderate,6.7,5.1
-Om Anugragha,Pollachi,2027,FQ1,25.0,18.75,0.0,0.444,Moderate,10.0,7.6
-Kadaieswarar Fibres,Pollachi,2027,FQ1,125.0,171.75,20.0,0.444,Moderate,91.6,70.0
-Kaviya Pith Block,Kangeyam,2027,FQ1,139.0,275.75,0.0,0.444,Moderate,272.8,182.4
-Nagajothi Fibre,Pollachi,2027,FQ1,25.0,17.5,0.0,0.444,Moderate,9.3,7.1
-Logesh Fibre Product,Pollachi,2027,FQ1,25.0,6.25,0.0,0.443,Moderate,3.3,2.5
-Ratham Coir,Pollachi,2027,FQ1,45.0,53.75,0.0,0.443,Moderate,28.7,21.9
-Supreeth Fibers (LEC),Salem,2027,FQ1,145.0,176.5,17.241,0.443,Moderate,159.1,108.2
-Sakthi Vinayaga Fibers,Pollachi,2027,FQ1,209.0,200.0,0.0,0.443,Moderate,106.7,81.6
-Kaliyamman Fibres,Pollachi,2027,FQ1,50.0,55.25,0.0,0.441,Moderate,29.5,22.6
-Hari Krishna Coco Products,Pollachi,2027,FQ1,149.0,168.25,0.0,0.441,Moderate,89.7,68.7
-Sughavesh Natural Fiber (HEC),Salem,2027,FQ1,425.0,548.5,5.882,0.441,Moderate,494.4,337.0
-Sri Muthu Fibers,Pollachi,2027,FQ1,97.0,108.0,0.0,0.44,Moderate,57.6,44.1
-Dev Coir,Pollachi,2027,FQ1,130.0,140.0,0.0,0.439,Moderate,74.7,57.3
-Ramajeyam Coir,Salem,2027,FQ1,99.0,142.0,0.0,0.438,Moderate,128.0,87.5
-Akshya Fiber,Pollachi,2027,FQ1,99.0,140.5,0.0,0.437,Moderate,74.9,57.5
-E M K Coir,Pollachi,2027,FQ1,25.0,6.25,0.0,0.437,Moderate,3.3,2.5
-Srinath Coir,Pollachi,2027,FQ1,25.0,6.25,0.0,0.437,Moderate,3.3,2.5
-Sri Bagavathi Amman Coir,Pollachi,2027,FQ1,25.0,6.25,0.0,0.437,Moderate,3.3,2.5
-Sivasakthi Fbre,Pollachi,2027,FQ1,75.0,72.5,0.0,0.436,Moderate,38.7,29.7
-Sri Sai Coco,Pollachi,2027,FQ1,50.0,49.75,0.0,0.435,Moderate,26.5,20.4
-G R Organic,Salem,2027,FQ1,55.0,101.5,0.0,0.435,Moderate,91.5,62.7
-Leeds Hydroponic,Pollachi,2027,FQ1,175.0,250.0,0.0,0.435,Moderate,133.3,102.5
-Rayar Fibres,Pollachi,2027,FQ1,50.0,34.5,0.0,0.435,Moderate,18.4,14.2
-Charvi Fibre,Salem,2027,FQ1,70.0,84.0,0.0,0.434,Moderate,75.7,52.0
-Green Teck Coir Pith,Madurai,2027,FQ1,30.0,94.5,0.0,0.434,Moderate,102.6,68.4
-CHELLAMMAL FIBRE,Pollachi,2027,FQ1,99.0,100.0,0.0,0.433,Moderate,53.3,41.0
-NRN Samy Coirs,Kangeyam,2027,FQ1,150.0,169.25,0.0,0.433,Moderate,167.4,113.2
-New Natural Coco,Pollachi,2027,FQ1,65.0,63.25,0.0,0.433,Moderate,33.7,26.0
-VT Jothivenkatachalam Fibers,Madurai,2027,FQ1,5.0,48.5,0.0,0.43,Moderate,52.6,35.2
-Lotus Coir,Madurai,2027,FQ1,20.0,54.25,0.0,0.429,Moderate,58.9,39.4
-Eswari Fibres,Pollachi,2027,FQ1,324.0,347.0,0.0,0.429,Moderate,185.1,143.0
-SS Agro,Pollachi,2027,FQ1,75.0,67.75,0.0,0.428,Moderate,36.1,27.9
-Vetrivel Pith Block,Kangeyam,2027,FQ1,469.0,642.5,0.0,0.427,Moderate,635.6,432.8
-Shri Vinayaga Coirs,Pollachi,2027,FQ1,174.0,170.0,0.0,0.427,Moderate,90.7,70.1
-Manthri Coir,Salem,2027,FQ1,20.0,11.25,0.0,0.427,Moderate,10.1,7.0
-Kaniskha Coir,Pollachi,2027,FQ1,150.0,155.25,0.0,0.426,Moderate,82.8,64.0
-Chellandiamman Fibers,Kangeyam,2027,FQ1,72.0,158.25,0.0,0.425,Moderate,156.6,106.8
-Thiyagarajan Coir Industry,Salem,2027,FQ1,75.0,112.5,0.0,0.425,Moderate,101.4,70.3
-Manoj Traders,Kangeyam,2027,FQ1,125.0,198.25,0.0,0.425,Moderate,196.1,133.9
-Selvam Coco Tech,Pollachi,2027,FQ1,62.0,97.0,33.871,0.424,Moderate,51.7,40.1
-Vinayaga Coirs,Pollachi,2027,FQ1,54.0,22.25,0.0,0.424,Moderate,11.9,9.2
-Naval Fibre,Pollachi,2027,FQ1,65.0,32.5,0.0,0.423,Moderate,17.3,13.4
-S.A Export,Kangeyam,2027,FQ1,328.0,480.25,0.0,0.423,Moderate,475.1,324.8
-Arul Hi-Tech Coir,Kangeyam,2027,FQ1,192.0,294.25,25.521,0.422,Moderate,291.1,199.4
-Mathi Coir,Pollachi,2027,FQ1,210.0,230.25,0.0,0.42,Moderate,122.8,95.4
-Sri Aswin Coirs/Srinivasa Fiber (Unsieved),Pollachi,2027,FQ1,254.0,287.5,0.0,0.418,Moderate,153.3,119.3
-Alam Coco,Pollachi,2027,FQ1,69.0,40.75,0.0,0.417,Moderate,21.7,16.9
-Tharwin Fibres,Salem,2027,FQ1,50.0,55.5,0.0,0.416,Moderate,50.0,35.0
-Periyasamy Fiber,Kangeyam,2027,FQ1,50.0,160.75,50.0,0.416,Moderate,159.0,109.6
-SPN Coir,Salem,2027,FQ1,125.0,148.5,0.0,0.415,Moderate,133.8,93.7
-Sree Vari Fibres,Kangeyam,2027,FQ1,100.0,184.5,0.0,0.415,Moderate,182.5,125.9
-Maxiworth Coir,Salem,2027,FQ1,50.0,91.25,50.0,0.414,Moderate,82.2,57.6
-Veerakumarasamy Fiber,Pollachi,2027,FQ1,125.0,87.25,0.0,0.414,Moderate,46.5,36.3
-Sri Vinayaka Curled Coir Fibre Factory,Salem,2027,FQ1,25.0,18.75,0.0,0.413,Moderate,16.9,11.9
-Seniandavar Fibers,Pollachi,2027,FQ1,222.0,250.5,10.36,0.412,Moderate,133.6,104.3
-Coco Star,Pollachi,2027,FQ1,100.0,93.75,0.0,0.412,Moderate,50.0,39.1
-JJ Coir,Pollachi,2027,FQ1,50.0,18.75,0.0,0.41,Moderate,10.0,7.8
-SP Coir Pith Block,Kangeyam,2027,FQ1,48.0,117.75,0.0,0.41,Moderate,116.5,80.8
-Sri Varsini Fibres,Pollachi,2027,FQ1,200.0,261.75,0.0,0.41,Moderate,139.6,109.2
-Maruthamalai Murugan Traders,Pollachi,2027,FQ1,90.0,58.75,0.0,0.409,Moderate,31.3,24.5
-Sri Harikrishna Coir Pith Products,Pollachi,2027,FQ1,285.0,279.75,0.0,0.408,Moderate,149.2,116.8
-Udhaya Coir,Salem,2027,FQ1,75.0,68.25,0.0,0.408,Moderate,61.5,43.4
-S.R.Fibres,Madurai,2027,FQ1,24.0,41.25,0.0,0.408,Moderate,44.8,30.7
-Jai Sakthi Coir Products,Pollachi,2027,FQ1,423.0,396.75,0.0,0.407,Moderate,211.6,165.9
-M M Coirs,Madurai,2027,FQ1,6.0,24.5,0.0,0.407,Moderate,26.6,18.3
-Boss Coir,Kangeyam,2027,FQ1,50.0,95.75,0.0,0.406,Moderate,94.7,65.9
-TGT Coir Export,Pollachi,2027,FQ1,75.0,27.75,0.0,0.406,Moderate,14.8,11.6
-Virckucham Coirs,Kangeyam,2027,FQ1,75.0,114.5,0.0,0.405,Moderate,113.3,79.0
-Dhanu Coir,Kangeyam,2027,FQ1,48.0,96.0,0.0,0.405,Moderate,95.0,66.3
-KPN Coir Industries,Pollachi,2027,FQ1,75.0,31.25,0.0,0.404,Moderate,16.7,13.1
-Sun Fibre Products,Pollachi,2027,FQ1,41.0,65.5,51.22,0.403,Moderate,34.9,27.4
-Devi Fibre,Kangeyam,2027,FQ1,40.0,59.5,0.0,0.403,Moderate,58.9,41.2
-Amirtha Coirs,Kangeyam,2027,FQ1,120.0,136.75,0.0,0.402,Moderate,135.3,94.6
-MPN Coir,Salem,2027,FQ1,49.0,24.25,0.0,0.402,Moderate,21.9,15.5
-MS Coir,Kangeyam,2027,FQ1,101.0,191.75,50.495,0.401,Moderate,189.7,132.8
-SMT Coir,Pollachi,2027,FQ1,144.0,149.25,65.278,0.401,Moderate,79.6,62.7
-Sangam Coir,Kangeyam,2027,FQ1,25.0,30.0,0.0,0.4,Moderate,29.7,20.8
-MMJ Coir,Madurai,2027,FQ1,64.0,89.0,0.0,0.4,Moderate,96.6,66.8
-SS Coir / Shars Green Enterprises,Kangeyam,2027,FQ1,25.0,37.5,0.0,0.399,Low,37.1,26.0
-Kaviya Coco Pith,Salem,2027,FQ1,50.0,37.0,0.0,0.399,Low,33.3,23.7
-Amjath Ali Fibers,Madurai,2027,FQ1,22.0,33.5,0.0,0.398,Low,36.4,25.2
-Sowbarnica Coir,Kangeyam,2027,FQ1,75.0,123.0,0.0,0.398,Low,121.7,85.5
-RCA Coirs,Madurai,2027,FQ1,20.0,38.25,0.0,0.397,Low,41.5,28.8
-Thampy Industriess,Pollachi,2027,FQ1,100.0,31.25,0.0,0.396,Low,16.7,13.2
-Vega Fiber Industries,Salem,2027,FQ1,100.0,75.0,0.0,0.396,Low,67.6,48.2
-Venus Coir,Kangeyam,2027,FQ1,169.0,229.75,0.0,0.395,Low,227.3,160.2
-Sam Coir,Madurai,2027,FQ1,31.0,37.5,0.0,0.395,Low,40.7,28.3
-Shobiya Fibers,Madurai,2027,FQ1,16.0,21.0,0.0,0.394,Low,22.8,15.9
-Sri Varsan Coirs,Pollachi,2027,FQ1,248.0,262.75,0.0,0.394,Low,140.1,110.8
-Balaji Coir Pith,Kangeyam,2027,FQ1,440.0,569.75,0.0,0.394,Low,563.7,397.8
-Sri Bannaraiamman Fibers,Salem,2027,FQ1,50.0,12.5,0.0,0.393,Low,11.3,8.1
-Shri Venkateswara Coirs,Madurai,2027,FQ1,6.0,12.5,0.0,0.393,Low,13.6,9.5
-ASP Coir,Madurai,2027,FQ1,38.0,54.75,0.0,0.392,Low,59.4,41.5
-PAS Fibers,Peravurani,2027,FQ1,125.0,153.0,0.0,0.391,Low,178.4,123.6
-Katalai Mariyamman Fibre,Kangeyam,2027,FQ1,25.0,51.5,0.0,0.391,Low,50.9,36.0
-Suriya Farms,Madurai,2027,FQ1,52.0,53.25,0.0,0.39,Low,57.8,40.5
-Akshya Coirs,Salem,2027,FQ1,189.0,200.5,0.0,0.389,Low,180.7,129.8
-Lakshmi Pith Block,Kangeyam,2027,FQ1,423.0,551.5,5.674,0.389,Low,545.6,386.9
-Cloud Eco Products ltd,Kangeyam,2027,FQ1,23.0,10.75,0.0,0.389,Low,10.6,7.5
-AB Coir,Kangeyam,2027,FQ1,25.0,36.0,0.0,0.388,Low,35.6,25.3
-Horpiflora Pith,Madurai,2027,FQ1,43.0,42.5,0.0,0.388,Low,46.1,32.3
-Ayyanar Coir,Madurai,2027,FQ1,5.0,5.5,0.0,0.388,Low,6.0,4.2
-PK Coir,Pollachi,2027,FQ1,70.0,35.0,28.571,0.388,Low,18.7,14.8
-Sri Pathi Coir Industries,Madurai,2027,FQ1,5.0,7.5,0.0,0.388,Low,8.1,5.7
-Vinayaga Fibers,Pollachi,2027,FQ1,38.0,41.25,47.368,0.387,Low,22.0,17.5
-Truth Fibers,Madurai,2027,FQ1,45.0,65.25,0.0,0.387,Low,70.8,49.7
-K R R Fibers,Madurai,2027,FQ1,16.0,12.5,0.0,0.387,Low,13.6,9.5
-LNF Coir,Kangeyam,2027,FQ1,50.0,70.75,0.0,0.387,Low,70.0,49.8
-Sanjana Coir,Salem,2027,FQ1,50.0,12.5,0.0,0.386,Low,11.3,8.1
-Mahajothi Fibre,Kangeyam,2027,FQ1,82.0,119.75,0.0,0.386,Low,118.5,84.4
-Sabrina Coir,Peravurani,2027,FQ1,13.0,15.75,0.0,0.385,Low,18.4,12.8
-Jupiter Fibre,Kangeyam,2027,FQ1,47.0,51.0,0.0,0.384,Low,50.5,36.0
-Appan Coir,Pollachi,2027,FQ1,173.0,133.5,0.0,0.384,Low,71.2,56.7
-AKS FIBER,Madurai,2027,FQ1,13.0,14.75,0.0,0.384,Low,16.0,11.3
-Sri Murugan Coir Pith Blocks,Kangeyam,2027,FQ1,25.0,30.5,0.0,0.384,Low,30.2,21.5
-RPG Coir/Velavan Coir,Kangeyam,2027,FQ1,99.0,116.0,0.0,0.383,Low,114.8,81.9
-Chellam Fibre,Madurai,2027,FQ1,62.0,68.0,0.0,0.383,Low,73.8,52.0
-Gohila Coir & Fiber Industry,Madurai,2027,FQ1,45.0,47.5,0.0,0.383,Low,51.6,36.4
-Mariya Pushpam Coir Pith,Madurai,2027,FQ1,10.0,2.5,0.0,0.381,Low,2.7,1.9
-RR Coir Industries,Peravurani,2027,FQ1,12.0,6.0,0.0,0.381,Low,7.0,4.9
-MKA Coir Industries,Madurai,2027,FQ1,27.0,24.25,0.0,0.38,Low,26.3,18.6
-(Ramesh M) M R Fiber,Madurai,2027,FQ1,56.0,57.0,0.0,0.38,Low,61.9,43.8
-Sri Natha Coirs,Madurai,2027,FQ1,148.0,182.75,0.0,0.38,Low,198.4,140.4
-Udhayam Coir & Fiber,Peravurani,2027,FQ1,13.0,9.25,0.0,0.379,Low,10.8,7.6
-Anamalai Coirs,Pollachi,2027,FQ1,111.0,83.75,36.937,0.379,Low,44.7,35.7
-Fathima Fibers,Madurai,2027,FQ1,114.0,135.0,0.0,0.379,Low,146.5,103.8
-Sindhu Fiber,Pollachi,2027,FQ1,393.0,468.25,34.606,0.379,Low,249.7,199.4
-Sri Ponbala Coir,Kangeyam,2027,FQ1,25.0,12.25,0.0,0.378,Low,12.1,8.7
-Venkateshwara Trader,Peravurani,2027,FQ1,14.0,3.5,0.0,0.378,Low,4.1,2.9
-RRR Coir,Madurai,2027,FQ1,36.0,31.75,0.0,0.378,Low,34.5,24.5
-Sowabarnicka Fibers,Peravurani,2027,FQ1,24.0,16.0,0.0,0.378,Low,18.7,13.1
-RR Coirs,Kangeyam,2027,FQ1,44.0,38.25,0.0,0.377,Low,37.8,27.2
-AGP Coir,Pollachi,2027,FQ1,98.0,91.0,48.98,0.376,Low,48.5,38.8
-Vishnu Coirs,Kangeyam,2027,FQ1,122.0,175.0,38.525,0.376,Low,173.1,124.4
-Chidhu Pith Blocks,Pollachi,2027,FQ1,170.0,101.25,0.0,0.376,Low,54.0,43.2
-JJ Coco Products,Madurai,2027,FQ1,132.0,162.0,0.0,0.375,Low,175.8,125.0
-M P N Fibers,Madurai,2027,FQ1,64.0,67.25,0.0,0.375,Low,73.0,51.9
-Uthayam Fibers,Peravurani,2027,FQ1,20.0,5.0,0.0,0.375,Low,5.8,4.1
-Eco Max,Pollachi,2027,FQ1,250.0,247.5,10.0,0.374,Low,132.0,105.7
-Karthikeyan Coir,Kangeyam,2027,FQ1,74.0,115.75,32.432,0.374,Low,114.5,82.5
-Sai Sarasvathi Coirs,Madurai,2027,FQ1,110.0,104.5,0.0,0.374,Low,113.4,80.8
-Lakshmi Coir,Kangeyam,2027,FQ1,24.0,6.0,0.0,0.373,Low,5.9,4.3
-Kumaran Industry,Kangeyam,2027,FQ1,241.0,213.5,0.0,0.373,Low,211.2,152.3
-SP Coir Products,Kangeyam,2027,FQ1,25.0,6.25,0.0,0.373,Low,6.2,4.5
-Sri Amman Coir,Kangeyam,2027,FQ1,249.0,248.5,0.0,0.372,Low,245.8,177.5
-Abi Coir,Kangeyam,2027,FQ1,124.0,143.0,0.0,0.372,Low,141.5,102.2
-Kamatchiyaamman Coir,Kangeyam,2027,FQ1,46.0,80.5,0.0,0.371,Low,79.6,57.5
-Sri Nisha Coco Peat (70-30) Rajakamangalam,Madurai,2027,FQ1,300.0,359.5,0.0,0.371,Low,390.2,278.8
-Ragavandra Fibers,Pollachi,2027,FQ1,224.0,197.0,11.161,0.37,Low,105.1,84.4
-Baby Coir,Kangeyam,2027,FQ1,123.0,134.25,0.0,0.37,Low,132.8,96.1
-Sri Krishna Industries,Pollachi,2027,FQ1,306.0,276.5,8.17,0.369,Low,147.5,118.6
-A R Coir,Pollachi,2027,FQ1,48.0,12.0,47.917,0.368,Low,6.4,5.1
-Durai Kalai Coir,Kangeyam,2027,FQ1,149.0,155.5,0.0,0.368,Low,153.8,111.5
-KCK Coirs,Madurai,2027,FQ1,16.0,6.0,0.0,0.367,Low,6.5,4.7
-K A N Coir Products,Madurai,2027,FQ1,136.0,157.0,0.0,0.367,Low,170.4,122.3
-Ponbala Coir,Kangeyam,2027,FQ1,50.0,42.25,0.0,0.366,Low,41.8,30.4
-Anand International,Salem,2027,FQ1,224.0,208.5,0.0,0.366,Low,187.9,138.2
-Sri Vishnu Coir pith Blocks,Kangeyam,2027,FQ1,83.0,74.25,0.0,0.366,Low,73.5,53.4
-ATR Coirs (HEC),Madurai,2027,FQ1,45.0,11.25,0.0,0.366,Low,12.2,8.8
-Velmurugan Coco Peat,Kangeyam,2027,FQ1,321.0,405.25,0.0,0.366,Low,400.9,291.3
-Balaji Coir Pith-Udumal,Kangeyam,2027,FQ1,355.0,500.419,29.577,0.366,Low,495.1,359.8
-Laxmi Coir Industries,Madurai,2027,FQ1,47.0,30.25,0.0,0.366,Low,32.8,23.6
-MKS Fibre,Peravurani,2027,FQ1,35.0,8.75,0.0,0.365,Low,10.2,7.3
-Nathan Industries,Peravurani,2027,FQ1,35.0,17.75,0.0,0.365,Low,20.7,14.8
-RBS Fiber,Kangeyam,2027,FQ1,50.0,12.5,0.0,0.365,Low,12.4,9.0
-Gowtham Coir,Kangeyam,2027,FQ1,86.0,65.0,0.0,0.364,Low,64.3,46.8
-SVF Coco peat,Pollachi,2027,FQ1,141.0,151.5,46.809,0.363,Low,80.8,65.2
-Aarudra Coco Products,Madurai,2027,FQ1,61.0,51.75,0.0,0.363,Low,56.2,40.5
-Ananya Coco Pith,Madurai,2027,FQ1,51.0,36.75,0.0,0.363,Low,39.9,28.7
-Arul Jothi Fibers,Kangeyam,2027,FQ1,84.0,88.25,0.0,0.362,Low,87.3,63.7
-Palanimurugan Coir,Kangeyam,2027,FQ1,320.0,410.0,0.0,0.362,Low,405.6,296.0
-Raja Coir,Pollachi,2027,FQ1,197.0,125.75,12.183,0.361,Low,67.1,54.2
-Aarha Export - Nochodampatti,Madurai,2027,FQ1,102.0,92.25,0.0,0.36,Low,100.1,72.3
-KCA Fiber Industries,Kangeyam,2027,FQ1,45.0,11.25,0.0,0.36,Low,11.1,8.1
-Amogam Exports,Madurai,2027,FQ1,106.0,82.0,0.0,0.36,Low,89.0,64.4
-Sri Arunachala Coir,Kangeyam,2027,FQ1,75.0,124.5,0.0,0.359,Low,123.2,90.1
-Jai Vishnu Coirs,Kangeyam,2027,FQ1,125.0,93.5,0.0,0.359,Low,92.5,67.7
-Muthu Viravan Coco Fiber,Peravurani,2027,FQ1,79.0,58.5,0.0,0.359,Low,68.2,49.0
-P.S Pith Block,Kangeyam,2027,FQ1,200.0,293.5,50.0,0.359,Low,290.4,212.6
-Uthis Coir,Pollachi,2027,FQ1,45.0,16.75,44.444,0.358,Low,8.9,7.2
-Sri Shakthi Coirs,Kangeyam,2027,FQ1,66.0,93.5,36.364,0.358,Low,92.5,67.8
-VICTORY Coir,Pollachi,2027,FQ1,19.0,44.75,100.0,0.358,Low,23.9,19.4
-SR fibre,Kangeyam,2027,FQ1,49.0,47.5,0.0,0.357,Low,47.0,34.4
-Sri Vishnu Fibre Unit,Pollachi,2027,FQ1,297.0,280.0,8.418,0.357,Low,149.3,121.0
-Evergreen Fiber,Peravurani,2027,FQ1,79.0,52.75,0.0,0.356,Low,61.5,44.3
-Sree K.S Fibres,Kangeyam,2027,FQ1,199.0,203.5,25.126,0.356,Low,201.3,147.8
-Amsaraja Fiber,Madurai,2027,FQ1,86.0,72.5,0.0,0.355,Low,78.7,57.2
-Mattai Murgan Fibers,Madurai,2027,FQ1,124.0,125.25,0.0,0.355,Low,136.0,98.9
-Sumathi Coir Industry,Salem,2027,FQ1,100.0,49.75,0.0,0.354,Low,44.8,33.3
-MICHEL COIR,Madurai,2027,FQ1,55.0,54.0,30.909,0.354,Low,58.6,42.6
-Cumbum Fibers,Madurai,2027,FQ1,91.0,62.5,0.0,0.352,Low,67.8,49.4
-Jeena Exports,Madurai,2027,FQ1,44.0,20.5,0.0,0.352,Low,22.3,16.3
-Brown Hills Enterprises,Kangeyam,2027,FQ1,76.0,99.5,34.211,0.351,Low,98.4,72.6
-SS Coir,Kangeyam,2027,FQ1,148.0,145.75,0.0,0.351,Low,144.2,106.4
-AVM Hydro Farming Products,Pollachi,2027,FQ1,159.0,71.0,0.0,0.35,Low,37.9,30.9
-Sri Mahalakshmi Coco Product,Pollachi,2027,FQ1,154.0,101.5,26.623,0.349,Low,54.1,44.1
-Anudeep Coir,Kangeyam,2027,FQ1,100.0,53.0,0.0,0.348,Low,52.4,38.8
-Sri Ram Fibres,Pollachi,2027,FQ1,73.0,110.5,100.0,0.347,Low,58.9,48.1
-JK Pith Industry,Peravurani,2027,FQ1,89.0,57.0,0.0,0.347,Low,66.5,48.4
-JK Coirs (LEC),Madurai,2027,FQ1,161.0,156.0,0.0,0.345,Low,169.3,124.4
-MUM Fibers,Peravurani,2027,FQ1,143.0,123.5,0.0,0.343,Low,144.0,105.2
-Sri Ram Guru Coir,Kangeyam,2027,FQ1,160.0,119.75,0.0,0.343,Low,118.5,88.1
-Go Green Coir,Salem,2027,FQ1,192.0,133.75,9.375,0.341,Low,120.6,90.9
-Veerakumara Coir,Pollachi,2027,FQ1,24.0,24.75,100.0,0.341,Low,13.2,10.8
-Sri Anoor Fibers,Kangeyam,2027,FQ1,313.0,279.25,14.058,0.34,Low,276.3,206.0
-Jairithanya Coir,Pollachi,2027,FQ1,126.0,98.25,59.524,0.34,Low,52.4,42.9
-Sai Coirs,Kangeyam,2027,FQ1,94.0,53.5,0.0,0.339,Low,52.9,39.5
-Athanur Amman Coir,Kangeyam,2027,FQ1,167.0,153.0,14.371,0.339,Low,151.4,113.1
-Jothi Coir,Peravurani,2027,FQ1,92.0,49.25,0.0,0.338,Low,57.4,42.2
-Arulperumjothi Fibers,Kangeyam,2027,FQ1,75.0,31.0,0.0,0.338,Low,30.7,23.0
-VKA Agro products,Kangeyam,2027,FQ1,245.0,321.5,29.388,0.337,Low,318.1,237.9
-Sri Venkateswara Fibres,Pollachi,2027,FQ1,289.0,167.25,0.0,0.337,Low,89.2,73.2
-Victor Coco Pith,Madurai,2027,FQ1,76.0,61.0,21.053,0.337,Low,66.2,49.0
-MSD Coir,Madurai,2027,FQ1,62.0,72.25,41.935,0.337,Low,78.4,58.1
-CS Coir,Kangeyam,2027,FQ1,263.0,225.25,0.0,0.336,Low,222.8,166.8
-Raghavaa Fibre,Kangeyam,2027,FQ1,70.0,82.0,34.286,0.336,Low,81.1,60.7
-India Coirs,Kangeyam,2027,FQ1,371.0,345.25,5.93,0.336,Low,341.6,255.8
-Shivanni Coirs,Pollachi,2027,FQ1,593.0,548.25,0.0,0.335,Low,292.4,240.3
-Sabari Coir,Madurai,2027,FQ1,232.0,275.25,31.897,0.335,Low,298.8,221.7
-Anjaneya Coir,Madurai,2027,FQ1,140.0,112.0,0.0,0.334,Low,121.6,90.3
-Natural Coir Co,Pollachi,2027,FQ1,283.0,174.0,21.908,0.334,Low,92.8,76.4
-Anuradha Coir,Madurai,2027,FQ1,154.0,109.5,0.0,0.333,Low,118.9,88.4
-L Hari Prakesh,Pollachi,2027,FQ1,177.0,101.5,19.209,0.333,Low,54.1,44.5
-VV Curld Coir,Pollachi,2027,FQ1,45.0,41.75,100.0,0.332,Low,22.3,18.4
-Srinivasa Coco Products,Madurai,2027,FQ1,285.0,281.25,0.0,0.332,Low,305.3,227.2
-Modern Fibers,Madurai,2027,FQ1,143.0,109.5,0.0,0.331,Low,118.9,88.6
-Velaa Fibres,Kangeyam,2027,FQ1,21.0,74.5,100.0,0.331,Low,73.7,55.5
-Aarudhra Agro,Pollachi,2027,FQ1,20.0,5.0,100.0,0.33,Low,2.7,2.2
-Aahash Coir Products,Madurai,2027,FQ1,161.0,169.0,30.435,0.329,Low,183.4,137.0
-TS Ashok Kumar Fibers (HEC),Madurai,2027,FQ1,242.0,219.0,0.0,0.327,Low,237.7,177.8
-Siva Selvi Fibers,Kangeyam,2027,FQ1,625.0,702.169,12.0,0.326,Low,694.7,525.2
-SAS Coco industries,Peravurani,2027,FQ1,131.0,87.75,10.687,0.326,Low,102.3,76.1
-Mariah Coirs,Madurai,2027,FQ1,72.0,62.0,31.944,0.326,Low,67.3,50.4
-Natraj Fibre,Kangeyam,2027,FQ1,294.0,243.5,0.0,0.325,Low,240.9,182.4
-MMM Coir,Kangeyam,2027,FQ1,292.0,304.0,0.0,0.325,Low,300.8,227.8
-Eligro Substrate Pvt Ltd,Madurai,2027,FQ1,110.0,61.25,0.0,0.323,Low,66.5,50.0
-Selvam Coirs,Kangeyam,2027,FQ1,97.0,59.25,23.711,0.323,Low,58.6,44.5
-Arun Coir Exime,Kangeyam,2027,FQ1,448.0,493.0,16.518,0.322,Low,487.7,370.4
-Milman Coir Export,Salem,2027,FQ1,174.0,84.5,0.0,0.322,Low,76.2,58.5
-Sarvana Gugan Coirs,Kangeyam,2027,FQ1,398.0,441.25,12.06,0.322,Low,436.5,331.5
-Karvembu Coir,Kangeyam,2027,FQ1,119.0,86.0,36.975,0.322,Low,85.1,64.6
-Anbu Fiber,Madurai,2027,FQ1,150.0,97.0,0.0,0.321,Low,105.3,79.2
-V Coir,Peravurani,2027,FQ1,128.0,70.0,0.0,0.321,Low,81.6,61.0
-ATA Coir,Pollachi,2027,FQ1,119.0,66.25,58.824,0.32,Low,35.3,29.3
-Om Sakthi Fiber,Peravurani,2027,FQ1,24.0,133.75,100.0,0.319,Low,155.9,116.8
-KMMR Industries,Madurai,2027,FQ1,147.0,124.75,13.605,0.319,Low,135.4,102.2
-Abirami Fibres,Peravurani,2027,FQ1,89.0,39.5,13.483,0.316,Low,46.1,34.7
-Vishu Fibers,Pollachi,2027,FQ1,160.0,96.25,56.25,0.316,Low,51.3,42.7
-Thraviyam Coco Products,Madurai,2027,FQ1,92.0,36.5,0.0,0.316,Low,39.6,30.0
-Almighty Fibres,Madurai,2027,FQ1,265.0,215.25,0.0,0.315,Low,233.7,177.1
-Classic Coir india,Kangeyam,2027,FQ1,174.0,188.75,58.046,0.315,Low,186.7,142.8
-KPS Amman Fiber,Pollachi,2027,FQ1,331.0,225.0,0.0,0.313,Low,120.0,100.0
-Hayagreever Coirs,Kangeyam,2027,FQ1,418.0,430.0,5.502,0.312,Low,425.4,326.1
-Radient Coir,Kangeyam,2027,FQ1,170.0,157.0,41.176,0.312,Low,155.3,119.1
-Sivamayam Fibers,Kangeyam,2027,FQ1,117.0,79.0,21.368,0.311,Low,78.2,60.0
-Thuran Coir Mills,Pollachi,2027,FQ1,120.0,34.25,0.0,0.311,Low,18.3,15.3
-Sri V Rangasamy Agencies,Kangeyam,2027,FQ1,184.0,119.5,0.0,0.31,Low,118.2,90.8
-VMM Coco,Madurai,2027,FQ1,115.0,107.5,59.13,0.31,Low,116.7,88.8
-Ten Star Coir Pith Block,Pollachi,2027,FQ1,295.0,201.25,15.593,0.31,Low,107.3,89.6
-SJ Bio Root Coir,Kangeyam,2027,FQ1,122.0,73.25,40.984,0.31,Low,72.5,55.7
-Sri Hari Fiber,Kangeyam,2027,FQ1,217.0,180.25,22.12,0.308,Low,178.3,137.2
-BN Coirs,Madurai,2027,FQ1,142.0,85.25,13.38,0.306,Low,92.5,70.7
-Meenakchi Fiber,Salem,2027,FQ1,300.0,189.0,0.0,0.306,Low,170.4,132.8
-PR Export,Kangeyam,2027,FQ1,272.0,313.25,8.824,0.305,Low,309.9,239.2
-Senthil Vinayaga Coirs,Peravurani,2027,FQ1,149.0,72.5,0.0,0.302,Low,84.5,64.5
-SHREE VETRRI VINAYAGAR FIBRES,Pollachi,2027,FQ1,323.0,233.5,30.341,0.301,Low,124.5,104.6
-Sri Ganapathi Fibres,Kangeyam,2027,FQ1,150.0,172.5,83.333,0.3,Low,170.7,132.5
-Sri Ponkalaiamman Fibers,Salem,2027,FQ1,186.0,198.25,100.0,0.299,Low,178.7,140.1
-Dhanalakshmi Coir,Pollachi,2027,FQ1,161.0,99.25,61.491,0.298,Low,52.9,44.5
-Vijayalakshmi Fibres,Pollachi,2027,FQ1,112.0,90.0,100.0,0.298,Low,48.0,40.4
-Gogulkrishna coir Export,Pollachi,2027,FQ1,248.0,158.5,19.355,0.297,Low,84.5,71.2
-Sri Omkara Traders,Pollachi,2027,FQ1,280.0,132.5,0.0,0.296,Low,70.7,59.6
-Coco Craft,Madurai,2027,FQ1,148.0,121.5,16.892,0.292,Low,131.9,102.3
-PK Coco Fibre,Kangeyam,2027,FQ1,65.0,42.25,69.231,0.291,Low,41.8,32.7
-AL-Matin Coir Exports,Madurai,2027,FQ1,58.0,34.5,62.069,0.289,Low,37.4,29.1
-Muthukumar Fiber,Madurai,2027,FQ1,16.0,26.0,100.0,0.287,Low,28.2,22.0
-Palaniyanadvar Pith Block,Kangeyam,2027,FQ1,573.0,668.669,44.503,0.286,Low,661.5,520.0
-Thirukumaran Fibers,Pollachi,2027,FQ1,745.0,755.669,0.0,0.286,Low,403.0,341.7
-Global Coco,Kangeyam,2027,FQ1,226.0,194.0,45.133,0.286,Low,191.9,150.9
-Udyam Coirs,Kangeyam,2027,FQ1,75.0,23.75,33.333,0.283,Low,23.5,18.5
-Menachi Coir,Pollachi,2027,FQ1,166.0,112.5,84.94,0.283,Low,60.0,51.0
-Veera Coir,Madurai,2027,FQ1,84.0,83.75,100.0,0.281,Low,90.9,71.2
-Annai Fibers,Madurai,2027,FQ1,10.0,5.0,100.0,0.28,Low,5.4,4.2
-Krishna Fibers,Kangeyam,2027,FQ1,26.0,18.75,100.0,0.28,Low,18.5,14.6
-Selvakarthipan Fibres,Kangeyam,2027,FQ1,100.0,80.25,75.0,0.279,Low,79.4,62.8
-Mahalakshmi Fiber,Kangeyam,2027,FQ1,198.0,92.75,0.0,0.279,Low,91.8,72.6
-AP Agro,Pollachi,2027,FQ1,169.0,126.25,100.0,0.277,Low,67.3,57.4
-Rani Coir,Kangeyam,2027,FQ1,120.0,35.0,0.0,0.276,Low,34.6,27.5
-Surya Coir,Kangeyam,2027,FQ1,82.0,63.5,69.512,0.275,Low,62.8,49.9
-RM Coconut Marchent,Madurai,2027,FQ1,101.0,106.0,87.129,0.275,Low,115.1,90.8
-Ayangaran Coirs,Madurai,2027,FQ1,41.0,40.25,100.0,0.274,Low,43.7,34.5
-Kaaruniya Coir Industries,Madurai,2027,FQ1,22.0,16.75,100.0,0.268,Low,18.2,14.4
-Bhakiyam Fibers,Madurai,2027,FQ1,151.0,121.25,59.603,0.268,Low,131.6,104.4
-Selva coco Fibre,Salem,2027,FQ1,424.0,320.25,5.896,0.268,Low,288.7,232.8
-Aakavi Coir,Kangeyam,2027,FQ1,72.0,73.0,100.0,0.267,Low,72.2,57.8
-Hyther Ali Coconut Merchant,Madurai,2027,FQ1,42.0,38.5,100.0,0.267,Low,41.8,33.2
-JPM Coirs,Madurai,2027,FQ1,74.0,76.5,100.0,0.266,Low,83.0,66.0
-Ganesh Coirs,Kangeyam,2027,FQ1,48.0,42.25,100.0,0.265,Low,41.8,33.5
-Karthika Coirs (70-30),Madurai,2027,FQ1,454.0,411.0,9.692,0.265,Low,446.1,355.2
-Kalpathur Substrate,Pollachi,2027,FQ1,272.0,115.667,45.221,0.263,Low,61.7,53.1
-Sai Balaji Coir,Kangeyam,2027,FQ1,250.0,268.0,10.0,0.262,Low,265.1,213.2
-Bio Thermal,Kangeyam,2027,FQ1,525.0,450.0,0.0,0.261,Low,445.2,358.4
-Sri Krishna Fibres,Madurai,2027,FQ1,283.0,219.5,28.975,0.259,Low,238.3,190.8
-Sri Annamalayar Coirs,Kangeyam,2027,FQ1,318.0,123.0,0.0,0.256,Low,121.7,98.4
-Anand Coir,Peravurani,2027,FQ1,323.0,223.75,19.814,0.254,Low,260.9,208.9
-Jayam Coir,Kangeyam,2027,FQ1,61.0,67.5,100.0,0.25,Low,66.8,54.3
-Ganapathy Fibers,Pollachi,2027,FQ1,419.0,297.25,35.561,0.249,Low,158.5,137.5
-SS FIBERS & COIRS,Madurai,2027,FQ1,72.0,39.75,88.889,0.249,Low,43.1,34.8
-RS Coir,Kangeyam,2027,FQ1,325.0,161.25,0.0,0.248,Low,159.5,130.0
-Raja Fibre Industry,Salem,2027,FQ1,472.0,331.75,4.661,0.245,Low,299.0,246.0
-Siva Sanju Fibers (LEC),Madurai,2027,FQ1,470.0,384.0,0.0,0.245,Low,416.8,338.4
-Winner Coirs,Pollachi,2027,FQ1,547.0,421.75,8.775,0.244,Low,224.9,195.8
-S J Coir,Madurai,2027,FQ1,194.0,105.25,53.608,0.243,Low,114.2,92.9
-Barani Fibers,Kangeyam,2027,FQ1,146.0,120.25,100.0,0.239,Low,119.0,97.7
-RP Pith Blocks,Madurai,2027,FQ1,284.0,194.0,44.718,0.238,Low,210.6,172.1
-Srinivasa Agro Products,Madurai,2027,FQ1,370.0,308.25,10.811,0.235,Low,334.6,274.1
-Deva Coir,Kangeyam,2027,FQ1,301.0,213.0,10.299,0.235,Low,210.7,173.7
-Sri Palaniyandavar Fibres,Kangeyam,2027,FQ1,400.0,371.25,62.5,0.234,Low,367.3,303.2
-Vishnu Fibres,Kangeyam,2027,FQ1,292.0,206.5,91.438,0.226,Low,204.3,169.9
-Ramesh Coir,Kangeyam,2027,FQ1,235.0,181.25,62.979,0.224,Low,179.3,149.2
-Sri Annamar Fibres,Kangeyam,2027,FQ1,226.0,180.0,100.0,0.223,Low,178.1,148.4
-Ganesan Coco Product,Salem,2027,FQ1,419.0,220.25,6.444,0.211,Low,198.5,168.3
-Narayana Coirs,Salem,2027,FQ1,500.0,296.0,5.0,0.207,Low,266.8,226.9
-Anathi Fiber,Madurai,2027,FQ1,494.0,324.0,0.0,0.205,Low,351.7,296.1
-Iniya Coir,Kangeyam,2027,FQ1,836.0,780.337,49.761,0.203,Low,772.0,654.8
-PNK Coir,Kangeyam,2027,FQ1,285.0,199.0,82.807,0.202,Low,196.9,167.1
-Dhananya Coir,Kangeyam,2027,FQ1,527.0,403.75,18.975,0.192,Low,399.4,342.1
-Sri Kandiyamman Fibres,Kangeyam,2027,FQ1,523.0,470.0,71.319,0.191,Low,465.0,398.5
-Brown Spring,Kangeyam,2027,FQ1,420.0,358.0,23.095,0.189,Low,354.2,304.0
-Ganapathy Coir,Kangeyam,2027,FQ1,428.0,169.25,0.0,0.182,Low,167.4,144.6
-Thulasiamman Coir Industry,Salem,2027,FQ1,670.0,397.75,0.0,0.161,Low,358.5,316.7
-SS Fibre,Kangeyam,2027,FQ1,544.0,254.5,36.949,0.146,Low,251.8,224.3
-Sri Ragavendra Coir Products,Pollachi,2027,FQ1,945.675,653.919,13.218,0.144,Low,348.7,322.1
-Sri Kumaran Coirs,Kangeyam,2027,FQ1,569.0,255.0,17.399,0.129,Low,252.3,227.9
-Amman Coir,Kangeyam,2027,FQ1,960.0,708.25,34.375,0.115,Low,700.7,640.5
+supplier,region,fiscal_year,fiscal_quarter,latest_q_dispatch_MT,trailing_4q_avg_MT,our_share_pct,decline_risk,risk_band,forecast_next_q_MT,forecast_p10_MT,forecast_p90_MT,expected_next_q_MT
+Krishna Coir,Pollachi,2027,FQ1,0.0,12.25,0.0,0.817,Critical,5.7,0.0,15.6,3.5
+J&D Pith Blocks,Pollachi,2027,FQ1,0.0,6.25,0.0,0.816,Critical,2.9,0.0,8.0,1.8
+Kannamal Fibre,Pollachi,2027,FQ1,0.0,6.25,0.0,0.816,Critical,2.9,0.0,8.0,1.8
+Siva Fiber Products,Pollachi,2027,FQ1,0.0,6.25,0.0,0.816,Critical,2.9,0.0,8.0,1.8
+Vasantha Fibers,Pollachi,2027,FQ1,0.0,6.25,0.0,0.816,Critical,2.9,0.0,8.0,1.8
+PKS Coir,Pollachi,2027,FQ1,0.0,5.0,0.0,0.816,Critical,2.3,0.0,6.4,1.4
+AKS Coirs (Vivek),Salem,2027,FQ1,0.0,6.25,0.0,0.795,Critical,8.1,0.0,22.0,2.9
+Sujaatha Exim,Madurai,2027,FQ1,0.0,7.75,0.0,0.794,Critical,5.7,0.0,15.4,2.7
+Sai Marketing,Madurai,2027,FQ1,0.0,5.25,0.0,0.794,Critical,3.8,0.0,10.5,1.8
+Sun Fiber,Madurai,2027,FQ1,0.0,4.0,0.0,0.794,Critical,2.9,0.0,8.0,1.4
+Karuppusamy Coir Industries,Madurai,2027,FQ1,0.0,5.0,0.0,0.794,Critical,3.7,0.0,10.0,1.8
+MMS Coir,Madurai,2027,FQ1,0.0,5.0,0.0,0.794,Critical,3.7,0.0,10.0,1.8
+N K S Fibers,Madurai,2027,FQ1,0.0,3.75,0.0,0.794,Critical,2.7,0.0,7.5,1.3
+Karuppusamy Coir,Madurai,2027,FQ1,0.0,4.0,0.0,0.794,Critical,2.9,0.0,8.0,1.4
+TGS Coir,Madurai,2027,FQ1,0.0,4.0,0.0,0.794,Critical,2.9,0.0,8.0,1.4
+Jesus Coir Agro,Madurai,2027,FQ1,0.0,4.0,0.0,0.794,Critical,2.9,0.0,8.0,1.4
+Nivetha Coir Products,Madurai,2027,FQ1,0.0,3.0,0.0,0.794,Critical,2.2,0.0,6.0,1.0
+Sri Ayyanar Coco Pith Products,Madurai,2027,FQ1,0.0,2.0,0.0,0.794,Critical,1.5,0.0,4.0,0.7
+Jaya Coco Pith,Madurai,2027,FQ1,0.0,1.75,0.0,0.794,Critical,1.3,0.0,3.5,0.6
+Niveepree Coir,Kangeyam,2027,FQ1,0.0,6.25,0.0,0.777,Critical,6.2,0.0,17.0,2.6
+Pranesh Coir,Pollachi,2027,FQ1,0.0,31.25,0.0,0.717,Critical,14.6,0.0,39.8,9.7
+Corootz,Pollachi,2027,FQ1,0.0,18.5,0.0,0.715,Critical,8.6,0.0,23.6,5.8
+KG Coir Products,Pollachi,2027,FQ1,0.0,5.5,0.0,0.714,Critical,2.6,0.0,7.0,1.7
+Ever Shine Pith Bricks,Pollachi,2027,FQ1,0.0,6.0,0.0,0.714,Critical,2.8,0.0,7.6,1.9
+Sri Hydroponic,Pollachi,2027,FQ1,0.0,6.25,0.0,0.714,Critical,2.9,0.0,8.0,1.9
+Standard Agro Tech,Pollachi,2027,FQ1,0.0,5.0,0.0,0.713,Critical,2.3,0.0,6.4,1.6
+Vengadeswara Coir,Pollachi,2027,FQ1,0.0,5.75,0.0,0.702,Critical,2.7,0.0,7.3,1.8
+Sivasakthi Fibre Products Export,Pollachi,2027,FQ1,0.0,45.0,0.0,0.694,Moderate,21.0,0.0,57.3,14.2
+Velaven Coir,Madurai,2027,FQ1,0.0,59.0,0.0,0.685,Moderate,43.1,0.0,117.5,23.7
+Sri Kamalan Co Coir Industry,Salem,2027,FQ1,0.0,11.0,0.0,0.679,Moderate,14.2,0.0,38.8,6.4
+PRS Coco Pith,Salem,2027,FQ1,0.0,6.25,0.0,0.679,Moderate,8.1,0.0,22.0,3.7
+Unique Coirs - Prabu Coir,Salem,2027,FQ1,0.0,6.25,0.0,0.679,Moderate,8.1,0.0,22.0,3.7
+Guna Coir,Salem,2027,FQ1,0.0,6.25,0.0,0.678,Moderate,8.1,0.0,22.0,3.7
+V Star Coirs,Madurai,2027,FQ1,0.0,11.25,0.0,0.678,Moderate,8.2,0.0,22.4,4.5
+SUGHAVESH NATURAL FIBRE,Salem,2027,FQ1,0.0,5.5,0.0,0.678,Moderate,7.1,0.0,19.4,3.2
+Shine Coir,Madurai,2027,FQ1,0.0,6.5,0.0,0.678,Moderate,4.7,0.0,12.9,2.6
+Pachiyammal Coco product,Salem,2027,FQ1,0.0,6.25,0.0,0.666,Moderate,8.1,0.0,22.0,3.7
+Natural Fiber,Kangeyam,2027,FQ1,0.0,6.0,0.0,0.651,Moderate,6.0,0.0,16.4,3.1
+Vortex Bio Fuel -Selliyamman Coconut Product,Kangeyam,2027,FQ1,0.0,17.25,0.0,0.645,Moderate,17.2,0.0,47.0,8.9
+Palaniyandavar Coirs,Kangeyam,2027,FQ1,0.0,27.25,0.0,0.637,Moderate,27.2,0.0,74.3,14.2
+Sri Krishna Coir Impexs,Pollachi,2027,FQ1,0.0,180.0,0.0,0.576,Moderate,84.1,0.0,229.3,61.6
+Vishvajith Fiber,Pollachi,2027,FQ1,0.0,242.25,0.0,0.574,Moderate,113.2,0.0,308.6,83.0
+Sri Hariharasudhan Coirs,Pollachi,2027,FQ1,0.0,224.25,0.0,0.568,Moderate,104.8,0.0,285.6,77.1
+Sri Palaniandavar Coir,Pollachi,2027,FQ1,0.0,31.0,0.0,0.562,Moderate,14.5,0.0,39.5,10.7
+SKS Coir,Pollachi,2027,FQ1,0.0,37.5,0.0,0.561,Moderate,17.5,0.0,47.8,12.9
+Sri Murugan Fibre,Pollachi,2027,FQ1,0.0,25.0,0.0,0.56,Moderate,11.7,0.0,31.8,8.6
+Dhamas Coir,Pollachi,2027,FQ1,0.0,25.0,0.0,0.56,Moderate,11.7,0.0,31.8,8.6
+Venkatajalapathi Fibers,Pollachi,2027,FQ1,0.0,18.75,0.0,0.559,Moderate,8.8,0.0,23.9,6.5
+Sri Amman coir Product,Pollachi,2027,FQ1,0.0,18.75,0.0,0.559,Moderate,8.8,0.0,23.9,6.5
+Jothi Fibre,Pollachi,2027,FQ1,0.0,18.75,0.0,0.559,Moderate,8.8,0.0,23.9,6.5
+Rajathi Coir,Pollachi,2027,FQ1,0.0,12.5,0.0,0.559,Moderate,5.8,0.0,15.9,4.3
+Aiswarya Coir,Pollachi,2027,FQ1,0.0,6.0,0.0,0.558,Moderate,2.8,0.0,7.6,2.1
+Green Coco Galuxy,Pollachi,2027,FQ1,0.0,12.5,0.0,0.558,Moderate,5.8,0.0,15.9,4.3
+Parven Coirs,Pollachi,2027,FQ1,0.0,10.0,0.0,0.558,Moderate,4.7,0.0,12.7,3.5
+SST Coir,Pollachi,2027,FQ1,0.0,6.25,0.0,0.558,Moderate,2.9,0.0,8.0,2.2
+A J Coir,Pollachi,2027,FQ1,0.0,6.25,0.0,0.558,Moderate,2.9,0.0,8.0,2.2
+Vivo AG Tech Products,Pollachi,2027,FQ1,0.0,6.25,0.0,0.558,Moderate,2.9,0.0,8.0,2.2
+Kaveri Fibres,Pollachi,2027,FQ1,0.0,6.25,0.0,0.558,Moderate,2.9,0.0,8.0,2.2
+Nagajothi Fibres,Pollachi,2027,FQ1,0.0,6.25,0.0,0.558,Moderate,2.9,0.0,8.0,2.2
+Visnu Fibers,Pollachi,2027,FQ1,0.0,4.5,0.0,0.557,Moderate,2.1,0.0,5.7,1.6
+Sri Sri Fibre,Pollachi,2027,FQ1,0.0,35.75,0.0,0.556,Moderate,16.7,0.0,45.5,12.4
+AYYANAR COIR PRODUCT,Pollachi,2027,FQ1,0.0,12.5,0.0,0.555,Moderate,5.8,0.0,15.9,4.3
+Kyro Coirs,Pollachi,2027,FQ1,0.0,78.0,0.0,0.554,Moderate,36.4,0.0,99.3,27.0
+Sri Raghavendra Fibre,Pollachi,2027,FQ1,0.0,24.0,0.0,0.551,Moderate,11.2,0.0,30.6,8.3
+Krishi Horti Pro,Pollachi,2027,FQ1,0.0,4.25,0.0,0.543,Moderate,2.0,0.0,5.4,1.5
+VSK coir Product,Pollachi,2027,FQ1,0.0,5.0,0.0,0.543,Moderate,2.3,0.0,6.4,1.7
+VV Coir,Pollachi,2027,FQ1,0.0,5.5,0.0,0.542,Moderate,2.6,0.0,7.0,1.9
+Sri Lakshmi Coirs,Pollachi,2027,FQ1,0.0,73.75,0.0,0.535,Moderate,34.5,0.0,93.9,25.9
+Sai Coco (Ten Star Leesed),Pollachi,2027,FQ1,0.0,35.5,0.0,0.531,Moderate,16.6,0.0,45.2,12.5
+Sri Devi Coir,Pollachi,2027,FQ1,0.0,26.5,0.0,0.523,Moderate,12.4,0.0,33.8,9.4
+Rathana Coirs,Salem,2027,FQ1,0.0,31.0,0.0,0.515,Moderate,40.1,0.0,109.2,23.4
+Sri Siva Selvi Coirs,Salem,2027,FQ1,0.0,36.75,0.0,0.515,Moderate,47.5,0.0,129.5,27.8
+Vijayabalan Coir,Salem,2027,FQ1,0.0,24.75,0.0,0.515,Moderate,32.0,0.0,87.2,18.7
+Sri Murugan Fiber Mills,Salem,2027,FQ1,0.0,17.75,0.0,0.514,Moderate,22.9,0.0,62.5,13.4
+RNK Fibers,Salem,2027,FQ1,0.0,12.5,0.0,0.514,Moderate,16.2,0.0,44.0,9.5
+Sri Vinayaka Fibres,Madurai,2027,FQ1,0.0,22.75,0.0,0.514,Moderate,16.6,0.0,45.3,11.0
+RMSR Coir,Madurai,2027,FQ1,0.0,18.0,0.0,0.513,Moderate,13.1,0.0,35.8,8.7
+Jai Nandhini Coirs,Salem,2027,FQ1,0.0,12.5,0.0,0.513,Moderate,16.2,0.0,44.0,9.5
+Mariya Coir Products,Salem,2027,FQ1,0.0,12.0,0.0,0.513,Moderate,15.5,0.0,42.3,9.1
+Imperial Coir,Salem,2027,FQ1,0.0,6.25,0.0,0.513,Moderate,8.1,0.0,22.0,4.7
+Sangamam Coirs,Salem,2027,FQ1,0.0,12.5,0.0,0.513,Moderate,16.2,0.0,44.0,9.5
+Krishna Fiber,Salem,2027,FQ1,0.0,12.5,0.0,0.513,Moderate,16.2,0.0,44.0,9.5
+CS Coir Industries,Salem,2027,FQ1,0.0,12.25,0.0,0.513,Moderate,15.8,0.0,43.2,9.3
+RMA Raja Coconut Pith Products,Madurai,2027,FQ1,0.0,21.75,0.0,0.513,Moderate,15.9,0.0,43.3,10.5
+Sri Kumaran Coir Industry,Salem,2027,FQ1,0.0,6.25,0.0,0.512,Moderate,8.1,0.0,22.0,4.8
+VGV Traders,Madurai,2027,FQ1,0.0,10.25,0.0,0.512,Moderate,7.5,0.0,20.4,5.0
+A P Fibers,Madurai,2027,FQ1,0.0,10.5,0.0,0.512,Moderate,7.7,0.0,20.9,5.1
+Prabu Coir,Madurai,2027,FQ1,0.0,6.25,0.0,0.511,Moderate,4.6,0.0,12.4,3.0
+Arulperumjothi Coir,Madurai,2027,FQ1,0.0,4.0,0.0,0.511,Moderate,2.9,0.0,8.0,1.9
+Velavan Coir,Pollachi,2027,FQ1,0.0,42.5,0.0,0.511,Moderate,19.9,0.0,54.1,15.2
+Jaihind Coir,Salem,2027,FQ1,0.0,78.25,0.0,0.505,Moderate,101.1,0.0,275.7,59.9
+Mahalakshmi Coir Industry,Salem,2027,FQ1,0.0,36.0,0.0,0.504,Moderate,46.5,0.0,126.8,27.6
+Ozone Internationals,Madurai,2027,FQ1,0.0,48.5,0.0,0.501,Moderate,35.4,0.0,96.6,23.7
+TSM Nature Grow,Salem,2027,FQ1,0.0,12.25,0.0,0.497,Moderate,15.8,0.0,43.2,9.5
+Natural Coco,Kangeyam,2027,FQ1,0.0,178.5,0.0,0.497,Moderate,178.4,0.0,486.5,111.9
+Bhama Coir,Madurai,2027,FQ1,0.0,13.0,0.0,0.497,Moderate,9.5,0.0,25.9,6.4
+Shasti Coir,Madurai,2027,FQ1,0.0,23.25,0.0,0.492,Moderate,17.0,0.0,46.3,11.5
+Green Universe,Kangeyam,2027,FQ1,0.0,98.0,0.0,0.491,Moderate,98.0,0.0,267.1,61.9
+Sabarigiri Fibres,Kangeyam,2027,FQ1,0.0,190.0,0.0,0.489,Moderate,189.9,0.0,517.8,120.3
+M I Coirs,Madurai,2027,FQ1,0.0,11.25,0.0,0.486,Moderate,8.2,0.0,22.4,5.6
+Naveen Coir,Kangeyam,2027,FQ1,0.0,46.25,0.0,0.484,Moderate,46.2,0.0,126.0,29.4
+Aruna Coir,Kangeyam,2027,FQ1,0.0,37.5,0.0,0.482,Moderate,37.5,0.0,102.2,23.9
+Selvam Fibers,Kangeyam,2027,FQ1,0.0,17.5,0.0,0.48,Moderate,17.5,0.0,47.7,11.2
+SRM Pith Block,Kangeyam,2027,FQ1,0.0,20.25,0.0,0.48,Moderate,20.2,0.0,55.2,12.9
+Ganapathy Coco Pith,Kangeyam,2027,FQ1,0.0,12.5,0.0,0.479,Moderate,12.5,0.0,34.1,8.0
+Krishtha Fibres,Kangeyam,2027,FQ1,0.0,6.25,0.0,0.479,Moderate,6.2,0.0,17.0,4.0
+Harshitha Coir,Kangeyam,2027,FQ1,0.0,6.25,0.0,0.479,Moderate,6.2,0.0,17.0,4.0
+Smartsports Coir,Kangeyam,2027,FQ1,0.0,6.25,0.0,0.479,Moderate,6.2,0.0,17.0,4.0
+VSM Coir,Kangeyam,2027,FQ1,0.0,6.0,0.0,0.479,Moderate,6.0,0.0,16.4,3.8
+MAHA SHANKAR FIBERS,Madurai,2027,FQ1,0.0,27.75,0.0,0.469,Moderate,20.3,0.0,55.3,14.0
+Bannariyamman Fibres,Kangeyam,2027,FQ1,0.0,6.25,0.0,0.463,Moderate,6.2,0.0,17.0,4.1
+Sri Sivam Coco,Kangeyam,2027,FQ1,0.0,28.75,0.0,0.461,Moderate,28.7,0.0,78.4,18.8
+Jayam Fibre,Kangeyam,2027,FQ1,0.0,47.5,0.0,0.436,Moderate,47.5,0.0,129.4,32.0
+Balu Coir,Pollachi,2027,FQ1,315.0,507.25,0.0,0.42,Moderate,237.0,0.0,646.1,190.7
+Venkateshwara Fibers,Pollachi,2027,FQ1,75.0,327.0,0.0,0.414,Moderate,152.8,0.0,416.5,123.4
+Shivanni Coirs,Pollachi,2027,FQ1,593.0,548.25,0.0,0.41,Moderate,256.2,0.0,698.3,207.4
+Sri Lakshmi Coirs - Negamam,Pollachi,2027,FQ1,75.0,206.25,0.0,0.404,Moderate,96.4,0.0,262.7,78.3
+Jai Sakthi Coir Products,Pollachi,2027,FQ1,423.0,396.75,0.0,0.402,Moderate,185.4,0.0,505.3,150.7
+SETHU COCOS,Pollachi,2027,FQ1,225.0,337.75,0.0,0.401,Moderate,157.8,0.0,430.2,128.4
+Jacope,Pollachi,2027,FQ1,75.0,205.0,0.0,0.399,Low,95.8,0.0,261.1,78.0
+Leeds Hydroponic,Pollachi,2027,FQ1,175.0,250.0,0.0,0.399,Low,116.8,0.0,318.4,95.2
+Mangayar Selvi Coir,Pollachi,2027,FQ1,124.0,235.0,0.0,0.399,Low,109.8,0.0,299.3,89.5
+Sri Harikrishna Coir Pith Products,Pollachi,2027,FQ1,285.0,279.75,0.0,0.398,Low,130.7,0.0,356.3,106.5
+Sakthi Vinayaga Fibers,Pollachi,2027,FQ1,209.0,200.0,0.0,0.397,Low,93.4,0.0,254.7,76.2
+Sri Aswin Coirs/Srinivasa Fiber (Unsieved),Pollachi,2027,FQ1,254.0,287.5,0.0,0.397,Low,134.3,0.0,366.2,109.5
+Senthur Fibers,Pollachi,2027,FQ1,125.0,226.25,0.0,0.396,Low,105.7,0.0,288.2,86.2
+Sri Varsini Fibres,Pollachi,2027,FQ1,200.0,261.75,0.0,0.396,Low,122.3,0.0,333.4,99.8
+Mathi Coir,Pollachi,2027,FQ1,210.0,230.25,0.0,0.393,Low,107.6,0.0,293.3,88.0
+Suriya Coir Products,Pollachi,2027,FQ1,49.0,149.5,0.0,0.393,Low,69.8,0.0,190.4,57.1
+Arun Coir,Pollachi,2027,FQ1,25.0,118.0,0.0,0.392,Low,55.1,0.0,150.3,45.1
+Hari Krishna Coco Products,Pollachi,2027,FQ1,149.0,168.25,0.0,0.392,Low,78.6,0.0,214.3,64.3
+PMR Agro Green Fibers,Pollachi,2027,FQ1,101.0,137.75,0.0,0.391,Low,64.4,0.0,175.5,52.7
+Skantha Fibres,Pollachi,2027,FQ1,75.0,134.25,0.0,0.391,Low,62.7,0.0,171.0,51.3
+Jaisakthi Fibers,Pollachi,2027,FQ1,90.0,129.75,0.0,0.391,Low,60.6,0.0,165.3,49.6
+SRM Coco Coirs,Pollachi,2027,FQ1,50.0,118.75,0.0,0.391,Low,55.5,0.0,151.3,45.4
+Akshya Fiber,Pollachi,2027,FQ1,99.0,140.5,0.0,0.39,Low,65.6,0.0,179.0,53.7
+Kaniskha Coir,Pollachi,2027,FQ1,150.0,155.25,0.0,0.39,Low,72.5,0.0,197.7,59.4
+Shri Vinayaga Coirs,Pollachi,2027,FQ1,174.0,170.0,0.0,0.39,Low,79.4,0.0,216.5,65.0
+Sri Venkateswara Fibres,Pollachi,2027,FQ1,289.0,167.25,0.0,0.389,Low,78.1,0.0,213.0,64.0
+Appan Coir,Pollachi,2027,FQ1,173.0,133.5,0.0,0.389,Low,62.4,0.0,170.0,51.1
+Bharani Fibers,Pollachi,2027,FQ1,25.0,42.75,0.0,0.388,Low,20.0,0.0,54.5,16.4
+Sri Selvakumaran Coir Bricks,Pollachi,2027,FQ1,25.0,71.25,0.0,0.387,Low,33.3,0.0,90.8,27.3
+Parasakthi Cocotex,Pollachi,2027,FQ1,190.0,263.25,0.0,0.387,Low,123.0,0.0,335.3,100.9
+Sri Fibers,Pollachi,2027,FQ1,24.0,229.0,0.0,0.387,Low,107.0,0.0,291.7,87.8
+Veerakumarasamy Fiber,Pollachi,2027,FQ1,125.0,87.25,0.0,0.387,Low,40.8,0.0,111.1,33.5
+K P N Coir Industries,Pollachi,2027,FQ1,25.0,62.5,0.0,0.386,Low,29.2,0.0,79.6,24.0
+Ever Green Coir,Pollachi,2027,FQ1,50.0,80.5,0.0,0.386,Low,37.6,0.0,102.5,30.9
+Dtree Coco Peat,Pollachi,2027,FQ1,70.0,151.0,0.0,0.386,Low,70.6,0.0,192.3,57.9
+Malayandisami Fibres,Pollachi,2027,FQ1,51.0,67.5,0.0,0.386,Low,31.5,0.0,86.0,25.9
+Senthurvelavan Fibers,Pollachi,2027,FQ1,123.0,166.5,0.0,0.386,Low,77.8,0.0,212.1,63.9
+Sri Kumaran Fibres,Pollachi,2027,FQ1,25.0,60.25,0.0,0.385,Low,28.2,0.0,76.7,23.1
+Chidhu Pith Blocks,Pollachi,2027,FQ1,170.0,101.25,0.0,0.385,Low,47.3,0.0,129.0,38.8
+Sri Omkara Traders,Pollachi,2027,FQ1,280.0,132.5,0.0,0.385,Low,61.9,0.0,168.8,50.8
+New Natural Coco,Pollachi,2027,FQ1,65.0,63.25,0.0,0.385,Low,29.6,0.0,80.6,24.3
+Kaliyamman Fibres,Pollachi,2027,FQ1,50.0,55.25,0.0,0.385,Low,25.8,0.0,70.4,21.2
+Iswarya Coir,Pollachi,2027,FQ1,75.0,109.25,0.0,0.385,Low,51.0,0.0,139.2,41.9
+Sakthi Trade,Pollachi,2027,FQ1,24.0,52.25,0.0,0.385,Low,24.4,0.0,66.6,20.0
+Sri Ragam Fiber,Pollachi,2027,FQ1,13.0,29.5,0.0,0.385,Low,13.8,0.0,37.6,11.3
+SS Agro,Pollachi,2027,FQ1,75.0,67.75,0.0,0.385,Low,31.7,0.0,86.3,26.0
+Ratham Coir,Pollachi,2027,FQ1,45.0,53.75,0.0,0.385,Low,25.1,0.0,68.5,20.6
+Sri Sai Coco,Pollachi,2027,FQ1,50.0,49.75,0.0,0.385,Low,23.2,0.0,63.4,19.1
+Maruthamalai Murugan Traders,Pollachi,2027,FQ1,90.0,58.75,0.0,0.384,Low,27.4,0.0,74.8,22.5
+Ganapthy Coir,Pollachi,2027,FQ1,25.0,31.25,0.0,0.384,Low,14.6,0.0,39.8,12.0
+Naval Fibre,Pollachi,2027,FQ1,65.0,32.5,0.0,0.383,Low,15.2,0.0,41.4,12.5
+Rayar Fibres,Pollachi,2027,FQ1,50.0,34.5,0.0,0.383,Low,16.1,0.0,43.9,13.2
+Alam Coco,Pollachi,2027,FQ1,69.0,40.75,0.0,0.383,Low,19.0,0.0,51.9,15.6
+Kadiyamman Fibres,Pollachi,2027,FQ1,25.0,18.75,0.0,0.383,Low,8.8,0.0,23.9,7.2
+Thampy Industriess,Pollachi,2027,FQ1,100.0,31.25,0.0,0.382,Low,14.6,0.0,39.8,12.0
+KPN Coir Industries,Pollachi,2027,FQ1,75.0,31.25,0.0,0.382,Low,14.6,0.0,39.8,12.0
+Om Anugragha,Pollachi,2027,FQ1,25.0,18.75,0.0,0.382,Low,8.8,0.0,23.9,7.2
+Vinayaga Coirs,Pollachi,2027,FQ1,54.0,22.25,0.0,0.382,Low,10.4,0.0,28.3,8.6
+Nagajothi Fibre,Pollachi,2027,FQ1,25.0,17.5,0.0,0.382,Low,8.2,0.0,22.3,6.7
+Janani Coir,Pollachi,2027,FQ1,25.0,12.5,0.0,0.382,Low,5.8,0.0,15.9,4.8
+Logesh Fibre Product,Pollachi,2027,FQ1,25.0,6.25,0.0,0.382,Low,2.9,0.0,8.0,2.4
+Swami Coirs,Pollachi,2027,FQ1,15.0,3.75,0.0,0.382,Low,1.8,0.0,4.8,1.5
+JJ Coir,Pollachi,2027,FQ1,50.0,18.75,0.0,0.382,Low,8.8,0.0,23.9,7.2
+Sri Bagavathi Amman Coir,Pollachi,2027,FQ1,25.0,6.25,0.0,0.382,Low,2.9,0.0,8.0,2.4
+E M K Coir,Pollachi,2027,FQ1,25.0,6.25,0.0,0.382,Low,2.9,0.0,8.0,2.4
+Srinath Coir,Pollachi,2027,FQ1,25.0,6.25,0.0,0.382,Low,2.9,0.0,8.0,2.4
+Sri Sivam Fibers,Pollachi,2027,FQ1,25.0,158.75,0.0,0.381,Low,74.2,0.0,202.2,61.1
+Sivasakthi Fbre,Pollachi,2027,FQ1,75.0,72.5,0.0,0.38,Low,33.9,0.0,92.3,27.9
+Om Velavan Traders,Pollachi,2027,FQ1,25.0,59.25,0.0,0.38,Low,27.7,0.0,75.5,22.8
+Vetrivel Coir,Pollachi,2027,FQ1,25.0,37.0,0.0,0.379,Low,17.3,0.0,47.1,14.2
+Sri Muthu Fibers,Pollachi,2027,FQ1,97.0,108.0,0.0,0.379,Low,50.5,0.0,137.6,41.6
+Dev Coir,Pollachi,2027,FQ1,130.0,140.0,0.0,0.378,Low,65.4,0.0,178.3,53.9
+Sri Jayam Fibre Products,Pollachi,2027,FQ1,50.0,155.75,0.0,0.378,Low,72.8,0.0,198.4,60.0
+Eswari Fibres,Pollachi,2027,FQ1,324.0,347.0,0.0,0.378,Low,162.1,0.0,442.0,133.6
+Sri Murugan Thunai Fibres,Pollachi,2027,FQ1,20.0,23.5,0.0,0.377,Low,11.0,0.0,29.9,9.1
+Seniandavar Fibers,Pollachi,2027,FQ1,222.0,250.5,10.36,0.377,Low,117.0,0.0,319.1,96.5
+Sri Varsan Coirs,Pollachi,2027,FQ1,248.0,262.75,0.0,0.375,Low,122.8,0.0,334.7,101.4
+Vel Coir,Pollachi,2027,FQ1,70.0,96.25,0.0,0.374,Low,45.0,0.0,122.6,37.2
+AVM Hydro Farming Products,Pollachi,2027,FQ1,159.0,71.0,0.0,0.372,Low,33.2,0.0,90.4,27.4
+Coco Star,Pollachi,2027,FQ1,100.0,93.75,0.0,0.372,Low,43.8,0.0,119.4,36.2
+Sobiya coir,Pollachi,2027,FQ1,50.0,133.25,0.0,0.371,Low,62.3,0.0,169.7,51.5
+Adithya Coco Products,Pollachi,2027,FQ1,22.0,103.75,0.0,0.37,Low,48.5,0.0,132.1,40.1
+Sri Ragavendra Coir Products,Pollachi,2027,FQ1,1310.0,745.0,9.542,0.37,Low,348.1,0.0,948.9,288.2
+Thuran Coir Mills,Pollachi,2027,FQ1,120.0,34.25,0.0,0.369,Low,16.0,0.0,43.6,13.3
+TGT Coir Export,Pollachi,2027,FQ1,75.0,27.75,0.0,0.368,Low,13.0,0.0,35.3,10.8
+Vedaa Coir,Pollachi,2027,FQ1,25.0,93.75,0.0,0.367,Low,43.8,0.0,119.4,36.3
+Winner Coirs,Pollachi,2027,FQ1,547.0,421.75,8.775,0.367,Low,197.1,0.0,537.2,163.5
+AAA Coir,Peravurani,2027,FQ1,0.0,6.0,0.0,0.365,Low,7.0,0.0,19.1,5.0
+Thirupathi Coir,Peravurani,2027,FQ1,0.0,8.75,0.0,0.365,Low,10.2,0.0,27.8,7.3
+Thirukumaran Fibers,Pollachi,2027,FQ1,745.0,811.75,0.0,0.365,Low,379.3,0.0,1033.9,314.9
+Thirumalai Fibers,Peravurani,2027,FQ1,0.0,5.0,0.0,0.365,Low,5.8,0.0,15.9,4.1
+RM Lakshmi Coir,Peravurani,2027,FQ1,0.0,5.0,0.0,0.365,Low,5.8,0.0,15.9,4.1
+Everest Fiber,Peravurani,2027,FQ1,0.0,5.0,0.0,0.365,Low,5.8,0.0,15.9,4.1
+Sri Krishna Industries,Pollachi,2027,FQ1,306.0,276.5,8.17,0.364,Low,129.2,0.0,352.2,107.3
+Sri Nisha Coco Peat (70-30) Rajakamangalam,Madurai,2027,FQ1,300.0,359.5,0.0,0.36,Low,262.6,0.0,715.8,200.5
+CHELLAMMAL FIBRE,Pollachi,2027,FQ1,99.0,100.0,0.0,0.357,Low,46.7,0.0,127.4,39.0
+Thulasiamman Coir Industry,Salem,2027,FQ1,670.0,397.75,0.0,0.356,Low,514.1,0.0,1401.4,366.5
+Raja Coir,Pollachi,2027,FQ1,197.0,125.75,12.183,0.355,Low,58.8,0.0,160.2,49.1
+Siva Sanju Fibers (LEC),Madurai,2027,FQ1,470.0,384.0,0.0,0.353,Low,280.5,0.0,764.6,215.3
+Kali Fiber Unit,Salem,2027,FQ1,225.0,320.25,0.0,0.353,Low,413.9,0.0,1128.4,296.2
+Kadeswaran Pith Block,Kangeyam,2027,FQ1,50.0,423.75,0.0,0.352,Low,423.6,0.0,1154.8,311.7
+RSV Coir Industry,Salem,2027,FQ1,125.0,229.0,0.0,0.352,Low,296.0,0.0,806.8,212.0
+Selvanayagiamman Fibers,Kangeyam,2027,FQ1,154.0,494.0,0.0,0.352,Low,493.8,0.0,1346.3,363.5
+KPS Amman Fiber,Pollachi,2027,FQ1,331.0,225.0,0.0,0.352,Low,105.1,0.0,286.6,87.9
+Anathi Fiber,Madurai,2027,FQ1,494.0,324.0,0.0,0.351,Low,236.7,0.0,645.2,182.0
+Anand International,Salem,2027,FQ1,224.0,208.5,0.0,0.351,Low,269.5,0.0,734.6,193.3
+Akshya Coirs,Salem,2027,FQ1,189.0,200.5,0.0,0.35,Low,259.1,0.0,706.4,185.9
+Thiyagarajan Coir Industry,Salem,2027,FQ1,75.0,112.5,0.0,0.35,Low,145.4,0.0,396.4,104.4
+Sughavesh Natural Fiber (HEC),Salem,2027,FQ1,425.0,548.5,5.882,0.35,Low,708.9,0.0,1932.6,508.9
+SPN Coir,Salem,2027,FQ1,125.0,148.5,0.0,0.349,Low,191.9,0.0,523.2,137.9
+JJ Coco Products,Madurai,2027,FQ1,132.0,162.0,0.0,0.349,Low,118.3,0.0,322.6,91.1
+Almighty Fibres,Madurai,2027,FQ1,265.0,215.25,0.0,0.349,Low,157.2,0.0,428.6,121.1
+Meenakchi Fiber,Salem,2027,FQ1,300.0,189.0,0.0,0.348,Low,244.3,0.0,665.9,175.6
+Green Teck Coir Pith,Madurai,2027,FQ1,30.0,94.5,0.0,0.348,Low,69.0,0.0,188.2,53.2
+K A N Coir Products,Madurai,2027,FQ1,136.0,157.0,0.0,0.348,Low,114.7,0.0,312.6,88.5
+JK Coirs (LEC),Madurai,2027,FQ1,161.0,156.0,0.0,0.347,Low,113.9,0.0,310.6,87.9
+Fathima Fibers,Madurai,2027,FQ1,114.0,135.0,0.0,0.347,Low,98.6,0.0,268.8,76.1
+G R Organic,Salem,2027,FQ1,55.0,101.5,0.0,0.347,Low,131.2,0.0,357.6,94.5
+Amazon Agro Products,Madurai,2027,FQ1,45.0,123.25,0.0,0.347,Low,90.0,0.0,245.4,69.5
+Sivasakthi Coirs,Salem,2027,FQ1,25.0,179.0,0.0,0.347,Low,231.3,0.0,630.7,166.6
+Charvi Fibre,Salem,2027,FQ1,70.0,84.0,0.0,0.346,Low,108.6,0.0,296.0,78.3
+Vega Fiber Industries,Salem,2027,FQ1,100.0,75.0,0.0,0.346,Low,96.9,0.0,264.3,69.9
+Anjaneya Coir,Madurai,2027,FQ1,140.0,112.0,0.0,0.346,Low,81.8,0.0,223.0,63.2
+Ramajeyam Coir,Salem,2027,FQ1,99.0,142.0,0.0,0.346,Low,183.5,0.0,500.3,132.3
+Mattai Murgan Fibers,Madurai,2027,FQ1,124.0,125.25,0.0,0.346,Low,91.5,0.0,249.4,70.7
+Sri Natha Coirs,Madurai,2027,FQ1,148.0,182.75,0.0,0.345,Low,133.5,0.0,363.9,103.2
+Modern Fibers,Madurai,2027,FQ1,143.0,109.5,0.0,0.345,Low,80.0,0.0,218.0,61.8
+K.C.A COIR INDUSTRY,Salem,2027,FQ1,25.0,56.25,0.0,0.345,Low,72.7,0.0,198.2,52.5
+TS Ashok Kumar Fibers (HEC),Madurai,2027,FQ1,242.0,219.0,0.0,0.345,Low,160.0,0.0,436.1,123.7
+L Hari Prakesh,Pollachi,2027,FQ1,177.0,101.5,19.209,0.345,Low,47.4,0.0,129.3,39.8
+Udhaya Coir,Salem,2027,FQ1,75.0,68.25,0.0,0.345,Low,88.2,0.0,240.5,63.7
+Sai Sarasvathi Coirs,Madurai,2027,FQ1,110.0,104.5,0.0,0.345,Low,76.3,0.0,208.1,59.0
+Lotus Coir,Madurai,2027,FQ1,20.0,54.25,0.0,0.345,Low,39.6,0.0,108.0,30.6
+Anuradha Coir,Madurai,2027,FQ1,154.0,109.5,0.0,0.345,Low,80.0,0.0,218.0,61.9
+VT Jothivenkatachalam Fibers,Madurai,2027,FQ1,5.0,48.5,0.0,0.344,Low,35.4,0.0,96.6,27.4
+Srinivasa Coco Products,Madurai,2027,FQ1,285.0,281.25,0.0,0.344,Low,205.4,0.0,560.0,158.9
+Amogam Exports,Madurai,2027,FQ1,106.0,82.0,0.0,0.344,Low,59.9,0.0,163.3,46.3
+Ten Star Coir Pith Block,Pollachi,2027,FQ1,295.0,201.25,15.593,0.344,Low,94.0,0.0,256.3,79.0
+Chellam Fibre,Madurai,2027,FQ1,62.0,68.0,0.0,0.344,Low,49.7,0.0,135.4,38.5
+Anbu Fiber,Madurai,2027,FQ1,150.0,97.0,0.0,0.344,Low,70.9,0.0,193.1,54.9
+Vetrivel Pith Block,Kangeyam,2027,FQ1,469.0,642.5,0.0,0.344,Low,642.3,0.0,1751.0,476.8
+Milman Coir Export,Salem,2027,FQ1,174.0,84.5,0.0,0.343,Low,109.2,0.0,297.7,79.0
+RCA Coirs,Madurai,2027,FQ1,20.0,38.25,0.0,0.343,Low,27.9,0.0,76.2,21.6
+S.R.Fibres,Madurai,2027,FQ1,24.0,41.25,0.0,0.343,Low,30.1,0.0,82.1,23.3
+M P N Fibers,Madurai,2027,FQ1,64.0,67.25,0.0,0.343,Low,49.1,0.0,133.9,38.0
+MPN Coir,Salem,2027,FQ1,49.0,24.25,0.0,0.343,Low,31.3,0.0,85.4,22.6
+Suriya Farms,Madurai,2027,FQ1,52.0,53.25,0.0,0.343,Low,38.9,0.0,106.0,30.1
+Gohila Coir & Fiber Industry,Madurai,2027,FQ1,45.0,47.5,0.0,0.343,Low,34.7,0.0,94.6,26.9
+Amsaraja Fiber,Madurai,2027,FQ1,86.0,72.5,0.0,0.343,Low,53.0,0.0,144.4,41.0
+(Ramesh M) M R Fiber,Madurai,2027,FQ1,56.0,57.0,0.0,0.343,Low,41.6,0.0,113.5,32.2
+Kaviya Coco Pith,Salem,2027,FQ1,50.0,37.0,0.0,0.343,Low,47.8,0.0,130.4,34.6
+Cumbum Fibers,Madurai,2027,FQ1,91.0,62.5,0.0,0.343,Low,45.7,0.0,124.5,35.4
+Manthri Coir,Salem,2027,FQ1,20.0,11.25,0.0,0.343,Low,14.5,0.0,39.6,10.5
+Sam Coir,Madurai,2027,FQ1,31.0,37.5,0.0,0.342,Low,27.4,0.0,74.7,21.2
+Amjath Ali Fibers,Madurai,2027,FQ1,22.0,33.5,0.0,0.342,Low,24.5,0.0,66.7,19.0
+Sumathi Coir Industry,Salem,2027,FQ1,100.0,49.75,0.0,0.342,Low,64.3,0.0,175.3,46.6
+Sri Vinayaka Curled Coir Fibre Factory,Salem,2027,FQ1,25.0,18.75,0.0,0.342,Low,24.2,0.0,66.1,17.5
+Aarha Export - Nochodampatti,Madurai,2027,FQ1,102.0,92.25,0.0,0.342,Low,67.4,0.0,183.7,52.2
+Ananya Coco Pith,Madurai,2027,FQ1,51.0,36.75,0.0,0.342,Low,26.8,0.0,73.2,20.8
+RRR Coir,Madurai,2027,FQ1,36.0,31.75,0.0,0.342,Low,23.2,0.0,63.2,18.0
+K R R Fibers,Madurai,2027,FQ1,16.0,12.5,0.0,0.342,Low,9.1,0.0,24.9,7.1
+Shri Venkateswara Coirs,Madurai,2027,FQ1,6.0,12.5,0.0,0.342,Low,9.1,0.0,24.9,7.1
+Sri Bannaraiamman Fibers,Salem,2027,FQ1,50.0,12.5,0.0,0.341,Low,16.2,0.0,44.0,11.7
+Shobiya Fibers,Madurai,2027,FQ1,16.0,21.0,0.0,0.341,Low,15.3,0.0,41.8,11.9
+MKA Coir Industries,Madurai,2027,FQ1,27.0,24.25,0.0,0.341,Low,17.7,0.0,48.3,13.7
+Laxmi Coir Industries,Madurai,2027,FQ1,47.0,30.25,0.0,0.341,Low,22.1,0.0,60.2,17.1
+Karthika Coirs (70-30),Madurai,2027,FQ1,454.0,411.0,9.692,0.341,Low,300.2,0.0,818.4,232.9
+Thraviyam Coco Products,Madurai,2027,FQ1,92.0,36.5,0.0,0.341,Low,26.7,0.0,72.7,20.7
+Sanjana Coir,Salem,2027,FQ1,50.0,12.5,0.0,0.341,Low,16.2,0.0,44.0,11.7
+Sri Pathi Coir Industries,Madurai,2027,FQ1,5.0,7.5,0.0,0.341,Low,5.5,0.0,14.9,4.3
+AKS FIBER,Madurai,2027,FQ1,13.0,14.75,0.0,0.341,Low,10.8,0.0,29.4,8.4
+Jeena Exports,Madurai,2027,FQ1,44.0,20.5,0.0,0.341,Low,15.0,0.0,40.8,11.6
+ATR Coirs (HEC),Madurai,2027,FQ1,45.0,11.25,0.0,0.341,Low,8.2,0.0,22.4,6.4
+Ayyanar Coir,Madurai,2027,FQ1,5.0,5.5,0.0,0.341,Low,4.0,0.0,11.0,3.1
+KCK Coirs,Madurai,2027,FQ1,16.0,6.0,0.0,0.34,Low,4.4,0.0,11.9,3.4
+Mariya Pushpam Coir Pith,Madurai,2027,FQ1,10.0,2.5,0.0,0.34,Low,1.8,0.0,5.0,1.4
+Tharwin Fibres,Salem,2027,FQ1,50.0,55.5,0.0,0.339,Low,71.7,0.0,195.5,52.1
+Palanimurugan Coir,Kangeyam,2027,FQ1,320.0,410.0,0.0,0.338,Low,409.9,0.0,1117.4,305.9
+Truth Fibers,Madurai,2027,FQ1,45.0,65.25,0.0,0.337,Low,47.7,0.0,129.9,37.1
+S.A Export,Kangeyam,2027,FQ1,328.0,480.25,0.0,0.337,Low,480.1,0.0,1308.8,358.9
+Narayana Coirs,Salem,2027,FQ1,500.0,296.0,5.0,0.335,Low,382.6,0.0,1042.9,279.1
+M M Coirs,Madurai,2027,FQ1,6.0,24.5,0.0,0.334,Low,17.9,0.0,48.8,14.0
+Bio Thermal,Kangeyam,2027,FQ1,525.0,450.0,0.0,0.334,Low,449.9,0.0,1226.4,337.3
+PK Coir,Pollachi,2027,FQ1,70.0,35.0,28.571,0.334,Low,16.4,0.0,44.6,13.8
+MRK Fibres,Pollachi,2027,FQ1,272.0,329.75,26.838,0.334,Low,154.1,0.0,420.0,130.2
+Natural Coir Co,Pollachi,2027,FQ1,283.0,174.0,21.908,0.333,Low,81.3,0.0,221.6,68.7
+Selva coco Fibre,Salem,2027,FQ1,424.0,320.25,5.896,0.333,Low,413.9,0.0,1128.4,302.8
+Kadaieswarar Fibres,Pollachi,2027,FQ1,125.0,171.75,20.0,0.332,Low,80.2,0.0,218.8,67.8
+Sri Mahalakshmi Coco Product,Pollachi,2027,FQ1,154.0,101.5,26.623,0.332,Low,47.4,0.0,129.3,40.1
+Sri Vishnu Fibre Unit,Pollachi,2027,FQ1,297.0,280.0,8.418,0.332,Low,130.8,0.0,356.6,110.6
+Go Green Coir,Salem,2027,FQ1,192.0,133.75,9.375,0.331,Low,172.9,0.0,471.2,126.7
+Ganesan Coco Product,Salem,2027,FQ1,419.0,220.25,6.444,0.331,Low,284.7,0.0,776.0,208.8
+Rathinam Fibres,Kangeyam,2027,FQ1,22.0,190.25,0.0,0.329,Low,190.2,0.0,518.5,143.3
+MMM Coir,Kangeyam,2027,FQ1,292.0,304.0,0.0,0.328,Low,303.9,0.0,828.5,229.1
+Sun Coir,Kangeyam,2027,FQ1,100.0,297.25,0.0,0.327,Low,297.2,0.0,810.1,224.3
+Balaji Coir Pith,Kangeyam,2027,FQ1,440.0,569.75,0.0,0.327,Low,569.6,0.0,1552.7,430.1
+Aathil Coir Factory,Kangeyam,2027,FQ1,70.0,168.5,0.0,0.326,Low,168.4,0.0,459.2,127.2
+Manoj Traders,Kangeyam,2027,FQ1,125.0,198.25,0.0,0.326,Low,198.2,0.0,540.3,149.8
+CS Coir,Kangeyam,2027,FQ1,263.0,225.25,0.0,0.326,Low,225.2,0.0,613.9,170.2
+Chellandiamman Fibers,Kangeyam,2027,FQ1,72.0,158.25,0.0,0.326,Low,158.2,0.0,431.3,119.6
+Venus Coir,Kangeyam,2027,FQ1,169.0,229.75,0.0,0.325,Low,229.7,0.0,626.1,173.6
+Sree Vari Fibres,Kangeyam,2027,FQ1,100.0,184.5,0.0,0.325,Low,184.4,0.0,502.8,139.4
+Sri Amman Coir,Kangeyam,2027,FQ1,249.0,248.5,0.0,0.324,Low,248.4,0.0,677.2,188.0
+MMJ Coir,Madurai,2027,FQ1,64.0,89.0,0.0,0.324,Low,65.0,0.0,177.2,51.2
+Kumaran Industry,Kangeyam,2027,FQ1,241.0,213.5,0.0,0.324,Low,213.4,0.0,581.8,161.6
+Anamalai Coirs,Pollachi,2027,FQ1,111.0,83.75,36.937,0.323,Low,39.1,0.0,106.7,33.2
+Horpiflora Pith,Madurai,2027,FQ1,43.0,42.5,0.0,0.322,Low,31.0,0.0,84.6,24.4
+Eligro Substrate Pvt Ltd,Madurai,2027,FQ1,110.0,61.25,0.0,0.321,Low,44.7,0.0,122.0,35.3
+ASP Coir,Madurai,2027,FQ1,38.0,54.75,0.0,0.321,Low,40.0,0.0,109.0,31.6
+SP Coir Pith Block,Kangeyam,2027,FQ1,48.0,117.75,0.0,0.321,Low,117.7,0.0,320.9,89.4
+Baby Coir,Kangeyam,2027,FQ1,123.0,134.25,0.0,0.321,Low,134.2,0.0,365.9,101.9
+Natraj Fibre,Kangeyam,2027,FQ1,294.0,243.5,0.0,0.32,Low,243.4,0.0,663.6,185.0
+Sowbarnica Coir,Kangeyam,2027,FQ1,75.0,123.0,0.0,0.32,Low,123.0,0.0,335.2,93.5
+Abi Coir,Kangeyam,2027,FQ1,124.0,143.0,0.0,0.32,Low,143.0,0.0,389.7,108.7
+Dhanu Coir,Kangeyam,2027,FQ1,48.0,96.0,0.0,0.32,Low,96.0,0.0,261.6,73.0
+Virckucham Coirs,Kangeyam,2027,FQ1,75.0,114.5,0.0,0.32,Low,114.5,0.0,312.0,87.1
+RPG Coir/Velavan Coir,Kangeyam,2027,FQ1,99.0,116.0,0.0,0.319,Low,116.0,0.0,316.1,88.2
+Siva Selvi Fibers,Kangeyam,2027,FQ1,625.0,776.5,12.0,0.319,Low,776.2,0.0,2116.2,590.5
+Velmurugan Coco Peat,Kangeyam,2027,FQ1,321.0,405.25,0.0,0.319,Low,405.1,0.0,1104.4,308.2
+Sri Annamalayar Coirs,Kangeyam,2027,FQ1,318.0,123.0,0.0,0.319,Low,123.0,0.0,335.2,93.6
+Raja Fibre Industry,Salem,2027,FQ1,472.0,331.75,4.661,0.318,Low,428.8,0.0,1168.9,318.6
+Sri Ram Guru Coir,Kangeyam,2027,FQ1,160.0,119.75,0.0,0.318,Low,119.7,0.0,326.3,91.1
+Ganapathy Coir,Kangeyam,2027,FQ1,428.0,169.25,0.0,0.318,Low,169.2,0.0,461.2,128.8
+India Coirs,Kangeyam,2027,FQ1,371.0,345.25,5.93,0.318,Low,345.1,0.0,940.9,262.8
+SS Coir,Kangeyam,2027,FQ1,148.0,145.75,0.0,0.317,Low,145.7,0.0,397.2,111.0
+Jai Vishnu Coirs,Kangeyam,2027,FQ1,125.0,93.5,0.0,0.317,Low,93.5,0.0,254.8,71.2
+SJ BioRoots Coir Products,Salem,2027,FQ1,25.0,105.75,0.0,0.317,Low,136.7,0.0,372.6,101.7
+Sri Vishnu Coir pith Blocks,Kangeyam,2027,FQ1,83.0,74.25,0.0,0.317,Low,74.2,0.0,202.4,56.6
+Sri V Rangasamy Agencies,Kangeyam,2027,FQ1,184.0,119.5,0.0,0.317,Low,119.5,0.0,325.7,91.1
+Amirtha Coirs,Kangeyam,2027,FQ1,120.0,136.75,0.0,0.317,Low,136.7,0.0,372.7,104.2
+Gowtham Coir,Kangeyam,2027,FQ1,86.0,65.0,0.0,0.317,Low,65.0,0.0,177.1,49.6
+Arul Jothi Fibers,Kangeyam,2027,FQ1,84.0,88.25,0.0,0.317,Low,88.2,0.0,240.5,67.3
+Devi Fibre,Kangeyam,2027,FQ1,40.0,59.5,0.0,0.316,Low,59.5,0.0,162.2,45.4
+Eco Max,Pollachi,2027,FQ1,250.0,247.5,10.0,0.316,Low,115.6,0.0,315.2,98.6
+Anudeep Coir,Kangeyam,2027,FQ1,100.0,53.0,0.0,0.316,Low,53.0,0.0,144.4,40.4
+Selvam Coco Tech,Pollachi,2027,FQ1,62.0,97.0,33.871,0.316,Low,45.3,0.0,123.5,38.6
+Jupiter Fibre,Kangeyam,2027,FQ1,47.0,51.0,0.0,0.316,Low,51.0,0.0,139.0,38.9
+Mahalakshmi Fiber,Kangeyam,2027,FQ1,198.0,92.75,0.0,0.315,Low,92.7,0.0,252.8,70.8
+SS Coir / Shars Green Enterprises,Kangeyam,2027,FQ1,25.0,37.5,0.0,0.315,Low,37.5,0.0,102.2,28.6
+Sangam Coir,Kangeyam,2027,FQ1,25.0,30.0,0.0,0.315,Low,30.0,0.0,81.8,22.9
+RR Coirs,Kangeyam,2027,FQ1,44.0,38.25,0.0,0.315,Low,38.2,0.0,104.2,29.2
+Ponbala Coir,Kangeyam,2027,FQ1,50.0,42.25,0.0,0.315,Low,42.2,0.0,115.1,32.2
+Sai Coirs,Kangeyam,2027,FQ1,94.0,53.5,0.0,0.315,Low,53.5,0.0,145.8,40.9
+Cloud Eco Products ltd,Kangeyam,2027,FQ1,23.0,10.75,0.0,0.314,Low,10.7,0.0,29.3,8.2
+Rani Coir,Kangeyam,2027,FQ1,120.0,35.0,0.0,0.314,Low,35.0,0.0,95.4,26.8
+Sri Ponbala Coir,Kangeyam,2027,FQ1,25.0,12.25,0.0,0.314,Low,12.2,0.0,33.4,9.3
+Arulperumjothi Fibers,Kangeyam,2027,FQ1,75.0,31.0,0.0,0.314,Low,31.0,0.0,84.5,23.7
+RBS Fiber,Kangeyam,2027,FQ1,50.0,12.5,0.0,0.314,Low,12.5,0.0,34.1,9.6
+SP Coir Products,Kangeyam,2027,FQ1,25.0,6.25,0.0,0.313,Low,6.2,0.0,17.0,4.7
+RS Coir,Kangeyam,2027,FQ1,325.0,161.25,0.0,0.313,Low,161.2,0.0,439.4,123.3
+KCA Fiber Industries,Kangeyam,2027,FQ1,45.0,11.25,0.0,0.313,Low,11.2,0.0,30.7,8.6
+Lakshmi Coir,Kangeyam,2027,FQ1,24.0,6.0,0.0,0.313,Low,6.0,0.0,16.4,4.6
+Boss Coir,Kangeyam,2027,FQ1,50.0,95.75,0.0,0.313,Low,95.7,0.0,260.9,73.2
+Aarudra Coco Products,Madurai,2027,FQ1,61.0,51.75,0.0,0.313,Low,37.8,0.0,103.0,30.0
+NRN Samy Coirs,Kangeyam,2027,FQ1,150.0,169.25,0.0,0.313,Low,169.2,0.0,461.2,129.5
+Kuppanasamy Coir,Kangeyam,2027,FQ1,324.0,539.25,8.025,0.312,Low,539.1,0.0,1469.6,412.9
+SP Exports (Sammy Coir),Kangeyam,2027,FQ1,272.0,562.0,17.279,0.312,Low,561.8,0.0,1531.6,430.3
+BN Coirs,Madurai,2027,FQ1,142.0,85.25,13.38,0.312,Low,62.3,0.0,169.8,49.5
+SHREE VETRRI VINAYAGAR FIBRES,Pollachi,2027,FQ1,323.0,233.5,30.341,0.312,Low,109.1,0.0,297.4,93.3
+Gogulkrishna coir Export,Pollachi,2027,FQ1,248.0,158.5,19.355,0.31,Low,74.1,0.0,201.9,63.4
+A R Coir,Pollachi,2027,FQ1,48.0,12.0,47.917,0.31,Low,5.6,0.0,15.3,4.8
+AGP Coir,Pollachi,2027,FQ1,98.0,91.0,48.98,0.307,Low,42.5,0.0,115.9,36.4
+Victor Coco Pith,Madurai,2027,FQ1,76.0,61.0,21.053,0.307,Low,44.6,0.0,121.5,35.6
+SVF Coco peat,Pollachi,2027,FQ1,141.0,151.5,46.809,0.306,Low,70.8,0.0,193.0,60.7
+Sindhu Fiber,Pollachi,2027,FQ1,393.0,468.25,34.606,0.304,Low,218.8,0.0,596.4,187.9
+Sri Anoor Fibers,Kangeyam,2027,FQ1,313.0,279.25,14.058,0.304,Low,279.2,0.0,761.0,215.6
+Om Valaven Coir,Pollachi,2027,FQ1,73.0,72.75,32.877,0.304,Low,34.0,0.0,92.7,29.2
+Sri Arunachala Coir,Kangeyam,2027,FQ1,75.0,124.5,0.0,0.303,Low,124.5,0.0,339.3,96.2
+AB Coir,Kangeyam,2027,FQ1,25.0,36.0,0.0,0.303,Low,36.0,0.0,98.1,27.8
+Uthis Coir,Pollachi,2027,FQ1,45.0,16.75,44.444,0.303,Low,7.8,0.0,21.3,6.7
+Supreeth Fibers (LEC),Salem,2027,FQ1,145.0,176.5,17.241,0.3,Low,228.1,0.0,621.9,172.8
+Kamatchiyaamman Coir,Kangeyam,2027,FQ1,46.0,80.5,0.0,0.3,Low,80.5,0.0,219.4,62.4
+Dharsani Bio Fuels,Kangeyam,2027,FQ1,25.0,129.5,0.0,0.3,Low,129.5,0.0,352.9,100.4
+Katalai Mariyamman Fibre,Kangeyam,2027,FQ1,25.0,51.5,0.0,0.299,Low,51.5,0.0,140.4,40.0
+SR fibre,Kangeyam,2027,FQ1,49.0,47.5,0.0,0.298,Low,47.5,0.0,129.4,36.9
+Sri Murugan Coir Pith Blocks,Kangeyam,2027,FQ1,25.0,30.5,0.0,0.298,Low,30.5,0.0,83.1,23.7
+Kaviya Pith Block,Kangeyam,2027,FQ1,139.0,275.75,0.0,0.297,Low,275.7,0.0,751.5,214.2
+Coco Craft,Madurai,2027,FQ1,148.0,121.5,16.892,0.295,Low,88.7,0.0,241.9,71.5
+Vinayaga Fibers,Pollachi,2027,FQ1,38.0,41.25,47.368,0.295,Low,19.3,0.0,52.5,16.6
+MICHEL COIR,Madurai,2027,FQ1,55.0,54.0,30.909,0.295,Low,39.4,0.0,107.5,31.8
+Ragavandra Fibers,Pollachi,2027,FQ1,224.0,197.0,11.161,0.294,Low,92.0,0.0,250.9,79.4
+LNF Coir,Kangeyam,2027,FQ1,50.0,70.75,0.0,0.293,Low,70.7,0.0,192.8,55.2
+Arun Coir Exime,Kangeyam,2027,FQ1,448.0,493.0,16.518,0.292,Low,492.8,0.0,1343.5,384.8
+Sri Krishna Fibres,Madurai,2027,FQ1,283.0,219.5,28.975,0.292,Low,160.3,0.0,437.1,129.5
+Ganapathy Fibers,Pollachi,2027,FQ1,419.0,297.25,35.561,0.292,Low,138.9,0.0,378.6,120.0
+Durai Kalai Coir,Kangeyam,2027,FQ1,149.0,155.5,0.0,0.29,Low,155.4,0.0,423.8,121.6
+Athanur Amman Coir,Kangeyam,2027,FQ1,167.0,153.0,14.371,0.29,Low,153.0,0.0,417.0,119.7
+Lakshmi Pith Block,Kangeyam,2027,FQ1,423.0,551.5,5.674,0.289,Low,551.3,0.0,1503.0,431.6
+Sri Kumaran Coirs,Kangeyam,2027,FQ1,569.0,255.0,17.399,0.288,Low,254.9,0.0,694.9,199.8
+Arul Hi-Tech Coir,Kangeyam,2027,FQ1,192.0,294.25,25.521,0.288,Low,294.2,0.0,801.9,230.6
+Mariah Coirs,Madurai,2027,FQ1,72.0,62.0,31.944,0.288,Low,45.3,0.0,123.5,36.7
+Mahajothi Fibre,Kangeyam,2027,FQ1,82.0,119.75,0.0,0.287,Low,119.7,0.0,326.3,94.0
+Srinivasa Agro Products,Madurai,2027,FQ1,370.0,308.25,10.811,0.287,Low,225.2,0.0,613.8,182.7
+Sivamayam Fibers,Kangeyam,2027,FQ1,117.0,79.0,21.368,0.286,Low,79.0,0.0,215.3,62.1
+Hayagreever Coirs,Kangeyam,2027,FQ1,418.0,430.0,5.502,0.285,Low,429.9,0.0,1171.9,338.0
+Greater Green Coir,Kangeyam,2027,FQ1,48.0,164.75,0.0,0.285,Low,164.7,0.0,449.0,129.5
+Kalpathur Substrate,Pollachi,2027,FQ1,272.0,115.667,45.221,0.284,Low,54.0,0.0,147.3,46.9
+Vishu Fibers,Pollachi,2027,FQ1,160.0,96.25,56.25,0.284,Low,45.0,0.0,122.6,39.1
+Selvam Coirs,Kangeyam,2027,FQ1,97.0,59.25,23.711,0.283,Low,59.2,0.0,161.5,46.6
+MSD Coir,Madurai,2027,FQ1,62.0,72.25,41.935,0.281,Low,52.8,0.0,143.9,43.0
+Deva Coir,Kangeyam,2027,FQ1,301.0,213.0,10.299,0.279,Low,212.9,0.0,580.5,168.3
+Sun Fibre Products,Pollachi,2027,FQ1,41.0,65.5,51.22,0.279,Low,30.6,0.0,83.4,26.6
+ATA Coir,Pollachi,2027,FQ1,119.0,66.25,58.824,0.279,Low,31.0,0.0,84.4,27.0
+KMMR Industries,Madurai,2027,FQ1,147.0,124.75,13.605,0.278,Low,91.1,0.0,248.4,74.4
+PR Export,Kangeyam,2027,FQ1,272.0,313.25,8.824,0.278,Low,313.1,0.0,853.7,247.9
+Maxiworth Coir,Salem,2027,FQ1,50.0,91.25,50.0,0.277,Low,117.9,0.0,321.5,91.6
+Dhananya Coir,Kangeyam,2027,FQ1,527.0,403.75,18.975,0.277,Low,403.6,0.0,1100.3,319.9
+SMT Coir,Pollachi,2027,FQ1,144.0,149.25,65.278,0.277,Low,69.7,0.0,190.1,60.7
+VKA Agro products,Kangeyam,2027,FQ1,245.0,321.5,29.388,0.276,Low,321.4,0.0,876.2,254.8
+Aahash Coir Products,Madurai,2027,FQ1,161.0,169.0,30.435,0.275,Low,123.4,0.0,336.5,101.1
+Dhanalakshmi Coir,Pollachi,2027,FQ1,161.0,99.25,61.491,0.274,Low,46.4,0.0,126.4,40.5
+Raghavaa Fibre,Kangeyam,2027,FQ1,70.0,82.0,34.286,0.272,Low,82.0,0.0,223.5,65.3
+Sabari Coir,Madurai,2027,FQ1,232.0,275.25,31.897,0.271,Low,201.0,0.0,548.1,165.1
+Sree K.S Fibres,Kangeyam,2027,FQ1,199.0,203.5,25.126,0.27,Low,203.4,0.0,554.6,162.2
+Udyam Coirs,Kangeyam,2027,FQ1,75.0,23.75,33.333,0.269,Low,23.7,0.0,64.7,18.9
+Karvembu Coir,Kangeyam,2027,FQ1,119.0,86.0,36.975,0.267,Low,86.0,0.0,234.4,68.8
+Sarvana Gugan Coirs,Kangeyam,2027,FQ1,398.0,441.25,12.06,0.265,Low,441.1,0.0,1202.5,353.3
+Karthikeyan Coir,Kangeyam,2027,FQ1,74.0,115.75,32.432,0.263,Low,115.7,0.0,315.4,92.9
+Sri Shakthi Coirs,Kangeyam,2027,FQ1,66.0,93.5,36.364,0.263,Low,93.5,0.0,254.8,75.1
+Brown Hills Enterprises,Kangeyam,2027,FQ1,76.0,99.5,34.211,0.26,Low,99.5,0.0,271.2,80.1
+S J Coir,Madurai,2027,FQ1,194.0,105.25,53.608,0.26,Low,76.9,0.0,209.6,63.7
+RP Pith Blocks,Madurai,2027,FQ1,284.0,194.0,44.718,0.26,Low,141.7,0.0,386.3,117.5
+SJ Bio Root Coir,Kangeyam,2027,FQ1,122.0,73.25,40.984,0.26,Low,73.2,0.0,199.6,59.0
+Sri Hari Fiber,Kangeyam,2027,FQ1,217.0,180.25,22.12,0.259,Low,180.2,0.0,491.2,145.1
+SS Fibre,Kangeyam,2027,FQ1,544.0,254.5,36.949,0.253,Low,254.4,0.0,693.6,206.0
+Vishnu Coirs,Kangeyam,2027,FQ1,122.0,175.0,38.525,0.251,Low,174.9,0.0,476.9,142.0
+Jairithanya Coir,Pollachi,2027,FQ1,126.0,98.25,59.524,0.25,Low,45.9,0.0,125.1,40.6
+VICTORY Coir,Pollachi,2027,FQ1,19.0,44.75,100.0,0.25,Low,20.9,0.0,57.0,18.5
+Sai Balaji Coir,Kangeyam,2027,FQ1,250.0,268.0,10.0,0.249,Low,267.9,0.0,730.4,217.8
+VMM Coco,Madurai,2027,FQ1,115.0,107.5,59.13,0.249,Low,78.5,0.0,214.1,65.7
+Radient Coir,Kangeyam,2027,FQ1,170.0,157.0,41.176,0.248,Low,156.9,0.0,427.9,127.7
+Aarudhra Agro,Pollachi,2027,FQ1,20.0,5.0,100.0,0.247,Low,2.3,0.0,6.4,2.0
+Amman Coir,Kangeyam,2027,FQ1,960.0,708.25,34.375,0.244,Low,708.0,0.0,1930.2,578.5
+P.S Pith Block,Kangeyam,2027,FQ1,200.0,293.5,50.0,0.243,Low,293.4,0.0,799.9,240.0
+Brown Spring,Kangeyam,2027,FQ1,420.0,358.0,23.095,0.242,Low,357.9,0.0,975.6,292.9
+AL-Matin Coir Exports,Madurai,2027,FQ1,58.0,34.5,62.069,0.242,Low,25.2,0.0,68.7,21.2
+MS Coir,Kangeyam,2027,FQ1,101.0,191.75,50.495,0.241,Low,191.7,0.0,522.6,157.0
+Balaji Coir Pith-Udumal,Kangeyam,2027,FQ1,355.0,501.25,29.577,0.241,Low,501.1,0.0,1366.0,410.5
+Veerakumara Coir,Pollachi,2027,FQ1,24.0,24.75,100.0,0.238,Low,11.6,0.0,31.5,10.3
+VV Curld Coir,Pollachi,2027,FQ1,45.0,41.75,100.0,0.238,Low,19.5,0.0,53.2,17.3
+Vijayalakshmi Fibres,Pollachi,2027,FQ1,112.0,90.0,100.0,0.237,Low,42.0,0.0,114.6,37.4
+Global Coco,Kangeyam,2027,FQ1,226.0,194.0,45.133,0.234,Low,193.9,0.0,528.7,159.9
+Evergreen Fiber,Peravurani,2027,FQ1,79.0,52.75,0.0,0.233,Low,61.5,0.0,167.7,50.2
+Muthu Viravan Coco Fiber,Peravurani,2027,FQ1,79.0,58.5,0.0,0.233,Low,68.2,0.0,186.0,55.7
+MUM Fibers,Peravurani,2027,FQ1,143.0,123.5,0.0,0.232,Low,144.0,0.0,392.6,117.7
+JK Pith Industry,Peravurani,2027,FQ1,89.0,57.0,0.0,0.232,Low,66.5,0.0,181.2,54.4
+Senthil Vinayaga Coirs,Peravurani,2027,FQ1,149.0,72.5,0.0,0.232,Low,84.5,0.0,230.5,69.1
+Jothi Coir,Peravurani,2027,FQ1,92.0,49.25,0.0,0.232,Low,57.4,0.0,156.6,46.9
+Sabrina Coir,Peravurani,2027,FQ1,13.0,15.75,0.0,0.232,Low,18.4,0.0,50.1,15.1
+Menachi Coir,Pollachi,2027,FQ1,166.0,112.5,84.94,0.232,Low,52.6,0.0,143.3,46.9
+Sowabarnicka Fibers,Peravurani,2027,FQ1,24.0,16.0,0.0,0.231,Low,18.7,0.0,50.9,15.3
+MKS Fibre,Peravurani,2027,FQ1,35.0,8.75,0.0,0.231,Low,10.2,0.0,27.8,8.3
+Nathan Industries,Peravurani,2027,FQ1,35.0,17.75,0.0,0.231,Low,20.7,0.0,56.4,16.9
+Udhayam Coir & Fiber,Peravurani,2027,FQ1,13.0,9.25,0.0,0.231,Low,10.8,0.0,29.4,8.8
+RR Coir Industries,Peravurani,2027,FQ1,12.0,6.0,0.0,0.231,Low,7.0,0.0,19.1,5.7
+Uthayam Fibers,Peravurani,2027,FQ1,20.0,5.0,0.0,0.231,Low,5.8,0.0,15.9,4.7
+Venkateshwara Trader,Peravurani,2027,FQ1,14.0,3.5,0.0,0.231,Low,4.1,0.0,11.1,3.4
+Periyasamy Fiber,Kangeyam,2027,FQ1,50.0,160.75,50.0,0.23,Low,160.7,0.0,438.1,133.0
+V Coir,Peravurani,2027,FQ1,128.0,70.0,0.0,0.23,Low,81.6,0.0,222.5,66.8
+Global Pith Block,Kangeyam,2027,FQ1,68.0,360.25,63.235,0.227,Low,360.1,0.0,981.8,298.9
+Selvakarthipan Fibres,Kangeyam,2027,FQ1,100.0,80.25,75.0,0.224,Low,80.2,0.0,218.7,66.7
+PK Coco Fibre,Kangeyam,2027,FQ1,65.0,42.25,69.231,0.222,Low,42.2,0.0,115.1,35.2
+SAS Coco industries,Peravurani,2027,FQ1,131.0,87.75,10.687,0.22,Low,102.3,0.0,279.0,84.6
+Annai Fibers,Madurai,2027,FQ1,10.0,5.0,100.0,0.22,Low,3.7,0.0,10.0,3.2
+PAS Fibers,Peravurani,2027,FQ1,125.0,153.0,0.0,0.219,Low,178.4,0.0,486.4,147.7
+Classic Coir india,Kangeyam,2027,FQ1,174.0,188.75,58.046,0.217,Low,188.7,0.0,514.4,158.0
+Bhakiyam Fibers,Madurai,2027,FQ1,151.0,121.25,59.603,0.215,Low,88.6,0.0,241.4,76.1
+Abirami Fibres,Peravurani,2027,FQ1,89.0,39.5,13.483,0.214,Low,46.1,0.0,125.6,38.3
+Sri Ganapathi Fibres,Kangeyam,2027,FQ1,150.0,172.5,83.333,0.213,Low,172.4,0.0,470.1,144.9
+Palaniyanadvar Pith Block,Kangeyam,2027,FQ1,573.0,687.25,44.503,0.213,Low,687.0,0.0,1872.9,577.3
+Ayangaran Coirs,Madurai,2027,FQ1,41.0,40.25,100.0,0.211,Low,29.4,0.0,80.1,25.3
+SS FIBERS & COIRS,Madurai,2027,FQ1,72.0,39.75,88.889,0.207,Low,29.0,0.0,79.2,25.0
+Velaa Fibres,Kangeyam,2027,FQ1,21.0,74.5,100.0,0.206,Low,74.5,0.0,203.0,63.0
+Kaaruniya Coir Industries,Madurai,2027,FQ1,22.0,16.75,100.0,0.205,Low,12.2,0.0,33.4,10.6
+Sri Ram Fibres,Pollachi,2027,FQ1,73.0,110.5,100.0,0.204,Low,51.6,0.0,140.7,46.7
+Muthukumar Fiber,Madurai,2027,FQ1,16.0,26.0,100.0,0.203,Low,19.0,0.0,51.8,16.5
+Anand Coir,Peravurani,2027,FQ1,323.0,223.75,19.814,0.202,Low,260.9,0.0,711.3,219.6
+AP Agro,Pollachi,2027,FQ1,169.0,126.25,100.0,0.201,Low,59.0,0.0,160.8,53.5
+Surya Coir,Kangeyam,2027,FQ1,82.0,63.5,69.512,0.201,Low,63.5,0.0,173.1,53.9
+Ramesh Coir,Kangeyam,2027,FQ1,235.0,181.25,62.979,0.199,Low,181.2,0.0,494.0,154.2
+Krishna Fibers,Kangeyam,2027,FQ1,26.0,18.75,100.0,0.195,Low,18.7,0.0,51.1,16.0
+Veera Coir,Madurai,2027,FQ1,84.0,83.75,100.0,0.195,Low,61.2,0.0,166.8,53.4
+Hyther Ali Coconut Merchant,Madurai,2027,FQ1,42.0,38.5,100.0,0.193,Low,28.1,0.0,76.7,24.5
+RM Coconut Marchent,Madurai,2027,FQ1,101.0,106.0,87.129,0.193,Low,77.4,0.0,211.1,67.6
+JPM Coirs,Madurai,2027,FQ1,74.0,76.5,100.0,0.187,Low,55.9,0.0,152.3,49.0
+Iniya Coir,Kangeyam,2027,FQ1,836.0,941.75,49.761,0.185,Low,941.4,0.0,2566.5,811.1
+PNK Coir,Kangeyam,2027,FQ1,285.0,199.0,82.807,0.184,Low,198.9,0.0,542.3,171.4
+Ganesh Coirs,Kangeyam,2027,FQ1,48.0,42.25,100.0,0.184,Low,42.2,0.0,115.1,36.4
+Vishnu Fibres,Kangeyam,2027,FQ1,292.0,206.5,91.438,0.182,Low,206.4,0.0,562.8,178.3
+Aakavi Coir,Kangeyam,2027,FQ1,72.0,73.0,100.0,0.18,Low,73.0,0.0,198.9,63.1
+Sri Palaniyandavar Fibres,Kangeyam,2027,FQ1,400.0,371.25,62.5,0.178,Low,371.1,0.0,1011.8,321.6
+Jayam Coir,Kangeyam,2027,FQ1,61.0,67.5,100.0,0.174,Low,67.5,0.0,184.0,58.7
+Sri Ponkalaiamman Fibers,Salem,2027,FQ1,186.0,198.25,100.0,0.172,Low,256.2,0.0,698.5,220.6
+Sri Annamar Fibres,Kangeyam,2027,FQ1,226.0,180.0,100.0,0.169,Low,179.9,0.0,490.5,157.1
+Barani Fibers,Kangeyam,2027,FQ1,146.0,120.25,100.0,0.169,Low,120.2,0.0,327.7,105.0
+Sri Kandiyamman Fibres,Kangeyam,2027,FQ1,523.0,470.0,71.319,0.163,Low,469.8,0.0,1280.9,412.4
+Om Sakthi Fiber,Peravurani,2027,FQ1,24.0,133.75,100.0,0.133,Low,156.0,0.0,425.2,139.7
