@@ -80,19 +80,94 @@ function Kpi({ value, label, tone = "", decimals = 0, suffix = "" }) {
   );
 }
 
+/* Tamil Nadu coir-region coordinates (also used by the weather overlay below) */
+const REGION_COORDS = {
+  Pollachi: [10.66, 77.01], Kangeyam: [11.00, 77.56], Salem: [11.66, 78.16],
+  Madurai: [9.93, 78.12], Peravurani: [10.29, 79.19],
+};
+
+/* Leaflet map (loaded from CDN in index.html) — regions as bubbles: size = dispatch, colour = our share */
+function RegionMap({ regionStats }) {
+  const ref = useRef(null);
+  const mapRef = useRef(null);
+  useEffect(() => {
+    let tries = 0, id;
+    const init = () => {
+      if (!window.L || !ref.current) { if (tries++ < 60) id = setTimeout(init, 100); return; }
+      const L = window.L;
+      if (!mapRef.current) {
+        mapRef.current = L.map(ref.current, { scrollWheelZoom: false, attributionControl: true })
+          .setView([10.8, 78.0], 7);
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+          { attribution: "&copy; OpenStreetMap, &copy; CARTO", maxZoom: 19 }).addTo(mapRef.current);
+      }
+      const map = mapRef.current;
+      (map._radar || []).forEach((l) => map.removeLayer(l));
+      map._radar = [];
+      regionStats.forEach((s) => {
+        if (s.lat == null) return;
+        const share = s.share || 0;
+        const color = share < 15 ? "#f87171" : share < 40 ? "#fbbf24" : "#34d399";
+        const radius = Math.max(10, Math.sqrt(s.dispatched) / 6);
+        const c = L.circleMarker([s.lat, s.lon],
+          { radius, color, weight: 2, fillColor: color, fillOpacity: 0.35 }).addTo(map);
+        c.bindPopup(
+          `<b>${s.region}</b><br>dispatch ${Math.round(s.dispatched).toLocaleString()} MT` +
+          `<br>our share ${share.toFixed(0)}%<br>untapped ${Math.round(s.untapped).toLocaleString()} MT`);
+        c.bindTooltip(`${s.region} · ${share.toFixed(0)}% ours`);
+        map._radar.push(c);
+      });
+    };
+    init();
+    return () => clearTimeout(id);
+  }, [regionStats]);
+  return <div ref={ref} className="mapbox" />;
+}
+
 const tipStyle = {
   background: "rgba(10,15,35,.92)", border: "1px solid rgba(255,255,255,.15)",
   borderRadius: 12, fontSize: 12.5, color: "#eef2ff",
 };
 
-/* live agent proxy (keeps the LLM key server-side) — run: python3 src/agent_server.py */
-const AGENT_URL = "http://localhost:8000/api/explain";
-const INSIGHT_URL = "http://localhost:8000/api/insight";
+/* Agent endpoints are relative: in dev, vite proxies /api -> python agent_server on :8000;
+   in production on Vercel, /api is served by the serverless functions in frontend/api/. */
+const AGENT_URL = "/api/explain";
+const INSIGHT_URL = "/api/insight";
+
+/* Confidential-access gate (env-driven; open in dev when VITE_SITE_PASSWORD is unset) */
+function PasswordGate({ onOk }) {
+  const [v, setV] = useState("");
+  const [err, setErr] = useState(false);
+  const pw = import.meta.env.VITE_SITE_PASSWORD;
+  const submit = () => {
+    if (v === pw) { sessionStorage.setItem("radar_unlocked", "1"); onOk(); }
+    else { setErr(true); setV(""); }
+  };
+  return (
+    <div className="gate">
+      <div className="bg" /><div className="orb orb1" /><div className="orb orb2" />
+      <div className="gatecard">
+        <div className="badge">Vaighai · Confidential</div>
+        <h1>Supply Radar</h1>
+        <p>This page contains confidential supplier data. Enter the access password to continue.</p>
+        <input type="password" value={v} placeholder="Password" autoFocus
+          onChange={(e) => { setV(e.target.value); setErr(false); }}
+          onKeyDown={(e) => e.key === "Enter" && submit()} />
+        {err && <div className="gateerr">Incorrect password. Please try again.</div>}
+        <button onClick={submit}>Access dashboard</button>
+      </div>
+    </div>
+  );
+}
 
 /* ---------- app ---------- */
 export default function App() {
   const [data, setData] = useState(null);
   const [q, setQ] = useState("");
+  const [unlocked, setUnlocked] = useState(() => {
+    const pw = import.meta.env.VITE_SITE_PASSWORD;
+    return !pw || sessionStorage.getItem("radar_unlocked") === "1";
+  });
 
   /* ---- live agent-on-hover state (supplier rows AND charts) ---- */
   const [ai, setAi] = useState({ open: false, kind: "", title: "", band: "", text: "", loading: false, facts: null });
@@ -164,6 +239,15 @@ export default function App() {
     );
   }, [data, q]);
 
+  const regionStats = useMemo(() =>
+    (data?.region_mix || []).map((r) => ({
+      region: r.region, dispatched: r.dispatched_MT, offtake: r.offtake_MT,
+      share: r.dispatched_MT ? (r.offtake_MT / r.dispatched_MT) * 100 : 0,
+      untapped: Math.max(0, r.dispatched_MT - r.offtake_MT),
+      lat: REGION_COORDS[r.region]?.[0] ?? null, lon: REGION_COORDS[r.region]?.[1] ?? null,
+    })), [data]);
+
+  if (!unlocked) return <PasswordGate onOk={() => setUnlocked(true)} />;
   if (!data) return <div className="wrap hero"><p>Loading Supply Radar…</p></div>;
   if (data.error)
     return (
@@ -330,6 +414,12 @@ export default function App() {
                 <Bar dataKey="offtake_MT" name="Our offtake" fill="#34d399" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
+          </Tilt>
+
+          <Tilt className="full" onEnter={() => hover(() => askInsight("Region map", sums.region))}>
+            <h2>Region map — where our coir comes from</h2>
+            <div className="sub">Each coir region sized by market dispatch, coloured by our share (red &lt;15%, amber &lt;40%, green higher). Click a bubble for detail.</div>
+            <RegionMap regionStats={regionStats} />
           </Tilt>
 
           <Tilt onEnter={() => hover(() => askInsight("Supply-base concentration", sums.conc))}>

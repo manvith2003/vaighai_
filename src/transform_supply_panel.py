@@ -50,13 +50,25 @@ def run():
 
     # LOG-SCALE winsorization: cap computed with median + k·MAD on log1p so a real
     # 9,000 MT mill is not flattened toward the small-mill bulk (was a plain p99.5 clip).
-    for c in QTY_COLS:
+    # Only the MIR field ESTIMATES are capped (they carry entry errors); actual
+    # system-recorded purchases (vaighai_purchased_MT) are reliable and left untouched.
+    ESTIMATE_COLS = ["mill_produced_MT", "mill_dispatched_MT", "vaighai_offtake_est_MT"]
+    for c in ESTIMATE_COLS:
         cap = log_winsorize_cap(panel.loc[panel[c] > 0, c].values, k=5.0)
         n_capped = int((panel[c] > cap).sum()) if cap else 0
         if cap:
             panel[c] = panel[c].clip(upper=cap)
         if n_capped:
             print(f"  log-winsorized {n_capped} outliers in {c} (cap {cap:,.0f} MT)")
+    # Purchases are reliable system records but contain a few extreme error/bulk entries.
+    # A conservative p99.5 cap trims only those without distorting genuine large buys.
+    pc = panel.loc[panel["vaighai_purchased_MT"] > 0, "vaighai_purchased_MT"]
+    if len(pc):
+        pcap = float(pc.quantile(0.995))
+        n_pc = int((panel["vaighai_purchased_MT"] > pcap).sum())
+        panel["vaighai_purchased_MT"] = panel["vaighai_purchased_MT"].clip(upper=pcap)
+        if n_pc:
+            print(f"  p99.5-capped {n_pc} extreme purchase entries (cap {pcap:,.0f} MT)")
     panel["our_share_of_dispatch_pct"] = np.where(
         panel["mill_dispatched_MT"] > 0,
         (panel["vaighai_offtake_est_MT"] / panel["mill_dispatched_MT"] * 100).clip(0, 100), np.nan)
