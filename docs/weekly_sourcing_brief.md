@@ -1,59 +1,59 @@
 # Supply Radar — Weekly Sourcing Brief
-*Scored quarter: FY2027 FQ1 · predictions for FY2027 FQ2 · generated 20 Jul 2026*
+*Scored quarter: FY2027 FQ1 · predictions for FY2027 FQ2 · generated 27 Jul 2026*
 
 ## Headline
-Of 510 active suppliers, **36 are at critical risk** of a sharp supply drop next quarter and 82 at moderate risk (model AUC 0.736). Top-5 supplier dependency is 51.4% (was 88.5% in FY2021).
+Of 510 active suppliers, **27 are at critical risk** of a sharp supply drop next quarter and 90 at moderate risk (model AUC 0.706). Top-5 supplier dependency is 51.4% (was 88.5% in FY2021).
 
 ## Act this week — critical decline risks
 
-**1. Krishna Coir** (Pollachi) — risk 86%
+**1. Krishna Coir** (Pollachi) — risk 82%
    - Why: supplied nothing last quarter after averaging 12 MT/quarter; we take none of its output — possible competitor capture or pause.
-   - Expected next quarter: 3 MT (vs 12 MT normal).
+   - Expected next quarter: 4 MT (vs 12 MT normal).
    - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
 
-**2. J&D Pith Blocks** (Pollachi) — risk 86%
+**2. J&D Pith Blocks** (Pollachi) — risk 82%
    - Why: supplied nothing last quarter after averaging 6 MT/quarter; we take none of its output — possible competitor capture or pause.
    - Expected next quarter: 2 MT (vs 6 MT normal).
    - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
 
-**3. Vasantha Fibers** (Pollachi) — risk 86%
+**3. Siva Fiber Products** (Pollachi) — risk 82%
    - Why: supplied nothing last quarter after averaging 6 MT/quarter; we take none of its output — possible competitor capture or pause.
    - Expected next quarter: 2 MT (vs 6 MT normal).
    - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
 
-**4. Siva Fiber Products** (Pollachi) — risk 86%
+**4. Kannamal Fibre** (Pollachi) — risk 82%
    - Why: supplied nothing last quarter after averaging 6 MT/quarter; we take none of its output — possible competitor capture or pause.
    - Expected next quarter: 2 MT (vs 6 MT normal).
    - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
 
-**5. Kannamal Fibre** (Pollachi) — risk 86%
+**5. Vasantha Fibers** (Pollachi) — risk 82%
    - Why: supplied nothing last quarter after averaging 6 MT/quarter; we take none of its output — possible competitor capture or pause.
    - Expected next quarter: 2 MT (vs 6 MT normal).
    - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
 
-**6. PKS Coir** (Pollachi) — risk 86%
+**6. PKS Coir** (Pollachi) — risk 82%
    - Why: supplied nothing last quarter after averaging 5 MT/quarter; we take none of its output — possible competitor capture or pause.
    - Expected next quarter: 1 MT (vs 5 MT normal).
    - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
 
-**7. Sujaatha Exim** (Madurai) — risk 85%
-   - Why: supplied nothing last quarter after averaging 8 MT/quarter; we take none of its output — possible competitor capture or pause.
-   - Expected next quarter: 2 MT (vs 8 MT normal).
+**7. AKS Coirs (Vivek)** (Salem) — risk 79%
+   - Why: supplied nothing last quarter after averaging 6 MT/quarter; we take none of its output — possible competitor capture or pause.
+   - Expected next quarter: 3 MT (vs 6 MT normal).
    - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
 
-**8. Sai Marketing** (Madurai) — risk 85%
+**8. Sujaatha Exim** (Madurai) — risk 79%
+   - Why: supplied nothing last quarter after averaging 8 MT/quarter; we take none of its output — possible competitor capture or pause.
+   - Expected next quarter: 3 MT (vs 8 MT normal).
+   - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
+
+**9. Sai Marketing** (Madurai) — risk 79%
    - Why: supplied nothing last quarter after averaging 5 MT/quarter; we take none of its output — possible competitor capture or pause.
    - Expected next quarter: 2 MT (vs 5 MT normal).
    - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
 
-**9. Sun Fiber** (Madurai) — risk 85%
+**10. Sun Fiber** (Madurai) — risk 79%
    - Why: supplied nothing last quarter after averaging 4 MT/quarter; we take none of its output — possible competitor capture or pause.
    - Expected next quarter: 1 MT (vs 4 MT normal).
-   - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
-
-**10. MMS Coir** (Madurai) — risk 85%
-   - Why: supplied nothing last quarter after averaging 5 MT/quarter; we take none of its output — possible competitor capture or pause.
-   - Expected next quarter: 2 MT (vs 5 MT normal).
    - Action: Field visit this week: confirm mill status (closed / seasonal / competitor contract).
 
 ## Grow here — top sourcing opportunities
@@ -66,11 +66,11 @@ Of 510 active suppliers, **36 are at critical risk** of a sharp supply drop next
 
 ## Monsoon outlook — next 16 days (live forecast)
 
-- **Peravurani**: 36.8 mm forecast (normal 26.7 mm, 1.38×) — heavy rain — expect wet-coir and drying delays.
-- **Madurai**: 40.5 mm forecast (normal 30.0 mm, 1.35×) — heavy rain — expect wet-coir and drying delays.
-- **Kangeyam**: 28.1 mm forecast (normal 29.3 mm, 0.96×) — near normal.
-- **Salem**: 36.0 mm forecast (normal 42.7 mm, 0.84×) — near normal.
-- **Pollachi**: 19.3 mm forecast (normal 34.0 mm, 0.57×) — dry spell — production should run freely.
+- **Peravurani**: 31.1 mm forecast (normal 36.0 mm, 0.86×) — near normal.
+- **Salem**: 30.3 mm forecast (normal 47.3 mm, 0.64×) — dry spell — production should run freely.
+- **Pollachi**: 18.6 mm forecast (normal 37.5 mm, 0.5×) — dry spell — production should run freely.
+- **Kangeyam**: 14.5 mm forecast (normal 34.0 mm, 0.43×) — dry spell — production should run freely.
+- **Madurai**: 15.6 mm forecast (normal 40.5 mm, 0.39×) — dry spell — production should run freely.
 
 ---
 *Every flagged item needs an owner, root cause and resolution date. Forecast model: seasonal_naive (WAPE 72.1%).*
