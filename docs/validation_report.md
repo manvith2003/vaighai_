@@ -1,10 +1,10 @@
 # Data Validation Report
 
-Generated: 2026-09-28 07:19
+Generated: 2026-10-05 07:26
 
 ## Hard gates
 
-- ✅ panel has 20,774 rows (>1,000 expected)
+- ✅ panel has 20,784 rows (>1,000 expected)
 - ✅ no null supplier names
 - ✅ no duplicate supplier-quarters (found 0)
 - ✅ mill_produced_MT: no negative quantities
